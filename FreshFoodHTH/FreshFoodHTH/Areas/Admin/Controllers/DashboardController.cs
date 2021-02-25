@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace FreshFoodHTH.Areas.Admin.Controllers
 {
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
         // GET: Admin/Dashboard
         public ActionResult Index()
