@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace FreshFoodHTH.Areas.Admin.Controllers
 {
-    public class TheLoaiController : Controller
+    public class TheLoaiController : BaseController
     {
         TheLoaiDAO tlDao = new TheLoaiDAO();
 

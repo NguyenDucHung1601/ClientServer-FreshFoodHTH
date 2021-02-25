@@ -210,25 +210,25 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="~/Assets/Admin/Images/logoFreshFood-whiteBg.png" class="user-image" alt="User Image" />
-                        <span class="hidden-xs">@Session["USER_SESSION"]</span>
+                        <span class="hidden-xs">@Session["NAME_SESSION"]</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <img src="~/Assets/Admin/Images/logoFreshFood-whiteBg.png" class="img-circle" alt="User Image" style="border: 2px solid white"/>
                             <p>
-                                @Session["USER_SESSION"]
-                                <small>Thành viên từ @Convert.ToDateTime(@Session["CREATE_USER_SESSION"]).ToShortDateString() </small>
+                                @Session["NAME_SESSION"]
+                                <small>Thành viên từ @Convert.ToDateTime(@Session["CREATEDDATE_SESSION"]).ToString("dd/MM/yyyy") </small>
                             </p>
                         </li>
                      
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="Admin/NguoiDung/Details/@Session["IDUSERSESSION"]" class="btn btn-default btn-flat">Hồ sơ</a>
                             </div>
                             <div class="pull-right">                                
-                                @Html.ActionLink("Đăng xuất","Index","Login", null, htmlAttributes: new { @class = "btn btn-default btn-flat" })
+                                @Html.ActionLink("Đăng xuất", "Logout", "Login", null, htmlAttributes: new { @class = "btn btn-default btn-flat" }); 
                             </div>
                         </li>
                     </ul>
