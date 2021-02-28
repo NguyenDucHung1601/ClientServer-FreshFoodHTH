@@ -1,0 +1,37 @@
+﻿@model FreshFoodHTH.Models.EF.PhanLoaiKhachHang
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section header
+{
+    Loại khách hàng - Thông tin thể loại (#@Model.IDLoaiKhachHang)
+}
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Tên thể loại:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ten)
+        </dd>
+        <dt>
+            Điều kiện
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DieuKien)
+        </dd>
+    </dl>
+</div>
+
+<button type="button" class="btn btn-primary">
+    <a class="fa fa-edit"></a> &nbsp;
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.IDLoaiKhachHang })
+</button>
+<button type="button" class="btn btn-warning">
+    <a class="fa fa-th-list"></a> &nbsp;
+    @Html.ActionLink("Danh sách", "Index")
+</button>

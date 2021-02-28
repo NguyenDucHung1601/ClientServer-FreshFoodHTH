@@ -1,0 +1,60 @@
+﻿@model FreshFoodHTH.Models.EF.NhaCungCap
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section header
+{
+    Nhà cung cấp - Thông tin nhà cung cấp (#@Model.IDNhaCungCap)
+}
+
+<div>
+    <table style="width:60%">
+        <td style="vertical-align:top">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <img height="300" width="300" src="~/Areas/Admin/Content/Photos/@Model.HinhAnh" alt="Chưa có" style="border:solid 1px gray; border-radius:10px" />
+                </div>
+            </div>
+        </td>
+        <td>
+        <dl class="dl-horizontal">
+            <dt>
+                Tên Nhà Cung cấp
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ten)
+            </dd>
+
+            <dt>
+                Địa Chỉ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+
+            <dt>
+                Điện Thoại
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DienThoai)
+            </dd>
+            </dl>
+        </td>
+    </table>
+</div>
+
+<button type="button" class="btn btn-primary">
+    <a class="fa fa-edit"></a> &nbsp;
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.IDNhaCungCap })
+</button>
+<button type="button" class="btn btn-warning">
+    <a class="fa fa-th-list"></a> &nbsp;
+    @Html.ActionLink("Danh sách", "Index")
+</button>
