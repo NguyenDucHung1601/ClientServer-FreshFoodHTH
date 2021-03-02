@@ -350,3 +350,5 @@ C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood\Github\ClientServer-FreshFood
 C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood\Github\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.csproj.CopyComplete
 C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood\Github\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.dll
 C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood\Github\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.pdb
+E:\Kì 2 năm 4\GithubProjectClient_Server\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\bin\BCrypt.Net.dll
+E:\Kì 2 năm 4\GithubProjectClient_Server\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\bin\BCrypt.Net.xml

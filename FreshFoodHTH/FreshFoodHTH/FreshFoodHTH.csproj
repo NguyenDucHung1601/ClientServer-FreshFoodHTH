@@ -139,7 +139,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ChiTietDonHangsController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ChiTietHoaDonNhapsController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\DonHangsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HoaDonNhapsController.cs" />
