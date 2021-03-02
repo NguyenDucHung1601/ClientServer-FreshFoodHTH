@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace FreshFoodHTH.Areas.Admin.Controllers
 {
-    public class SanPhamController : Controller
+    public class SanPhamController : BaseController
     {
         SanPhamDAO spDao = new SanPhamDAO();
         TheLoaiDAO tlDao = new TheLoaiDAO();

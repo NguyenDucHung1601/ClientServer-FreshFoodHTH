@@ -116,10 +116,6 @@ namespace FreshFoodHTH.Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<NguoiDung>()
-                .Property(e => e.Password)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<NguoiDung>()
                 .Property(e => e.TongTienGioHang)
                 .HasPrecision(18, 0);
 
