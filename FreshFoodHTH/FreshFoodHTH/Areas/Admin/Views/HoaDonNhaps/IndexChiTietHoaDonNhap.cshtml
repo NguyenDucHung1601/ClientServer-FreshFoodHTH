@@ -1,0 +1,52 @@
+﻿@model IEnumerable<FreshFoodHTH.Models.EF.ChiTietHoaDonNhap>
+
+<table class="table">
+    <tr>
+        <th>
+            Sản phẩm
+        </th>
+        <th>
+            Đơn vị tính
+        </th>
+        <th>
+            Đơn giá
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Thành tiền
+        </th>
+        <th>Chức năng</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPham.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonViTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonGiaNhap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhTien)
+            </td>
+            <td>
+                <i class="fa fa-info-circle"></i> &nbsp;
+                @Html.ActionLink("Xem", "Details", new { cthdn = item }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-edit"></i> &nbsp;
+                @Html.ActionLink("Sửa", "Edit", new { cthdn = item }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-trash"></i> &nbsp;
+                @Html.ActionLink("Xóa", "Delete", new { cthdn = item }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })
+            </td>
+        </tr>
+    }
+
+</table>
