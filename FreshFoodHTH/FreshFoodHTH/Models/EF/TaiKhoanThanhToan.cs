@@ -24,6 +24,8 @@ namespace FreshFoodHTH.Models.EF
         [StringLength(200)]
         public string Ten { get; set; }
 
+        public string Logo { get; set; }
+
         [StringLength(200)]
         public string LoaiTaiKhoan { get; set; }
 

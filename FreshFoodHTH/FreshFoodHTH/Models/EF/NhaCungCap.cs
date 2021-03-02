@@ -24,6 +24,8 @@ namespace FreshFoodHTH.Models.EF
 
         public string DiaChi { get; set; }
 
+        public string HinhAnh { get; set; }
+
         [StringLength(12)]
         public string DienThoai { get; set; }
 

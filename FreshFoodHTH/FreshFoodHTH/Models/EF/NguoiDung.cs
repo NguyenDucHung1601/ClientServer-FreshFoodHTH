@@ -36,8 +36,10 @@ namespace FreshFoodHTH.Models.EF
         [StringLength(50)]
         public string Username { get; set; }
 
-        [StringLength(50)]
+        [StringLength(200)]
         public string Password { get; set; }
+
+        public string Avatar { get; set; }
 
         public decimal? TongTienGioHang { get; set; }
 
