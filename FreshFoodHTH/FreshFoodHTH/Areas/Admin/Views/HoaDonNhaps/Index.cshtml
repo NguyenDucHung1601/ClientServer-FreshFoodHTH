@@ -43,60 +43,59 @@
                 <i class="fa fa-plus-square"></i> &nbsp;
                 @Html.ActionLink("Thêm mới", "Create", "HoaDonNhaps")
             </button>
-            <button type="button" class="btn btn-warning btn-admin" style="margin-bottom:10px; float: right; width:110px">
-                <i class="fa fa-filter"></i> &nbsp;
-                @Html.ActionLink("Bộ lọc", "Filter", "HoaDonNhaps")
-            </button>
         </td>
     </tr>
 </table>
 
 <table class="table">
     <tr>
-        <th>STT</th>
+        <th>MaSo</th>
         <th>Tên nhà cung cấp</th>
         <th>Tiền hàng</th>
         <th>Tiền ship</th>
         <th>Tiền giảm</th>
         <th>Tổng tiền</th>
         <th>Ngày tạo</th>
-        <th>Ghi chú</th>
+        <th>Ngày cập nhật</th>
         <th>Chức năng</th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenNhaCungCap)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TienHang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TienShip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TienGiam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TongTien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GhiChu)
-            </td>
-            <td>
-                <i class="fa fa-info-circle"></i> &nbsp;
-                @Html.ActionLink("Xem", "Details", new { id = item.IDHoaDonNhap }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-edit"></i> &nbsp;
-                @Html.ActionLink("Sửa", "Edit", new { id = item.IDHoaDonNhap }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-trash"></i> &nbsp;
-                @Html.ActionLink("Xóa", "Delete", new { id = item.IDHoaDonNhap }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.MaSo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TenNhaCungCap)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TienHang)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TienShip)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TienGiam)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TongTien)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ModifiedDate)
+    </td>
+    <td>
+        <i class="fa fa-info-circle"></i> &nbsp;
+        @Html.ActionLink("Xem", "Details", new { id = item.IDHoaDonNhap }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <i class="fa fa-edit"></i> &nbsp;
+        @Html.ActionLink("Sửa", "Edit", new { id = item.IDHoaDonNhap }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <i class="fa fa-trash"></i> &nbsp;
+        @Html.ActionLink("Xóa", "Delete", new { id = item.IDHoaDonNhap }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })
+    </td>
+</tr>
     }
 
 </table>

@@ -15,6 +15,14 @@
             <td>
                 <dl class="dl-horizontal">
                     <dt>
+                        Mã đơn hàng:
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MaSo)
+                    </dd>
+
+                    <dt>
                         Tên khách hàng:
                     </dt>
 
@@ -71,11 +79,19 @@
                     </dd>
 
                     <dt>
-                        Ngày cập nhật:
+                        Ngày tạo:
                     </dt>
 
                     <dd>
                         @Html.DisplayFor(model => model.CreatedDate)
+                    </dd>
+
+                    <dt>
+                        Ngày cập nhật:
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedDate)
                     </dd>
 
                     <dt>
@@ -98,11 +114,10 @@
     @Html.Action("IndexChiTietDonHang", new { @id = Model.IDDonHang })
 </div>
 <br />
-
-<button type="button" class="btn btn-primary btn-admin">
+@*<button type="button" class="btn btn-primary btn-admin">
     <a class="fa fa-edit"></a> &nbsp;
     @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.IDDonHang })
-</button>
+</button>*@
 <button type="button" class="btn btn-warning btn-admin">
     <a class="fa fa-th-list"></a> &nbsp;
     @Html.ActionLink("Danh sách", "Index")

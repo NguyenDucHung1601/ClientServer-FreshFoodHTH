@@ -8,50 +8,53 @@ using FreshFoodHTH.Models.EFplus;
 
 namespace FreshFoodHTH.Models.DAO.Admin
 {
-    public class NhaCungCapDAO
+    public class NhaCungCapSanPhamDAO
     {
         FreshFoodDBContext db;
 
-        public NhaCungCapDAO()
+        public NhaCungCapSanPhamDAO()
         {
             db = new FreshFoodDBContext();
         }
 
-        public List<NhaCungCap> ListNhaCungCap()
+        public List<NhaCungCapSanPham> ListNhaCungCap()
         {
-            return db.NhaCungCaps.ToList();
+            return db.NhaCungCapSanPhams.ToList();
         }
 
-        public NhaCungCap getByID(Guid id)
+        public NhaCungCapSanPham getByID(Guid id)
         {
-            return db.NhaCungCaps.Find(id);
+            return db.NhaCungCapSanPhams.Find(id);
         }
 
-        public void Add(NhaCungCap NhaCungCap)
+        public void Add(NhaCungCapSanPham NhaCungCapSanPham)
         {
-            db.NhaCungCaps.Add(NhaCungCap);
+            db.NhaCungCapSanPhams.Add(NhaCungCapSanPham);
             db.SaveChanges();
         }
 
-        public void Edit(NhaCungCap NhaCungCap)
+        public void Edit(NhaCungCapSanPham NhaCungCapSanPham)
         {
-            NhaCungCap nhaCungCap = getByID(NhaCungCap.IDNhaCungCap);
-            if (nhaCungCap != null)
+            NhaCungCapSanPham nhaCungCapSanPham = getByID(NhaCungCapSanPham.IDNhaCungCap);
+            if (nhaCungCapSanPham != null)
             {
-                nhaCungCap.Ten = NhaCungCap.Ten;
-                nhaCungCap.DiaChi = NhaCungCap.DiaChi;
-                nhaCungCap.DienThoai = NhaCungCap.DienThoai;
-                nhaCungCap.CreatedDate = NhaCungCap.CreatedDate;
+                nhaCungCapSanPham.IDNhaCungCapSanPham = NhaCungCapSanPham.IDNhaCungCapSanPham;
+                nhaCungCapSanPham.IDNhaCungCap= NhaCungCapSanPham.IDNhaCungCap;
+                nhaCungCapSanPham.IDSanPham = NhaCungCapSanPham.IDSanPham;
+
+                nhaCungCapSanPham.DonViTinh = NhaCungCapSanPham.DonViTinh;
+                nhaCungCapSanPham.GiaCungUng = NhaCungCapSanPham.GiaCungUng;
+                nhaCungCapSanPham.NgayCapNhat = NhaCungCapSanPham.NgayCapNhat;
                 db.SaveChanges();
             }
         }
 
         public int Delete(Guid id)
         {
-            NhaCungCap NhaCungCap = db.NhaCungCaps.Find(id);
-            if (NhaCungCap != null)
+            NhaCungCapSanPham NhaCungCapSanPham = db.NhaCungCapSanPhams.Find(id);
+            if (NhaCungCapSanPham != null)
             {
-                db.NhaCungCaps.Remove(NhaCungCap);
+                db.NhaCungCapSanPhams.Remove(NhaCungCapSanPham);
                 return db.SaveChanges();
             }
             else
@@ -60,38 +63,37 @@ namespace FreshFoodHTH.Models.DAO.Admin
             }
         }
 
-        public IEnumerable<flatNhaCungCap> ListSimple(string searching)
+        public IEnumerable<flatNhaCungCapSanPham> ListSimple(string searching)
         {
-            var list = db.Database.SqlQuery<flatNhaCungCap>($"SELECT ncc.IDNhaCungCap, ncc.Ten AS TenNhaCungCap, ncc.DiaChi, ncc.DienThoai, ncc.CreatedDate " +
-                $"FROM dbo.NhaCungCap ncc " +
-                $"WHERE ncc.IDNhaCungCap = ncc.IDNhaCungCap " +
-                $"AND ncc.IDNhaCungCap LIKE N'%{searching}%' " +
-                $"OR ncc.Ten LIKE N'%{searching}%' " +
-                $"OR ncc.DienThoai LIKE N'%{searching}%' " +
-                $"OR ncc.DiaChi LIKE N'%{searching}%' " +
-                $"OR ncc.CreatedDate LIKE N'%{searching}%' " +
-                $"ORDER BY ncc.CreatedDate DESC").ToList();
+            var list = db.Database.SqlQuery<flatNhaCungCapSanPham>($"SELECT nccsp.IDNhaCungCapSanPham, sp.Ten AS TenSanPham, ncc.Ten AS TenNhaCungCap, nccsp.DonViTinh, nccsp.GiaCungUng, nccsp.NgayCapNhat " +
+                $"FROM dbo.NhaCungCapSanPham nccsp INNER JOIN dbo.NhaCungCap ncc ON nccsp.IDNhaCungCap = ncc.IDNhaCungCap INNER JOIN dbo.SanPham sp ON nccsp.IDSanPham = sp.IDSanPham " +
+                $"WHERE sp.Ten LIKE N'%%' " +
+                $"OR ncc.Ten LIKE N'%%' " +
+                $"OR nccsp.DonViTinh LIKE N'%%' " +
+                $"OR nccsp.GiaCungUng LIKE N'%%' " +
+                $"OR nccsp.NgayCapNhat LIKE N'%%' " +
+                $"ORDER BY nccsp.NgayCapNhat DESC").ToList();
             return list;
         }
 
-        public IEnumerable<flatNhaCungCap> ListSimpleSearch(int PageNum, int PageSize, string searching)
+        public IEnumerable<flatNhaCungCapSanPham> ListSimpleSearch(int PageNum, int PageSize, string searching)
         {
-            var list = db.Database.SqlQuery<flatNhaCungCap>($"SELECT ncc.IDNhaCungCap, ncc.Ten AS TenNhaCungCap, ncc.DiaChi, ncc.DienThoai, ncc.CreatedDate " +
-                $"FROM dbo.NhaCungCap ncc " +
-                $"WHERE ncc.IDNhaCungCap = ncc.IDNhaCungCap " +
-                $"AND ncc.IDNhaCungCap LIKE N'%{searching}%' " +
-                $"OR ncc.Ten LIKE N'%{searching}%' " +
-                $"OR ncc.DienThoai LIKE N'%{searching}%' " +
-                $"OR ncc.DiaChi LIKE N'%{searching}%' " +
-                $"OR ncc.CreatedDate LIKE N'%{searching}%' " +
-                $"ORDER BY ncc.CreatedDate DESC").ToPagedList<flatNhaCungCap>(PageNum, PageSize);
+            var list = db.Database.SqlQuery<flatNhaCungCapSanPham>($"SELECT nccsp.IDNhaCungCapSanPham, sp.Ten AS TenSanPham, ncc.Ten AS TenNhaCungCap, nccsp.DonViTinh, nccsp.GiaCungUng, nccsp.NgayCapNhat " +
+            $"FROM dbo.NhaCungCapSanPham nccsp INNER JOIN dbo.NhaCungCap ncc ON nccsp.IDNhaCungCap = ncc.IDNhaCungCap INNER JOIN dbo.SanPham sp ON nccsp.IDSanPham = sp.IDSanPham " +
+            $"WHERE sp.Ten LIKE N'%%' " +
+            $"OR ncc.Ten LIKE N'%%' " +
+            $"OR nccsp.DonViTinh LIKE N'%%' " +
+            $"OR nccsp.GiaCungUng LIKE N'%%' " +
+            $"OR nccsp.NgayCapNhat LIKE N'%%' " +
+            $"ORDER BY nccsp.NgayCapNhat DESC").ToPagedList<flatNhaCungCapSanPham>(PageNum, PageSize);
+
             return list;
         }    
 
         //public IEnumerable<flatNhaCungCap> ListAdvanced(string idNhaCungCap, string customerName, string phone, string address, string discountCode, string discountFrom, string discountTo, string subtotalFrom, string subtotalTo, string totalFrom, string totalTo, string status)
         //{
         //    string querySearch = $"SELECT b.id_NhaCungCap, c.name AS customerName, b.phone, b.address, b.discountCode, b.discount, b.subtotal, b.total, b.creatDate, bs.status AS statusName " +
-        //        $"FROM dbo.NhaCungCap b, dbo.Customer c, dbo.NhaCungCapStatus bs " +
+        //        $"FROM dbo.NhaCungCapSanPham b, dbo.Customer c, dbo.NhaCungCapStatus bs " +
         //        $"WHERE b.id_customer = c.id_customer AND b.id_status = bs.id_status";
 
         //    string queryCondition = "";
@@ -145,7 +147,7 @@ namespace FreshFoodHTH.Models.DAO.Admin
         //public IEnumerable<flatNhaCungCap> ListAdvancedSearch(int PageNum, int PageSize, string idNhaCungCap, string customerName, string phone, string address, string discountCode, string discountFrom, string discountTo, string subtotalFrom, string subtotalTo, string totalFrom, string totalTo, string status)
         //{
         //    string querySearch = $"SELECT b.id_NhaCungCap, c.name AS customerName, b.phone, b.address, b.discountCode, b.discount, b.subtotal, b.total, b.creatDate, bs.status AS statusName " +
-        //        $"FROM dbo.NhaCungCap b, dbo.Customer c, dbo.NhaCungCapStatus bs " +
+        //        $"FROM dbo.NhaCungCapSanPham b, dbo.Customer c, dbo.NhaCungCapStatus bs " +
         //        $"WHERE b.id_customer = c.id_customer AND b.id_status = bs.id_status";
 
         //    string queryCondition = "";

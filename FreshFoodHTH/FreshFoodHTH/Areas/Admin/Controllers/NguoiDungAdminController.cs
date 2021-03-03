@@ -14,6 +14,8 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         // GET: Admin/NguoiDungAdmin
         FreshFoodDBContext db = new FreshFoodDBContext();
         NguoiDungDAO ndDao = new NguoiDungDAO();
+        ChiTietGioHangDAO ctghDao = new ChiTietGioHangDAO();
+
 
         public ActionResult Index(int? page, int? PageSize, string searching = "")
         {
@@ -113,6 +115,18 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         {
             ndDao.DeleteAdmin(id);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult IndexChiTietGioHang(Guid id)
+        {
+            var listChiTietDonHang = ctghDao.GetListChiTietGioHang(id);
+
+            if (listChiTietDonHang == null)
+                return HttpNotFound();
+
+            ViewBag.IDDonHang = id;
+
+            return PartialView(listChiTietDonHang);
         }
     }
 }

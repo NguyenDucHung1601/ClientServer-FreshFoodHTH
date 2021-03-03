@@ -7,7 +7,7 @@
 
 @section header
 {
-    Đơn hàng - Thông tin đơn hàng
+    Chi tiết hóa đơn nhập
 }
 
 <div>
@@ -16,7 +16,7 @@
             <td>
                 <dl class="dl-horizontal">
                     <dt>
-                        Sản phẩm:
+                        Tên sản phẩm:
                     </dt>
 
                     <dd>
@@ -32,7 +32,7 @@
                     </dd>
 
                     <dt>
-                        Đơn giá nhập:
+                        Đơn giá:
                     </dt>
 
                     <dd>
@@ -48,14 +48,14 @@
                     </dd>
 
                     <dt>
-                        Thành tiền
+                        Thành tiền:
                     </dt>
 
                     <dd>
                         @Html.DisplayFor(model => model.ThanhTien)
                     </dd>
                     <dt>
-                        Ghi chú
+                        Ghi chú:
                     </dt>
 
                     <dd>
@@ -66,12 +66,11 @@
         </tr>
     </table>
 </div>
-<br />
 <button type="button" class="btn btn-primary btn-admin">
     <a class="fa fa-edit"></a> &nbsp;
-    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.IDChiTietHoaDonNhap })
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { idhdn = Model.IDHoaDonNhap , idsp = Model.IDSanPham })
 </button>
 <button type="button" class="btn btn-warning btn-admin">
     <a class="fa fa-th-list"></a> &nbsp;
-    @Html.ActionLink("Details", "HoaDonNhapsController", new { id = Model.IDHoaDonNhap })
+    @Html.ActionLink("Danh sách", "HoaDonNhaps", "Details" , new { id = Model.IDHoaDonNhap})
 </button>

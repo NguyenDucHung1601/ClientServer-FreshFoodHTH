@@ -1,5 +1,12 @@
 ﻿@model IEnumerable<FreshFoodHTH.Models.EF.ChiTietHoaDonNhap>
 
+
+<button type="button" class="btn btn-success btn-admin" style="margin:5px; margin-left:unset">
+    <i class="fa fa-plus-square"></i> &nbsp;
+    @Html.ActionLink("Thêm dòng hóa đơn", "Create", "ChiTietHoaDonNhaps", new { idhdn = ViewBag.IDHoaDonNhap }, new { @class = "" })
+</button>
+
+
 <table class="table">
     <tr>
         <th>
@@ -39,14 +46,13 @@
                 @Html.DisplayFor(modelItem => item.ThanhTien)
             </td>
             <td>
-                <i class="fa fa-info-circle"></i> &nbsp;
-                @Html.ActionLink("Xem", "Details", new { cthdn = item }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @*<i class="fa fa-info-circle"></i> &nbsp;
+                    @Html.ActionLink("Xem", "Details", "ChiTietHoaDonNhaps", new { id = item.IDChiTietHoaDonNhap , idhdn = ViewBag.IDHoaDonNhap }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*@
                 <i class="fa fa-edit"></i> &nbsp;
-                @Html.ActionLink("Sửa", "Edit", new { cthdn = item }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("Sửa", "Edit", "ChiTietHoaDonNhaps", new { id = item.IDChiTietHoaDonNhap, idhdn = ViewBag.IDHoaDonNhap },new { @class = "" }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <i class="fa fa-trash"></i> &nbsp;
-                @Html.ActionLink("Xóa", "Delete", new { cthdn = item }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })
+                @Html.ActionLink("Xóa", "Delete", "ChiTietHoaDonNhaps", new { id = item.IDChiTietHoaDonNhap }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })
             </td>
         </tr>
     }
-
 </table>

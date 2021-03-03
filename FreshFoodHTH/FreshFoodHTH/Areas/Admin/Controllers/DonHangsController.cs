@@ -73,6 +73,11 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 donHang.IDDonHang = Guid.NewGuid();
+                donHang.CreatedDate = DateTime.Now;
+                donHang.CreatedBy = (string)Session["USERNAME_SESSION"];
+                donHang.ModifiedDate = DateTime.Now;
+                donHang.ModifiedBy = (string)Session["USERNAME_SESSION"];
+                donHang.TongTien = donHang.TienHang + donHang.TienShip - donHang.TienGiam;
                 db.DonHangs.Add(donHang);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -111,6 +116,8 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                donHang.ModifiedDate = DateTime.Now;
+                donHang.ModifiedBy = (string)Session["USERNAME_SESSION"];
                 db.Entry(donHang).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -64,11 +64,16 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDHoaDonNhap,IDNhaCungCap,GhiChu,TienHang,TienShip,TienGiam,TongTien,CreatedDate")] HoaDonNhap hoaDonNhap)
+        public ActionResult Create([Bind(Include = "IDHoaDonNhap,MaSo,IDNhaCungCap,GhiChu,TienHang,TienShip,TienGiam,TongTien,CreatedDate,CreatedBy,ModifiedDate,ModifiedBy")] HoaDonNhap hoaDonNhap)
         {
             if (ModelState.IsValid)
             {
                 hoaDonNhap.IDHoaDonNhap = Guid.NewGuid();
+                hoaDonNhap.CreatedDate = DateTime.Now;
+                hoaDonNhap.CreatedBy = (string)Session["USERNAME_SESSION"];
+                hoaDonNhap.ModifiedDate = DateTime.Now;
+                hoaDonNhap.ModifiedBy = (string)Session["USERNAME_SESSION"];
+                hoaDonNhap.TongTien = hoaDonNhap.TienHang + hoaDonNhap.TienShip - hoaDonNhap.TienGiam;
                 db.HoaDonNhaps.Add(hoaDonNhap);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -99,10 +104,14 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDHoaDonNhap,IDNhaCungCap,GhiChu,TienHang,TienShip,TienGiam,TongTien,CreatedDate")] HoaDonNhap hoaDonNhap)
+        public ActionResult Edit([Bind(Include = "IDHoaDonNhap,MaSo,IDNhaCungCap,GhiChu,TienHang,TienShip,TienGiam,TongTien,CreatedDate,CreatedBy,ModifiedDate,ModifiedBy")] HoaDonNhap hoaDonNhap)
         {
             if (ModelState.IsValid)
             {
+                hoaDonNhap.CreatedDate = hoaDonNhap.CreatedDate == null ? DateTime.Now : hoaDonNhap.CreatedDate;
+                hoaDonNhap.ModifiedDate = DateTime.Now;
+                hoaDonNhap.ModifiedBy = (string)Session["USERNAME_SESSION"];
+                hoaDonNhap.TongTien = hoaDonNhap.TienHang + hoaDonNhap.TienShip - hoaDonNhap.TienGiam;
                 db.Entry(hoaDonNhap).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

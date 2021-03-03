@@ -11,11 +11,11 @@ using FreshFoodHTH.Models.EF;
 
 namespace FreshFoodHTH.Areas.Admin.Controllers
 {
-    public class NhaCungCapsController : Controller
+    public class NhaCungCapSanPhamsController : Controller
     {
         private FreshFoodDBContext db = new FreshFoodDBContext();
-        public NhaCungCapSanPhamDAO nccDao = new NhaCungCapSanPhamDAO();
-        // GET: Admin/NhaCungCaps
+        public NhaCungCapSanPhamDAO nccspDao = new NhaCungCapSanPhamDAO();
+        // GET: Admin/NhaCungCapSanPhams
         public ActionResult Index(int? page, int? PageSize, string searching = "")
         {
             ViewBag.SearchString = searching;
@@ -30,90 +30,99 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             int pageNumber = (page ?? 1);
             int pagesize = (PageSize ?? 10);
             ViewBag.psize = pagesize;
-            ViewBag.Count = nccDao.ListSimple(searching).Count();
-            return View(nccDao.ListSimpleSearch(pageNumber,pagesize,searching));
+            ViewBag.Count = nccspDao.ListSimple(searching).Count();
+            return View(nccspDao.ListSimpleSearch(pageNumber, pagesize, searching));
         }
 
-        // GET: Admin/NhaCungCaps/Details/5
+        // GET: Admin/NhaCungCapSanPhams/Details/5
         public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhaCungCap nhaCungCap = db.NhaCungCaps.Find(id);
-            if (nhaCungCap == null)
+            NhaCungCapSanPham nhaCungCapSanPham = db.NhaCungCapSanPhams.Find(id);
+            if (nhaCungCapSanPham == null)
             {
                 return HttpNotFound();
             }
-            return View(nhaCungCap);
+            return View(nhaCungCapSanPham);
         }
 
-        // GET: Admin/NhaCungCaps/Create
+        // GET: Admin/NhaCungCapSanPhams/Create
         public ActionResult Create()
         {
+            ViewBag.IDNhaCungCap = new SelectList(db.NhaCungCaps, "IDNhaCungCap", "Ten");
+            ViewBag.IDSanPham = new SelectList(db.SanPhams, "IDSanPham", "Ten");
             return View();
         }
 
-        // POST: Admin/NhaCungCaps/Create
+        // POST: Admin/NhaCungCapSanPhams/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDNhaCungCap,Ten,DiaChi,DienThoai,CreatedDate")] NhaCungCap nhaCungCap)
+        public ActionResult Create([Bind(Include = "IDNhaCungCapSanPham,IDNhaCungCap,IDSanPham,DonViTinh,GiaCungUng,NgayCapNhat")] NhaCungCapSanPham nhaCungCapSanPham)
         {
             if (ModelState.IsValid)
             {
-                nhaCungCap.IDNhaCungCap = Guid.NewGuid();
-                db.NhaCungCaps.Add(nhaCungCap);
+                nhaCungCapSanPham.IDNhaCungCapSanPham = Guid.NewGuid();
+                nhaCungCapSanPham.NgayCapNhat = DateTime.Now;
+                db.NhaCungCapSanPhams.Add(nhaCungCapSanPham);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(nhaCungCap);
+            ViewBag.IDNhaCungCap = new SelectList(db.NhaCungCaps, "IDNhaCungCap", "Ten", nhaCungCapSanPham.IDNhaCungCap);
+            ViewBag.IDSanPham = new SelectList(db.SanPhams, "IDSanPham", "Ten", nhaCungCapSanPham.IDSanPham);
+            return View(nhaCungCapSanPham);
         }
 
-        // GET: Admin/NhaCungCaps/Edit/5
+        // GET: Admin/NhaCungCapSanPhams/Edit/5
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NhaCungCap nhaCungCap = db.NhaCungCaps.Find(id);
-            if (nhaCungCap == null)
+            NhaCungCapSanPham nhaCungCapSanPham = db.NhaCungCapSanPhams.Find(id);
+            if (nhaCungCapSanPham == null)
             {
                 return HttpNotFound();
             }
-            return View(nhaCungCap);
+            ViewBag.IDNhaCungCap = new SelectList(db.NhaCungCaps, "IDNhaCungCap", "Ten", nhaCungCapSanPham.IDNhaCungCap);
+            ViewBag.IDSanPham = new SelectList(db.SanPhams, "IDSanPham", "Ten", nhaCungCapSanPham.IDSanPham);
+            return View(nhaCungCapSanPham);
         }
 
-        // POST: Admin/NhaCungCaps/Edit/5
+        // POST: Admin/NhaCungCapSanPhams/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDNhaCungCap,Ten,DiaChi,DienThoai,CreatedDate")] NhaCungCap nhaCungCap)
+        public ActionResult Edit([Bind(Include = "IDNhaCungCapSanPham,IDNhaCungCap,IDSanPham,DonViTinh,GiaCungUng,NgayCapNhat")] NhaCungCapSanPham nhaCungCapSanPham)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(nhaCungCap).State = EntityState.Modified;
+                nhaCungCapSanPham.NgayCapNhat = DateTime.Now;
+                db.Entry(nhaCungCapSanPham).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(nhaCungCap);
+            ViewBag.IDNhaCungCap = new SelectList(db.NhaCungCaps, "IDNhaCungCap", "Ten", nhaCungCapSanPham.IDNhaCungCap);
+            ViewBag.IDSanPham = new SelectList(db.SanPhams, "IDSanPham", "Ten", nhaCungCapSanPham.IDSanPham);
+            return View(nhaCungCapSanPham);
         }
 
+        // GET: Admin/NhaCungCapSanPhams/Delete/5
         public ActionResult Delete(Guid id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            nccDao.Delete(id);
+            nccspDao.Delete(id);
             return RedirectToAction("Index");
         }
-
 
         protected override void Dispose(bool disposing)
         {

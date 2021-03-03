@@ -15,6 +15,13 @@
             <td>
                 <dl class="dl-horizontal">
                     <dt>
+                        Mã hóa đơn nhập:
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MaSo)
+                    </dd>
+                    <dt>
                         Nhà cung cấp:
                     </dt>
 
@@ -55,11 +62,19 @@
                     </dd>
 
                     <dt>
-                        Ngày cập nhật:
+                        Ngày tạo:
                     </dt>
 
                     <dd>
                         @Html.DisplayFor(model => model.CreatedDate)
+                    </dd>
+
+                    <dt>
+                        Ngày cập nhật:
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedDate)
                     </dd>
 
                     <dt>

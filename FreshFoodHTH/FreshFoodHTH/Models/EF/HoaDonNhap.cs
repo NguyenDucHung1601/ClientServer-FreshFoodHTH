@@ -20,6 +20,9 @@ namespace FreshFoodHTH.Models.EF
 
         public Guid? IDNhaCungCap { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int MaSo { get; set; }
+
         public string GhiChu { get; set; }
 
         public decimal? TienHang { get; set; }

@@ -38,6 +38,7 @@ namespace FreshFoodHTH.Models.DAO.Admin
             HoaDonNhap hoaDonNhap = getByID(HoaDonNhap.IDHoaDonNhap);
             if (hoaDonNhap != null)
             {
+                hoaDonNhap.IDHoaDonNhap = HoaDonNhap.IDHoaDonNhap;
                 hoaDonNhap.IDNhaCungCap = HoaDonNhap.IDNhaCungCap;
                 hoaDonNhap.GhiChu = HoaDonNhap.GhiChu;
                 hoaDonNhap.TienHang = HoaDonNhap.TienHang;
@@ -65,10 +66,9 @@ namespace FreshFoodHTH.Models.DAO.Admin
 
         public IEnumerable<flatHoaDonNhap> ListSimple(string searching)
         {
-            var list = db.Database.SqlQuery<flatHoaDonNhap>($"SELECT h.IDHoaDonNhap, ncc.Ten AS TenNhaCungCap, h.TienHang, h.TienShip, h.TienGiam, h.TongTien, h.CreatedDate " +
-                $"FROM dbo.HoaDonNhap h, dbo.NhaCungCap ncc " +
-                $"WHERE h.IDNhaCungCap = ncc.IDNhaCungCap " +
-                $"AND h.IDHoaDonNhap LIKE N'%{searching}%' " +
+            var list = db.Database.SqlQuery<flatHoaDonNhap>($"SELECT h.IDHoaDonNhap, h.MaSo, ncc.Ten AS TenNhaCungCap, h.TienHang, h.TienShip, h.TienGiam, h.TongTien, h.CreatedDate , h.ModifiedDate " +
+                $"FROM dbo.HoaDonNhap h INNER JOIN dbo.NhaCungCap ncc ON h.IDNhaCungCap = ncc.IDNhaCungCap " +
+                $"WHERE h.IDHoaDonNhap LIKE N'%{searching}%' " +
                 $"OR ncc.Ten LIKE N'%{searching}%' " +
                 $"OR h.TienGiam LIKE N'%{searching}%' " +
                 $"OR h.TienShip LIKE N'%{searching}%' " +
@@ -81,19 +81,18 @@ namespace FreshFoodHTH.Models.DAO.Admin
 
         public IEnumerable<flatHoaDonNhap> ListSimpleSearch(int PageNum, int PageSize, string searching)
         {
-            var list = db.Database.SqlQuery<flatHoaDonNhap>($"SELECT h.IDHoaDonNhap, ncc.Ten AS TenNhaCungCap, h.TienHang, h.TienShip, h.TienGiam, h.TongTien, h.CreatedDate " +
-                $"FROM dbo.HoaDonNhap h, dbo.NhaCungCap ncc " +
-                $"WHERE h.IDNhaCungCap = ncc.IDNhaCungCap " +
-                $"AND h.IDHoaDonNhap LIKE N'%{searching}%' " +
+            var list = db.Database.SqlQuery<flatHoaDonNhap>($"SELECT h.IDHoaDonNhap, h.MaSo , ncc.Ten AS TenNhaCungCap, h.TienHang, h.TienShip, h.TienGiam, h.TongTien, h.CreatedDate , h.ModifiedDate " +
+                $"FROM dbo.HoaDonNhap h INNER JOIN dbo.NhaCungCap ncc ON h.IDNhaCungCap = ncc.IDNhaCungCap " +
+                $"WHERE h.IDHoaDonNhap LIKE N'%{searching}%' " +
                 $"OR ncc.Ten LIKE N'%{searching}%' " +
                 $"OR h.TienGiam LIKE N'%{searching}%' " +
                 $"OR h.TienShip LIKE N'%{searching}%' " +
                 $"OR h.TienHang LIKE N'%{searching}%' " +
                 $"OR h.TongTien LIKE N'%{searching}%' " +
                 $"OR h.CreatedDate LIKE N'%{searching}%' " +
-                $"ORDER BY h.CreatedDate DESC").ToPagedList<flatHoaDonNhap>(PageNum,PageSize);
+                $"ORDER BY h.CreatedDate DESC").ToPagedList<flatHoaDonNhap>(PageNum, PageSize);
             return list;
-        }    
+        }
 
         //public IEnumerable<flatHoaDonNhap> ListAdvanced(string idHoaDonNhap, string customerName, string phone, string address, string discountCode, string discountFrom, string discountTo, string subtotalFrom, string subtotalTo, string totalFrom, string totalTo, string status)
         //{

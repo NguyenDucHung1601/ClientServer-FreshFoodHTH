@@ -38,6 +38,8 @@ namespace FreshFoodHTH.Models.DAO.Admin
             DonHang donHang = getByID(DonHang.IDDonHang);
             if (donHang != null)
             {
+                donHang.IDDonHang = DonHang.IDDonHang;
+                donHang.MaSo = DonHang.MaSo;
                 donHang.IDKhachHang = DonHang.IDKhachHang;
                 donHang.GhiChu = DonHang.GhiChu;
                 donHang.TienHang = DonHang.TienHang;
@@ -67,10 +69,10 @@ namespace FreshFoodHTH.Models.DAO.Admin
 
         public IEnumerable<flatDonHang> ListSimple(string searching)
         {
-            var list = db.Database.SqlQuery<flatDonHang>($"SELECT b.IDDonHang, c.Ten AS TenKhachHang, bpttt.TenPhuongThucThanhToan AS TenPhuongThucThanhToan , b.TienHang, b.TienShip, b.TienGiam, b.TongTien, b.CreatedDate, bs.TenTrangThai AS TenTrangThai " +
-                $"FROM dbo.DonHang b, dbo.NguoiDung c, dbo.TrangThai bs, dbo.PhuongThucThanhToan bpttt " +
-                $"WHERE b.IDKhachHang = c.IDNguoiDung AND b.IDTrangThai = bs.IDTrangThai AND b.IDPhuongThucThanhToan = bpttt.IDPhuongThucThanhToan " +
-                $"AND b.IDDonHang LIKE N'%{searching}%' " +
+            var list = db.Database.SqlQuery<flatDonHang>($"SELECT b.IDDonHang, b.MaSo, c.Ten AS TenKhachHang, bpttt.TenPhuongThucThanhToan AS TenPhuongThucThanhToan , b.TienHang, b.TienShip, b.TienGiam, b.TongTien, b.CreatedDate , b.ModifiedDate, b.GhiChu,bs.TenTrangThai AS TenTrangThai " +
+                $"FROM dbo.DonHang b INNER JOIN dbo.NguoiDung c ON b.IDKhachHang = c.IDNguoiDung INNER JOIN dbo.TrangThai bs ON " +
+                $"b.IDTrangThai = bs.IDTrangThai INNER JOIN dbo.PhuongThucThanhToan bpttt ON b.IDPhuongThucThanhToan = bpttt.IDPhuongThucThanhToan " +
+                $"WHERE b.IDDonHang LIKE N'%{searching}%' " +
                 $"OR c.Ten LIKE N'%{searching}%' " +
                 $"OR b.TienGiam LIKE N'%{searching}%' " +
                 $"OR b.TienShip LIKE N'%{searching}%' " +
@@ -85,21 +87,21 @@ namespace FreshFoodHTH.Models.DAO.Admin
 
         public IEnumerable<flatDonHang> ListSimpleSearch(int PageNum, int PageSize, string searching)
         {
-            var list = db.Database.SqlQuery<flatDonHang>($"SELECT b.IDDonHang, c.Ten AS TenKhachHang, bpttt.TenPhuongThucThanhToan AS TenPhuongThucThanhToan , b.TienHang, b.TienShip, b.TienGiam, b.TongTien, b.CreatedDate, bs.TenTrangThai AS TenTrangThai " +
-                $"FROM dbo.DonHang b, dbo.NguoiDung c, dbo.TrangThai bs, dbo.PhuongThucThanhToan bpttt " +
-                $"WHERE b.IDKhachHang = c.IDNguoiDung AND b.IDTrangThai = bs.IDTrangThai AND b.IDPhuongThucThanhToan = bpttt.IDPhuongThucThanhToan " +
-                $"AND b.IDDonHang LIKE N'%{searching}%' " +
-                $"OR c.Ten LIKE N'%{searching}%' " +
-                $"OR b.TienGiam LIKE N'%{searching}%' " +
-                $"OR b.TienShip LIKE N'%{searching}%' " +
-                $"OR b.TienHang LIKE N'%{searching}%' " +
-                $"OR b.TongTien LIKE N'%{searching}%' " +
-                $"OR b.CreatedDate LIKE N'%{searching}%' " +
-                $"OR bpttt.TenPhuongThucThanhToan LIKE N'%{searching}%' " +
-                $"OR bs.TenTrangThai LIKE N'%{searching}%' " +
-                $"ORDER BY b.CreatedDate DESC").ToPagedList<flatDonHang>(PageNum,PageSize);
+            var list = db.Database.SqlQuery<flatDonHang>($"SELECT b.IDDonHang,b.MaSo, c.Ten AS TenKhachHang, bpttt.TenPhuongThucThanhToan AS TenPhuongThucThanhToan , b.TienHang, b.TienShip, b.TienGiam, b.TongTien, b.CreatedDate, b.ModifiedDate ,b.GhiChu ,bs.TenTrangThai AS TenTrangThai " +
+                 $"FROM dbo.DonHang b INNER JOIN dbo.NguoiDung c ON b.IDKhachHang = c.IDNguoiDung INNER JOIN dbo.TrangThai bs ON " +
+                 $"b.IDTrangThai = bs.IDTrangThai INNER JOIN dbo.PhuongThucThanhToan bpttt ON b.IDPhuongThucThanhToan = bpttt.IDPhuongThucThanhToan " +
+                 $"WHERE b.IDDonHang LIKE N'%{searching}%' " +
+                 $"OR c.Ten LIKE N'%{searching}%' " +
+                 $"OR b.TienGiam LIKE N'%{searching}%' " +
+                 $"OR b.TienShip LIKE N'%{searching}%' " +
+                 $"OR b.TienHang LIKE N'%{searching}%' " +
+                 $"OR b.TongTien LIKE N'%{searching}%' " +
+                 $"OR b.CreatedDate LIKE N'%{searching}%' " +
+                 $"OR bpttt.TenPhuongThucThanhToan LIKE N'%{searching}%' " +
+                 $"OR bs.TenTrangThai LIKE N'%{searching}%' " +
+                 $"ORDER BY b.CreatedDate DESC").ToPagedList<flatDonHang>(PageNum, PageSize);
             return list;
-        }    
+        }
 
         //public IEnumerable<flatDonHang> ListAdvanced(string idDonHang, string customerName, string phone, string address, string discountCode, string discountFrom, string discountTo, string subtotalFrom, string subtotalTo, string totalFrom, string totalTo, string status)
         //{
