@@ -7,7 +7,7 @@
 
 @section header
 {
-    Loại khách hàng - Chỉnh sửa thông tin (#@Model.IDLoaiKhachHang)
+    Phân loại khách hàng Loại khách hàng - Chỉnh sửa thông tin
 }
 
 @using (Html.BeginForm())
@@ -27,7 +27,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-10">
-            <label for="exampleInputEmail1">Ten</label>
+            <label for="exampleInputEmail1">Điều kiện</label>
             <input type="text" class="form-control" name="dieukien" placeholder="Nhập điều kiện" value=" @Html.DisplayFor(model => model.DieuKien)">
         </div>
     </div>

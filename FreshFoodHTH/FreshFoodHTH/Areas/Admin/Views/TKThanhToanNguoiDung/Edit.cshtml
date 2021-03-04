@@ -7,7 +7,7 @@
 
 @section header
 {
-    Tài khoản thanh toán - Chỉnh sửa thông tin ( @Model.IDTaiKhoan)
+    Tài khoản thanh toán - Chỉnh sửa thông tin ( @Model.TaiKhoan)
 }
 
 @using (Html.BeginForm("Edit", "TKThanhToanNguoiDung", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <div class="col-md-10">
                             <label for="exampleInputEmail1">Tài khoản </label>
-                            <input type="text" class="form-control" name="taikhoan" placeholder="Tài khoản ..." value=" @Html.DisplayFor(model => model.TaiKhoan)" style="width:332px" readonly>
+                            <input type="text" class="form-control" name="taikhoan" placeholder="Tài khoản ..." value=" @Html.DisplayFor(model => model.TaiKhoan)" style="width:332px" required>
                         </div>
                     </div>
                     <br />
