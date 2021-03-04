@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "ErrorConstraint";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section header
+{
+    Hóa đơn nhập - Thông báo lỗi
+}
+<h3> <b style="color:red;font-style:italic"> Lỗi rằng buộc , không thể xóa! Hãy xóa các dòng hóa đơn nhập trước ! </b></h3>
+<button type="button" class="btn btn-warning btn-admin">
+    <a class="fa fa-th-list"></a> &nbsp;
+    @Html.ActionLink("Danh sách", "Index")
+</button>

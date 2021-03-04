@@ -138,6 +138,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChiTietDonHangsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChiTietHoaDonNhapsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DonHangsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HoaDonNhapsController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaiNguoiDungController.cs" />
@@ -147,6 +152,7 @@
     <Compile Include="Areas\Admin\Controllers\PhuongThucThanhToanController.cs" />
     <Compile Include="Areas\Admin\Controllers\NguoiDungAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\NguoiDungClientController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhaCungCapSanPhamsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanPhamController.cs" />
     <Compile Include="Areas\Admin\Controllers\TaiKhoanThanhToanController.cs" />
     <Compile Include="Areas\Admin\Controllers\TheLoaiController.cs" />
@@ -159,6 +165,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAO\Admin\ChiTietGioHangDAO.cs" />
+    <Compile Include="Models\DAO\Admin\ChiTietHoaDonNhapDAO.cs" />
+    <Compile Include="Models\DAO\Admin\ChiTietDonHangDAO.cs" />
+    <Compile Include="Models\DAO\Admin\NhaCungCapSanPhamDAO.cs" />
+    <Compile Include="Models\DAO\Admin\HoaDonNhapDAO.cs" />
+    <Compile Include="Models\DAO\Admin\DonHangDAO.cs" />
     <Compile Include="Models\DAO\Admin\LoaiNguoiDungDAO.cs" />
     <Compile Include="Models\DAO\Admin\NguoiDungDAO.cs" />
     <Compile Include="Models\DAO\Admin\NhaCungCapDAO.cs" />
@@ -167,6 +179,10 @@
     <Compile Include="Models\DAO\Admin\SanPhamDAO.cs" />
     <Compile Include="Models\DAO\Admin\TaiKhoanThanhToanDAO.cs" />
     <Compile Include="Models\DAO\Admin\TheLoaiDAO.cs" />
+    <Compile Include="Models\EFplus\flatNhaCungCapSanPham.cs" />
+    <Compile Include="Models\EFplus\flatHoaDonNhap.cs" />
+    <Compile Include="Models\EFplus\flatDonHang.cs" />
+    <Compile Include="Models\DAO\Admin\NguoiDungDAO.cs" />
     <Compile Include="Models\DAO\Admin\ThongTinLienHeDAO.cs" />
     <Compile Include="Models\DAO\Admin\TKThanhToanNguoiDungDAO.cs" />
     <Compile Include="Models\DAO\Admin\TrangThaiDAO.cs" />
@@ -1150,6 +1166,19 @@
     <Content Include="Areas\Admin\Views\SanPham\Create.cshtml" />
     <Content Include="Areas\Admin\Views\SanPham\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\SanPham\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonNhaps\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonNhaps\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonNhaps\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonNhaps\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DonHangs\IndexChiTietDonHang.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonNhaps\IndexChiTietHoaDonNhap.cshtml" />
+    <Content Include="Areas\Admin\Views\123\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\123\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\123\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ThongTinLienHe\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ThongTinLienHe\Details.cshtml" />
@@ -1187,6 +1216,15 @@
     <Content Include="Areas\Admin\Views\NguoiDungAdmin\Create.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDungAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDungClient\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietHoaDonNhaps\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietHoaDonNhaps\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietHoaDonNhaps\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCapSanPhams\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCapSanPhams\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCapSanPhams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NhaCungCapSanPhams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungAdmin\IndexChiTietGioHang.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonNhaps\ErrorConstraint.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

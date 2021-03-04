@@ -64,7 +64,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             TKThanhToanNguoiDung tkthanhtoannguoidung = new TKThanhToanNguoiDung();
             tkthanhtoannguoidung.IDNguoiDung = idnguoidung;
             tkthanhtoannguoidung.IDTaiKhoan = idtaikhoan;
-            tkthanhtoannguoidung.TaiKhoan = taikhoan;
+            tkthanhtoannguoidung.Username = taikhoan;
             tkthanhtoannguoidung.Password = Password;
             tkthanhtoannguoidung.TongTien = Convert.ToDecimal(tongtien);
 
@@ -90,7 +90,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         public ActionResult Edit(Guid idnguoidung, Guid idtaikhoan, string taikhoan, string Password, string tongtien)
         {
             TKThanhToanNguoiDung tkthanhtoannguoidung = tkttndDao.GetByID(idnguoidung,idtaikhoan);
-            tkthanhtoannguoidung.TaiKhoan = taikhoan;
+            tkthanhtoannguoidung.Username = taikhoan;
             tkthanhtoannguoidung.Password = Password;
             tkthanhtoannguoidung.TongTien = Convert.ToDecimal(tongtien);
 

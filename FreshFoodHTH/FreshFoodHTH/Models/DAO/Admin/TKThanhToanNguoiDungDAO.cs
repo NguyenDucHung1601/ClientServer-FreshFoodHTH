@@ -44,7 +44,7 @@ namespace FreshFoodHTH.Models.DAO.Admin
             TKThanhToanNguoiDung tkthanhtoannguoidung = GetByID(obj.IDNguoiDung,obj.IDTaiKhoan);
             if (tkthanhtoannguoidung != null)
             {
-                tkthanhtoannguoidung.TaiKhoan = obj.TaiKhoan;
+                tkthanhtoannguoidung.Username = obj.Username;
                 tkthanhtoannguoidung.Password = obj.Password;
                 tkthanhtoannguoidung.TongTien = obj.TongTien;
 

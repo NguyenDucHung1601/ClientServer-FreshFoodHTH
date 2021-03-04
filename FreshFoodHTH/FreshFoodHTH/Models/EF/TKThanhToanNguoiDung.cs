@@ -18,7 +18,7 @@ namespace FreshFoodHTH.Models.EF
         public Guid IDNguoiDung { get; set; }
 
         [StringLength(50)]
-        public string TaiKhoan { get; set; }
+        public string Username { get; set; }
 
         [StringLength(50)]
         public string Password { get; set; }

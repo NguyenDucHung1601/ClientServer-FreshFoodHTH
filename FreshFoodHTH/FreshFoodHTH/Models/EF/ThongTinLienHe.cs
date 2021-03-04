@@ -9,6 +9,9 @@ namespace FreshFoodHTH.Models.EF
     [Table("ThongTinLienHe")]
     public partial class ThongTinLienHe
     {
+        public Guid ID { get; set; }
+
+        [Required]
         [StringLength(400)]
         public string TenCuaHang { get; set; }
 
@@ -41,7 +44,5 @@ namespace FreshFoodHTH.Models.EF
 
         [StringLength(200)]
         public string ModifiedBy { get; set; }
-
-        public Guid ID { get; set; }
     }
 }

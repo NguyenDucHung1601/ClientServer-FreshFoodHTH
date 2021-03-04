@@ -10,11 +10,10 @@ namespace FreshFoodHTH.Models.EF
     public partial class ChiTietHoaDonNhap
     {
         [Key]
-        [Column(Order = 0)]
+        public Guid IDChiTietHoaDonNhap { get; set; }
+
         public Guid IDHoaDonNhap { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
         public Guid IDSanPham { get; set; }
 
         [StringLength(100)]

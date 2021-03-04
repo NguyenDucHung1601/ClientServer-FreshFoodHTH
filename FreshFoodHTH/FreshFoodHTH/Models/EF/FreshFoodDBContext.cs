@@ -1,10 +1,10 @@
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-using System.Linq;
-
 namespace FreshFoodHTH.Models.EF
 {
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+
     public partial class FreshFoodDBContext : DbContext
     {
         public FreshFoodDBContext()
@@ -239,7 +239,7 @@ namespace FreshFoodHTH.Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<TKThanhToanNguoiDung>()
-                .Property(e => e.TaiKhoan)
+                .Property(e => e.Username)
                 .IsUnicode(false);
 
             modelBuilder.Entity<TKThanhToanNguoiDung>()
