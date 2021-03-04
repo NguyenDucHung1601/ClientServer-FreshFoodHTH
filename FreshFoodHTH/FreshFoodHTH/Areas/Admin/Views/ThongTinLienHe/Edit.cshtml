@@ -1,0 +1,86 @@
+﻿@model FreshFoodHTH.Models.EF.ThongTinLienHe
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section header
+{
+    Thông tin liên hệ - Chỉnh sửa thông tin (#@Model.TenCuaHang)
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="exampleInputEmail1">Tên cửa hàng</label>
+            <input type="text" class="form-control" name="tencuahang" placeholder="Nhập tên cửa hàng" value=" @Html.DisplayFor(model => model.TenCuaHang)">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="exampleInputEmail1">Địa chỉ</label>
+            <input type="text" class="form-control" name="diachi" placeholder="Nhập địa chỉ" value=" @Html.DisplayFor(model => model.DiaChi)">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="exampleInputEmail1">Số điện thoại 1</label>
+            <input type="text" class="form-control" name="dienthoai1" placeholder="Nhập số điện thoại 1" value=" @Html.DisplayFor(model => model.DienThoai1)">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="exampleInputEmail1">Số điện thoại 2</label>
+            <input type="text" class="form-control" name="dienthoai2" placeholder="Nhập số điện thoại 2" value=" @Html.DisplayFor(model => model.DienThoai2)">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="exampleInputEmail1">Giờ mở cửa</label>
+            <input type="text" class="form-control" name="giomocua" placeholder="Nhập giờ mở cửa" value=" @Html.DisplayFor(model => model.GioMoCua)">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="exampleInputEmail1">Email</label>
+            <input type="text" class="form-control" name="email" placeholder="Nhập email" value=" @Html.DisplayFor(model => model.Email)">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="exampleInputEmail1">FaceBook</label>
+            <input type="text" class="form-control" name="facebook" placeholder="Nhập link Facebook" value=" @Html.DisplayFor(model => model.LinkFacebook)">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="exampleInputEmail1">Youtube</label>
+            <input type="text" class="form-control" name="youtube" placeholder="Nhập link youtube" value=" @Html.DisplayFor(model => model.LinkYoutube)">
+        </div>
+    </div> <div class="form-group">
+        <div class="col-md-10">
+            <label for="exampleInputEmail1">Instagram</label>
+            <input type="text" class="form-control" name="instagram" placeholder="Nhập link instagram" value=" @Html.DisplayFor(model => model.LinkInstagram)">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" style="width:110px">
+        <a class="fa fa-save"></a> &nbsp;Lưu lại
+    </button>
+    <button type="button" class="btn btn-warning" style="width:110px">
+        <a class="fa fa-th-list"></a> &nbsp;
+        @Html.ActionLink("Danh sách", "Index")
+    </button>
+</div>
+}

@@ -1,0 +1,96 @@
+﻿@model FreshFoodHTH.Models.EF.ThongTinLienHe
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section header
+{
+    Liên Hệ - Thông tin Liên Hệ (#@Model.TenCuaHang)
+}
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Tên cửa hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenCuaHang)
+        </dd>
+
+        <dt>
+            Địa chỉ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+        <dt>
+            Số Điện Thoại 1
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoai1)
+        </dd>
+        <dt>
+            Số Điện Thoại 2
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoai2)
+        </dd>
+        <dt>
+            Giờ mở cửa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioMoCua)
+        </dd>
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            FaceBook
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkFacebook)
+        </dd>
+        <dt>
+            Youtube
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkYoutube)
+        </dd>
+        <dt>
+            Instagram
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkInstagram)
+        </dd>
+        <dt>
+            Ngày Cập Nhật
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+    </dl>
+</div>
+
+<button type="button" class="btn btn-primary">
+    <a class="fa fa-edit"></a> &nbsp;
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.ID })
+</button>
+<button type="button" class="btn btn-warning">
+    <a class="fa fa-th-list"></a> &nbsp;
+    @Html.ActionLink("Danh sách", "Index")
+</button>

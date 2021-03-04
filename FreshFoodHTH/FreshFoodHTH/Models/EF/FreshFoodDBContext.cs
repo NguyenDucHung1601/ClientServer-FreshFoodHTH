@@ -27,6 +27,7 @@ namespace FreshFoodHTH.Models.EF
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<TaiKhoanThanhToan> TaiKhoanThanhToans { get; set; }
         public virtual DbSet<TheLoai> TheLoais { get; set; }
+        public virtual DbSet<ThongTinLienHe> ThongTinLienHes { get; set; }
         public virtual DbSet<TKThanhToanNguoiDung> TKThanhToanNguoiDungs { get; set; }
         public virtual DbSet<TrangThai> TrangThais { get; set; }
 
@@ -212,6 +213,30 @@ namespace FreshFoodHTH.Models.EF
                 .HasMany(e => e.SanPhams)
                 .WithRequired(e => e.TheLoai)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ThongTinLienHe>()
+                .Property(e => e.DienThoai1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ThongTinLienHe>()
+                .Property(e => e.DienThoai2)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ThongTinLienHe>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ThongTinLienHe>()
+                .Property(e => e.LinkFacebook)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ThongTinLienHe>()
+                .Property(e => e.LinkYoutube)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ThongTinLienHe>()
+                .Property(e => e.LinkInstagram)
+                .IsUnicode(false);
 
             modelBuilder.Entity<TKThanhToanNguoiDung>()
                 .Property(e => e.TaiKhoan)
