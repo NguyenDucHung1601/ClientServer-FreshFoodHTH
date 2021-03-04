@@ -145,6 +145,8 @@
     <Compile Include="Areas\Admin\Controllers\NhaCungCapController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhanLoaiKhachHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhuongThucThanhToanController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NguoiDungAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NguoiDungClientController.cs" />
     <Compile Include="Areas\Admin\Controllers\SanPhamController.cs" />
     <Compile Include="Areas\Admin\Controllers\TaiKhoanThanhToanController.cs" />
     <Compile Include="Areas\Admin\Controllers\TheLoaiController.cs" />
@@ -169,6 +171,7 @@
     <Compile Include="Models\DAO\Admin\TKThanhToanNguoiDungDAO.cs" />
     <Compile Include="Models\DAO\Admin\TrangThaiDAO.cs" />
     <Compile Include="Models\EFplus\flatTKThanhToanNguoiDung.cs" />
+    <Compile Include="Models\EFplus\flatKhachHang.cs" />
     <Compile Include="Models\EFplus\flatSanPham.cs" />
     <Compile Include="Models\EF\ChiTietDonHang.cs" />
     <Compile Include="Models\EF\ChiTietGioHang.cs" />
@@ -1179,6 +1182,11 @@
     <Content Include="Areas\Admin\Views\PhuongThucThanhToan\Details.cshtml" />
     <Content Include="Areas\Admin\Views\PhuongThucThanhToan\Create.cshtml" />
     <Content Include="Areas\Admin\Views\PhuongThucThanhToan\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungAdmin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NguoiDungClient\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

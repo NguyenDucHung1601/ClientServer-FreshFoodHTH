@@ -24,7 +24,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
                 var result = dao.Login(collection["inputUsername"].ToString(), collection["inputPassword"].ToString());
                 if (result == 1)
                 {
-                    var user = dao.GetById(collection["inputUsername"].ToString());
+                    var user = dao.GetByUsername(collection["inputUsername"].ToString());
                     var userSession = new UserLogin();
 
                     userSession.IDNguoiDung = user.IDNguoiDung;
