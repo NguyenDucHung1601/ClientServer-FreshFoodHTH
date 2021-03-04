@@ -27,6 +27,11 @@ namespace FreshFoodHTH.Models.DAO.Admin
             return db.NguoiDungs.SingleOrDefault(x => x.Username == username);
         }
 
+        public List<NguoiDung> ListNguoiDung()
+        {
+            return db.NguoiDungs.ToList();
+        }
+
         public int Login(string username, string password)
         {
             var result = db.NguoiDungs.SingleOrDefault(x => x.Username == username);
