@@ -1175,6 +1175,7 @@
     <Content Include="Areas\Admin\Views\NhaCungCapSanPhams\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\NhaCungCapSanPhams\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NguoiDungAdmin\IndexChiTietGioHang.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDonNhaps\ErrorConstraint.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

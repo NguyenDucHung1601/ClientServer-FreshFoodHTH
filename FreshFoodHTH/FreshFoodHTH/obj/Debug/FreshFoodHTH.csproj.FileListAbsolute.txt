@@ -351,3 +351,4 @@ E:\Kì 2 năm 4\GithubProjectClient_Server\ClientServer-FreshFoodHTH\FreshFoodHT
 E:\Kì 2 năm 4\GithubProjectClient_Server\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.csproj.CopyComplete
 E:\Kì 2 năm 4\GithubProjectClient_Server\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.dll
 E:\Kì 2 năm 4\GithubProjectClient_Server\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.pdb
+E:\Kì 2 năm 4\GithubProjectClient_Server\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.csprojAssemblyReference.cache

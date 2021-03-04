@@ -55,8 +55,17 @@ namespace FreshFoodHTH.Models.DAO.Admin
             HoaDonNhap HoaDonNhap = db.HoaDonNhaps.Find(id);
             if (HoaDonNhap != null)
             {
-                db.HoaDonNhaps.Remove(HoaDonNhap);
-                return db.SaveChanges();
+                try
+                {
+                    db.HoaDonNhaps.Remove(HoaDonNhap);
+                    db.SaveChanges();
+                    return 0;
+                }
+                catch
+                {
+                    return -1;
+                }
+                
             }
             else
             {

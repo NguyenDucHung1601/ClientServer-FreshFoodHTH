@@ -126,7 +126,11 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            hdnDao.Delete(id);
+            var result = hdnDao.Delete(id);
+            if(result == -1)
+            {
+                return View("ErrorConstraint");
+            }    
             return RedirectToAction("Index");
         }
 
