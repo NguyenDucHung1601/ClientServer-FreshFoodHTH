@@ -21,40 +21,58 @@ namespace FreshFoodHTH.Models.DAO.Admin
         {
             return db.NhaCungCapSanPhams.ToList();
         }
+        public List<NhaCungCapSanPham> GetListSPCungUngByIDNhaCungCap(Guid idncc)
+        {
+            return db.NhaCungCapSanPhams.Where(x => x.IDNhaCungCap == idncc).ToList();
+        }
 
-        public NhaCungCapSanPham getByID(Guid id)
+        public string SPCungUng_GetDonViTinh(Guid? idncc, Guid idsp)
+        {
+            return db.NhaCungCapSanPhams
+                .Where(x => x.IDNhaCungCap == idncc)
+                .Where(x => x.IDSanPham == idsp)
+                .Select(x => x.DonViTinh)
+                .FirstOrDefault();
+        }
+
+        public decimal SPCungUng_GetGiaCungUng(Guid? idncc, Guid idsp)
+        {
+            return Convert.ToDecimal(db.NhaCungCapSanPhams
+                .Where(x => x.IDNhaCungCap == idncc)
+                .Where(x => x.IDSanPham == idsp)
+                .Select(x => x.GiaCungUng)
+                .FirstOrDefault());
+        }
+
+        public NhaCungCapSanPham GetByID(Guid id)
         {
             return db.NhaCungCapSanPhams.Find(id);
         }
 
-        public void Add(NhaCungCapSanPham NhaCungCapSanPham)
+        public void Add(NhaCungCapSanPham obj)
         {
-            db.NhaCungCapSanPhams.Add(NhaCungCapSanPham);
+            db.NhaCungCapSanPhams.Add(obj);
             db.SaveChanges();
         }
 
-        public void Edit(NhaCungCapSanPham NhaCungCapSanPham)
+        public void Edit(NhaCungCapSanPham obj)
         {
-            NhaCungCapSanPham nhaCungCapSanPham = getByID(NhaCungCapSanPham.IDNhaCungCap);
-            if (nhaCungCapSanPham != null)
-            {
-                nhaCungCapSanPham.IDNhaCungCapSanPham = NhaCungCapSanPham.IDNhaCungCapSanPham;
-                nhaCungCapSanPham.IDNhaCungCap= NhaCungCapSanPham.IDNhaCungCap;
-                nhaCungCapSanPham.IDSanPham = NhaCungCapSanPham.IDSanPham;
+            NhaCungCapSanPham nhacungcapsanpham = GetByID(obj.IDNhaCungCapSanPham);
 
-                nhaCungCapSanPham.DonViTinh = NhaCungCapSanPham.DonViTinh;
-                nhaCungCapSanPham.GiaCungUng = NhaCungCapSanPham.GiaCungUng;
-                nhaCungCapSanPham.NgayCapNhat = NhaCungCapSanPham.NgayCapNhat;
+            if (nhacungcapsanpham != null)
+            {
+                nhacungcapsanpham.DonViTinh = obj.DonViTinh;
+                nhacungcapsanpham.GiaCungUng = obj.GiaCungUng;
                 db.SaveChanges();
             }
         }
 
         public int Delete(Guid id)
         {
-            NhaCungCapSanPham NhaCungCapSanPham = db.NhaCungCapSanPhams.Find(id);
-            if (NhaCungCapSanPham != null)
+            NhaCungCapSanPham nhacungcapsanpham = db.NhaCungCapSanPhams.Find(id);
+            if (nhacungcapsanpham != null)
             {
-                db.NhaCungCapSanPhams.Remove(NhaCungCapSanPham);
+                db.NhaCungCapSanPhams.Remove(nhacungcapsanpham);
                 return db.SaveChanges();
             }
             else
@@ -88,119 +106,6 @@ namespace FreshFoodHTH.Models.DAO.Admin
             $"ORDER BY nccsp.NgayCapNhat DESC").ToPagedList<flatNhaCungCapSanPham>(PageNum, PageSize);
 
             return list;
-        }    
-
-        //public IEnumerable<flatNhaCungCap> ListAdvanced(string idNhaCungCap, string customerName, string phone, string address, string discountCode, string discountFrom, string discountTo, string subtotalFrom, string subtotalTo, string totalFrom, string totalTo, string status)
-        //{
-        //    string querySearch = $"SELECT b.id_NhaCungCap, c.name AS customerName, b.phone, b.address, b.discountCode, b.discount, b.subtotal, b.total, b.creatDate, bs.status AS statusName " +
-        //        $"FROM dbo.NhaCungCapSanPham b, dbo.Customer c, dbo.NhaCungCapStatus bs " +
-        //        $"WHERE b.id_customer = c.id_customer AND b.id_status = bs.id_status";
-
-        //    string queryCondition = "";
-        //    if (idNhaCungCap != "" && idNhaCungCap != null)
-        //    {
-        //        queryCondition += $" AND b.id_NhaCungCap LIKE N'%{idNhaCungCap}%'";
-        //    }
-        //    if (customerName != "" && customerName != null)
-        //    {
-        //        queryCondition += $" AND c.name LIKE N'%{customerName}%'";
-        //    }
-        //    if (phone != "" && phone != null)
-        //    {
-        //        queryCondition += $" AND b.id_category LIKE N'%{phone}%'";
-        //    }
-        //    if (address != "" && address != null)
-        //    {
-        //        queryCondition += $" AND b.address LIKE N'%{address}%'";
-        //    }
-        //    if (discountCode != "" && discountCode != null)
-        //    {
-        //        queryCondition += $" AND b.discountCode LIKE N'%{discountCode}%'";
-        //    }
-        //    if (discountFrom != null && discountTo != null && discountFrom != "" && discountTo != "" && Convert.ToDecimal(discountFrom) <= Convert.ToDecimal(discountTo))
-        //    {
-        //        queryCondition += $" AND p.discount >= {discountFrom} AND p.discount <= {discountTo}";
-        //    }
-        //    if (subtotalFrom != null && subtotalTo != null && subtotalFrom != "" && subtotalTo != "" && Convert.ToDecimal(subtotalFrom) <= Convert.ToDecimal(subtotalTo))
-        //    {
-        //        queryCondition += $" AND p.subtotal >= {subtotalFrom} AND p.subtotal <= {subtotalTo}";
-        //    }
-        //    if (totalFrom != null && totalTo != null && totalFrom != "" && totalTo != "" && Convert.ToDecimal(totalFrom) <= Convert.ToDecimal(totalTo))
-        //    {
-        //        queryCondition += $" AND p.total >= {totalFrom} AND p.total <= {totalTo}";
-        //    }
-        //    if (status != "" && status != null)
-        //    {
-        //        queryCondition += $" AND b.id_status = {status}";
-        //    }
-
-        //    if (!queryCondition.Equals(""))
-        //    {
-        //        querySearch = querySearch + queryCondition;
-        //    }
-
-        //    var list = db.Database.SqlQuery<flatNhaCungCap>(querySearch).ToList();
-
-        //    return list;
-        //}
-
-        //public IEnumerable<flatNhaCungCap> ListAdvancedSearch(int PageNum, int PageSize, string idNhaCungCap, string customerName, string phone, string address, string discountCode, string discountFrom, string discountTo, string subtotalFrom, string subtotalTo, string totalFrom, string totalTo, string status)
-        //{
-        //    string querySearch = $"SELECT b.id_NhaCungCap, c.name AS customerName, b.phone, b.address, b.discountCode, b.discount, b.subtotal, b.total, b.creatDate, bs.status AS statusName " +
-        //        $"FROM dbo.NhaCungCapSanPham b, dbo.Customer c, dbo.NhaCungCapStatus bs " +
-        //        $"WHERE b.id_customer = c.id_customer AND b.id_status = bs.id_status";
-
-        //    string queryCondition = "";
-        //    if (idNhaCungCap != "" && idNhaCungCap != null)
-        //    {
-        //        queryCondition += $" AND b.id_NhaCungCap LIKE N'%{idNhaCungCap}%'";
-        //    }
-        //    if (customerName != "" && customerName != null)
-        //    {
-        //        queryCondition += $" AND c.name LIKE N'%{customerName}%'";
-        //    }
-        //    if (phone != "" && phone != null)
-        //    {
-        //        queryCondition += $" AND b.id_category LIKE N'%{phone}%'";
-        //    }
-        //    if (address != "" && address != null)
-        //    {
-        //        queryCondition += $" AND b.address LIKE N'%{address}%'";
-        //    }
-        //    if (discountCode != "" && discountCode != null)
-        //    {
-        //        queryCondition += $" AND b.discountCode LIKE N'%{discountCode}%'";
-        //    }
-        //    if (discountFrom != null && discountTo != null && discountFrom != "" && discountTo != "" && Convert.ToDecimal(discountFrom) <= Convert.ToDecimal(discountTo))
-        //    {
-        //        queryCondition += $" AND p.discount >= {discountFrom} AND p.discount <= {discountTo}";
-        //    }
-        //    if (subtotalFrom != null && subtotalTo != null && subtotalFrom != "" && subtotalTo != "" && Convert.ToDecimal(subtotalFrom) <= Convert.ToDecimal(subtotalTo))
-        //    {
-        //        queryCondition += $" AND p.subtotal >= {subtotalFrom} AND p.subtotal <= {subtotalTo}";
-        //    }
-        //    if (totalFrom != null && totalTo != null && totalFrom != "" && totalTo != "" && Convert.ToDecimal(totalFrom) <= Convert.ToDecimal(totalTo))
-        //    {
-        //        queryCondition += $" AND p.total >= {totalFrom} AND p.total <= {totalTo}";
-        //    }
-        //    if (status != "" && status != null)
-        //    {
-        //        queryCondition += $" AND b.id_status = {status}";
-        //    }
-
-        //    if (!queryCondition.Equals(""))
-        //    {
-        //        querySearch = querySearch + queryCondition;
-        //    }
-
-        //    var list = db.Database.SqlQuery<flatNhaCungCap>(querySearch).ToPagedList<flatNhaCungCap>(PageNum, PageSize);
-
-        //    return list;
-        //}
-
-        //internal object NhaCungCapDetail(int? id)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        }
     }
 }

@@ -103,117 +103,26 @@ namespace FreshFoodHTH.Models.DAO.Admin
             return list;
         }
 
-        //public IEnumerable<flatDonHang> ListAdvanced(string idDonHang, string customerName, string phone, string address, string discountCode, string discountFrom, string discountTo, string subtotalFrom, string subtotalTo, string totalFrom, string totalTo, string status)
-        //{
-        //    string querySearch = $"SELECT b.id_DonHang, c.name AS customerName, b.phone, b.address, b.discountCode, b.discount, b.subtotal, b.total, b.creatDate, bs.status AS statusName " +
-        //        $"FROM dbo.DonHang b, dbo.Customer c, dbo.DonHangStatus bs " +
-        //        $"WHERE b.id_customer = c.id_customer AND b.id_status = bs.id_status";
+        public int TongDonHang(DateTime startDate, DateTime endDate)
+        {
+            var start = String.Format("{0:yyyy/MM/dd}", startDate);
+            var end = String.Format("{0:yyyy/MM/dd}", endDate);
 
-        //    string queryCondition = "";
-        //    if (idDonHang != "" && idDonHang != null)
-        //    {
-        //        queryCondition += $" AND b.id_DonHang LIKE N'%{idDonHang}%'";
-        //    }
-        //    if (customerName != "" && customerName != null)
-        //    {
-        //        queryCondition += $" AND c.name LIKE N'%{customerName}%'";
-        //    }
-        //    if (phone != "" && phone != null)
-        //    {
-        //        queryCondition += $" AND b.id_category LIKE N'%{phone}%'";
-        //    }
-        //    if (address != "" && address != null)
-        //    {
-        //        queryCondition += $" AND b.address LIKE N'%{address}%'";
-        //    }
-        //    if (discountCode != "" && discountCode != null)
-        //    {
-        //        queryCondition += $" AND b.discountCode LIKE N'%{discountCode}%'";
-        //    }
-        //    if (discountFrom != null && discountTo != null && discountFrom != "" && discountTo != "" && Convert.ToDecimal(discountFrom) <= Convert.ToDecimal(discountTo))
-        //    {
-        //        queryCondition += $" AND p.discount >= {discountFrom} AND p.discount <= {discountTo}";
-        //    }
-        //    if (subtotalFrom != null && subtotalTo != null && subtotalFrom != "" && subtotalTo != "" && Convert.ToDecimal(subtotalFrom) <= Convert.ToDecimal(subtotalTo))
-        //    {
-        //        queryCondition += $" AND p.subtotal >= {subtotalFrom} AND p.subtotal <= {subtotalTo}";
-        //    }
-        //    if (totalFrom != null && totalTo != null && totalFrom != "" && totalTo != "" && Convert.ToDecimal(totalFrom) <= Convert.ToDecimal(totalTo))
-        //    {
-        //        queryCondition += $" AND p.total >= {totalFrom} AND p.total <= {totalTo}";
-        //    }
-        //    if (status != "" && status != null)
-        //    {
-        //        queryCondition += $" AND b.id_status = {status}";
-        //    }
+            var count = db.Database.SqlQuery<flatDonHang>($"SELECT * FROM dbo.DonHang dh " +
+            $"WHERE dh.CreatedDate BETWEEN '{start}' AND '{end}'").ToList().Count;
 
-        //    if (!queryCondition.Equals(""))
-        //    {
-        //        querySearch = querySearch + queryCondition;
-        //    }
+            return count;
+        }
 
-        //    var list = db.Database.SqlQuery<flatDonHang>(querySearch).ToList();
+        public decimal DoanhThu(DateTime startDate, DateTime endDate)
+        {
+            var start = String.Format("{0:yyyy/MM/dd}", startDate);
+            var end = String.Format("{0:yyyy/MM/dd}", endDate);
 
-        //    return list;
-        //}
+            var SumMoney = db.Database.SqlQuery<flatDonHang>($"SELECT * FROM dbo.DonHang dh " +
+            $"WHERE dh.CreatedDate BETWEEN '{start}' AND '{end}'").ToList().Sum(x => x.TongTien);
 
-        //public IEnumerable<flatDonHang> ListAdvancedSearch(int PageNum, int PageSize, string idDonHang, string customerName, string phone, string address, string discountCode, string discountFrom, string discountTo, string subtotalFrom, string subtotalTo, string totalFrom, string totalTo, string status)
-        //{
-        //    string querySearch = $"SELECT b.id_DonHang, c.name AS customerName, b.phone, b.address, b.discountCode, b.discount, b.subtotal, b.total, b.creatDate, bs.status AS statusName " +
-        //        $"FROM dbo.DonHang b, dbo.Customer c, dbo.DonHangStatus bs " +
-        //        $"WHERE b.id_customer = c.id_customer AND b.id_status = bs.id_status";
-
-        //    string queryCondition = "";
-        //    if (idDonHang != "" && idDonHang != null)
-        //    {
-        //        queryCondition += $" AND b.id_DonHang LIKE N'%{idDonHang}%'";
-        //    }
-        //    if (customerName != "" && customerName != null)
-        //    {
-        //        queryCondition += $" AND c.name LIKE N'%{customerName}%'";
-        //    }
-        //    if (phone != "" && phone != null)
-        //    {
-        //        queryCondition += $" AND b.id_category LIKE N'%{phone}%'";
-        //    }
-        //    if (address != "" && address != null)
-        //    {
-        //        queryCondition += $" AND b.address LIKE N'%{address}%'";
-        //    }
-        //    if (discountCode != "" && discountCode != null)
-        //    {
-        //        queryCondition += $" AND b.discountCode LIKE N'%{discountCode}%'";
-        //    }
-        //    if (discountFrom != null && discountTo != null && discountFrom != "" && discountTo != "" && Convert.ToDecimal(discountFrom) <= Convert.ToDecimal(discountTo))
-        //    {
-        //        queryCondition += $" AND p.discount >= {discountFrom} AND p.discount <= {discountTo}";
-        //    }
-        //    if (subtotalFrom != null && subtotalTo != null && subtotalFrom != "" && subtotalTo != "" && Convert.ToDecimal(subtotalFrom) <= Convert.ToDecimal(subtotalTo))
-        //    {
-        //        queryCondition += $" AND p.subtotal >= {subtotalFrom} AND p.subtotal <= {subtotalTo}";
-        //    }
-        //    if (totalFrom != null && totalTo != null && totalFrom != "" && totalTo != "" && Convert.ToDecimal(totalFrom) <= Convert.ToDecimal(totalTo))
-        //    {
-        //        queryCondition += $" AND p.total >= {totalFrom} AND p.total <= {totalTo}";
-        //    }
-        //    if (status != "" && status != null)
-        //    {
-        //        queryCondition += $" AND b.id_status = {status}";
-        //    }
-
-        //    if (!queryCondition.Equals(""))
-        //    {
-        //        querySearch = querySearch + queryCondition;
-        //    }
-
-        //    var list = db.Database.SqlQuery<flatDonHang>(querySearch).ToPagedList<flatDonHang>(PageNum, PageSize);
-
-        //    return list;
-        //}
-
-        //internal object DonHangDetail(int? id)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            return SumMoney;
+        }
     }
 }

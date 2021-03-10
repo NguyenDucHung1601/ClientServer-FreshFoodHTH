@@ -11,54 +11,37 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
     public class ThongTinLienHeController : BaseController
     {
         ThongTinLienHeDAO ttlhDao = new ThongTinLienHeDAO();
-        // GET: Admin/ThongTinLienHe
-        public ActionResult Index(int? page, int? PageSize, string searching = "")
+        
+        public ActionResult Index()
         {
-            ViewBag.SearchString = searching;
-            ViewBag.PageSize = new List<SelectListItem>()
-            {
-                new SelectListItem() { Value="10", Text= "10" },
-                new SelectListItem() { Value="15", Text= "15" },
-                new SelectListItem() { Value="20", Text= "20" },
-                new SelectListItem() { Value="25", Text= "25" },
-                new SelectListItem() { Value="50", Text= "50" }
-            };
-            int pageNumber = (page ?? 1);
-            int pagesize = (PageSize ?? 10);
-            ViewBag.psize = pagesize;
-            ViewBag.Count = ttlhDao.ListSimple(searching).Count();
-            return View(ttlhDao.ListSimpleSearch(pageNumber, pagesize, searching));
+            ThongTinLienHe info = ttlhDao.GetInfoObj();
+            return View(info);
         }
-        public ActionResult Details(Guid id)
+        public ActionResult Edit()
         {
-            ThongTinLienHe thongtinlienhe = ttlhDao.GetByID(id);
-            return View(thongtinlienhe);
-        }
-        public ActionResult Edit(Guid id)
-        {
-            return View(ttlhDao.GetByID(id));
+            ThongTinLienHe info = ttlhDao.GetInfoObj();
+            return View(info);
         }
         [HttpPost]
-        public ActionResult Edit(Guid id, string tencuahang, string diachi, string dienthoai1, string dienthoai2, string giomocua, string email,string facebook, string youtube, string instagram)
+        public ActionResult Edit(ThongTinLienHe info, string tencuahang, string diachi, string dienthoai1, string dienthoai2, string giomocua, string email,string facebook, string youtube, string instagram)
         {
-            ThongTinLienHe thongtinlienhe = ttlhDao.GetByID(id);
-            thongtinlienhe.TenCuaHang = tencuahang;
-            thongtinlienhe.DiaChi = diachi;
-            thongtinlienhe.DienThoai1 = dienthoai1;
-            thongtinlienhe.DienThoai2 = dienthoai2;
-            thongtinlienhe.GioMoCua = giomocua;
-            thongtinlienhe.Email = email;
-            thongtinlienhe.LinkFacebook = facebook;
-            thongtinlienhe.LinkYoutube = youtube;
-            thongtinlienhe.LinkInstagram = instagram;
+            info.TenCuaHang = tencuahang;
+            info.DiaChi = diachi;
+            info.DienThoai1 = dienthoai1;
+            info.DienThoai2 = dienthoai2;
+            info.GioMoCua = giomocua;
+            info.Email = email;
+            info.LinkFacebook = facebook;
+            info.LinkYoutube = youtube;
+            info.LinkInstagram = instagram;
             if (ModelState.IsValid)
             {
-                ttlhDao.Edit(thongtinlienhe);
+                ttlhDao.Edit(info);
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(thongtinlienhe);
+                return View(info);
             }
         }
     }

@@ -12,7 +12,7 @@ namespace FreshFoodHTH.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MaGiamGia()
         {
-            NguoiDungs = new HashSet<NguoiDung>();
+            MaGiamGiaKhachHangs = new HashSet<MaGiamGiaKhachHang>();
         }
 
         [Key]
@@ -23,9 +23,9 @@ namespace FreshFoodHTH.Models.EF
         [StringLength(10)]
         public string MaGiamGia1 { get; set; }
 
-        public int? SoLuong { get; set; }
-
         public decimal TienGiam { get; set; }
+
+        public Guid? IDLoaiKhachHang { get; set; }
 
         public string DieuKienApDung { get; set; }
 
@@ -42,7 +42,9 @@ namespace FreshFoodHTH.Models.EF
         [StringLength(200)]
         public string ModifiedBy { get; set; }
 
+        public virtual PhanLoaiKhachHang PhanLoaiKhachHang { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NguoiDung> NguoiDungs { get; set; }
+        public virtual ICollection<MaGiamGiaKhachHang> MaGiamGiaKhachHangs { get; set; }
     }
 }

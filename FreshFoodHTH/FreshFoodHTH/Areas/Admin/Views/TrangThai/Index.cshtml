@@ -24,7 +24,7 @@
 
 @section header
 {
-    Danh sách trạng thái
+    Danh sách Trạng thái đơn hàng
 }
 
 <table style="width:100%; margin-bottom:10px">
@@ -66,8 +66,6 @@
                     @Html.DisplayFor(modelItem => item.TenTrangThai)
                 </td>
                 <td>
-                    <i class="fa fa-info-circle"></i> &nbsp;
-                    @Html.ActionLink("Xem", "Details", new { id = item.IDTrangThai }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="fa fa-edit"></i> &nbsp;
                     @Html.ActionLink("Sửa", "Edit", new { id = item.IDTrangThai }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <i class="fa fa-trash"></i> &nbsp;

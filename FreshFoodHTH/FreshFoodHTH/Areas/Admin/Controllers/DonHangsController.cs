@@ -11,7 +11,7 @@ using FreshFoodHTH.Models.EF;
 
 namespace FreshFoodHTH.Areas.Admin.Controllers
 {
-    public class DonHangsController : Controller
+    public class DonHangsController : BaseController
     {
         private FreshFoodDBContext db = new FreshFoodDBContext();
         public DonHangDAO dhDao = new DonHangDAO();
@@ -77,7 +77,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
                 donHang.CreatedBy = (string)Session["USERNAME_SESSION"];
                 donHang.ModifiedDate = DateTime.Now;
                 donHang.ModifiedBy = (string)Session["USERNAME_SESSION"];
-                donHang.TongTien = donHang.TienHang + donHang.TienShip - donHang.TienGiam;
+                donHang.TongTien = 0;
                 db.DonHangs.Add(donHang);
                 db.SaveChanges();
                 return RedirectToAction("Index");

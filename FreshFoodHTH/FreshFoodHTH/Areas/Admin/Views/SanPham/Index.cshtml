@@ -65,6 +65,8 @@
             <th>Hình ảnh</th>
             <th>Có sẵn</th>
             <th>Số lượng</th>
+            <th>Số lượt xem</th>
+            <th>Số lượt mua</th>
             <th>Ngày cập nhật</th>
             <th>Chức năng</th>
         </tr>
@@ -95,7 +97,7 @@
                     @Html.DisplayFor(modelItem => item.GiaKhuyenMai)
                 </td>
                 <td>
-                    <img height="20" width="30" src="~/Areas/Admin/Content/Photos/@item.HinhAnh" alt="Chưa có"  style="border: solid 1px #80808038"/>
+                    <img height="20" width="30" src="~/Areas/Admin/Content/Photos/@item.HinhAnh" alt="Chưa có" style="border: solid 1px #80808038" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CoSan)
@@ -104,7 +106,13 @@
                     @Html.DisplayFor(modelItem => item.SoLuong)
                 </td>
                 <td>
-                    @Html.Raw(@Convert.ToDateTime(item.NgayCapNhat).ToString("dd/MM/yyyy"))
+                    @Html.DisplayFor(modelItem => item.SoLuotXem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuotMua)
+                </td>
+                <td>
+                    @Html.Raw(@Convert.ToDateTime(item.ModifiedDate).ToString("dd/MM/yyyy"))
                 </td>
                 <td>
                     <i class="fa fa-info-circle"></i> &nbsp;

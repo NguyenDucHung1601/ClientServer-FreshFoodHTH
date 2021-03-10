@@ -14,8 +14,8 @@ namespace FreshFoodHTH.Models.EF
         {
             ChiTietGioHangs = new HashSet<ChiTietGioHang>();
             DonHangs = new HashSet<DonHang>();
+            MaGiamGiaKhachHangs = new HashSet<MaGiamGiaKhachHang>();
             TKThanhToanNguoiDungs = new HashSet<TKThanhToanNguoiDung>();
-            MaGiamGias = new HashSet<MaGiamGia>();
         }
 
         [Key]
@@ -30,6 +30,9 @@ namespace FreshFoodHTH.Models.EF
 
         [StringLength(12)]
         public string DienThoai { get; set; }
+
+        [StringLength(300)]
+        public string Email { get; set; }
 
         public string DiaChi { get; set; }
 
@@ -71,12 +74,12 @@ namespace FreshFoodHTH.Models.EF
 
         public virtual LoaiNguoiDung LoaiNguoiDung { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MaGiamGiaKhachHang> MaGiamGiaKhachHangs { get; set; }
+
         public virtual PhanLoaiKhachHang PhanLoaiKhachHang { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TKThanhToanNguoiDung> TKThanhToanNguoiDungs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaGiamGia> MaGiamGias { get; set; }
     }
 }

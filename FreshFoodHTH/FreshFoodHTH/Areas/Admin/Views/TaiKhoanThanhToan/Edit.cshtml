@@ -7,7 +7,7 @@
 
 @section header
 {
-    Thông tin tài khoản - Chỉnh sửa thông tin (@Model.Ten)
+    Thông tin tài khoản thanh toán - Chỉnh sửa (@Model.Ten)
 }
 
 @using (Html.BeginForm("Edit", "TaiKhoanThanhToan", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -19,56 +19,30 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IDTaiKhoan)
 
-
-        <table style="width:100%">
-            <col style="width:25%">
-            <col style="width:25%">
-            <col style="width:25%">
-            <col style="width:25%">
-            <tr>
-                <td>
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <label for="exampleInputEmail1">Mã viết tắt</label>
-                            <input type="text" class="form-control" name="viettat" placeholder="Nhập mã mã viết tắt ..." value=" @Html.DisplayFor(model => model.VietTat)" style="width:332px" required>
-                        </div>
-                    </div>
-                    <br />
-                </td>
-                <td>
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <label for="exampleInputEmail1">Tên tài khoản</label>
-                            <input type="text" class="form-control" name="ten" placeholder="Nhập tên tài khoản ..." value=" @Html.DisplayFor(model => model.Ten)" style="width:332px" required>
-                        </div>
-                    </div>
-                    <br />
-                </td> 
-            </tr>
-            <tr>
-                <td>
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <label for="exampleInputEmail1">Loại tài khoản</label><br />
-                            <input type="text" class="form-control" name="loaitaikhoan" placeholder="Nhập đơn vị tính ..." value=" @Html.DisplayFor(model => model.LoaiTaiKhoan)" required>
-                        </div>
-                    </div>
-                    <br />
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align:top">
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <label for="exampleInputFile">Hình ảnh sản phẩm</label>
-                            <input type="file" id="hinhanh" name="logo">
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-
-
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="exampleInputEmail1">Viết tắt</label><br />
+                <input type="text" class="form-control" name="viettat" placeholder="Nhập tên tài khoản viết tắt ..." value=" @Html.DisplayFor(model => model.VietTat)" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="exampleInputEmail1">Tên đầy đủ</label>
+                <input type="text" class="form-control" name="ten" placeholder="Nhập tên tài khoản đầy đủ..." value=" @Html.DisplayFor(model => model.Ten)" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="exampleInputEmail1">Loại tài khoản</label><br />
+                <input type="text" class="form-control" name="loaitaikhoan" placeholder="Nhập loại tài khoản ..." value=" @Html.DisplayFor(model => model.LoaiTaiKhoan)" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="exampleInputFile">Logo</label>
+                <input type="file" id="hinhanh" name="logo">
+            </div>
+        </div>
         <br />
 
         <button type="submit" class="btn btn-primary btn-admin" style="width:110px">

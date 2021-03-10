@@ -7,7 +7,7 @@
 
 @section header
 {
-    Đơn hàng - Thông tin đơn hàng
+    Đơn hàng - Thông tin đơn hàng (#@Model.MaSo.ToString("D6"))
 }
 <div>
     <table>
@@ -19,7 +19,7 @@
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.MaSo)
+                        @Html.Raw(Model.MaSo.ToString("D6"))
                     </dd>
 
                     <dt>
@@ -83,15 +83,7 @@
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.CreatedDate)
-                    </dd>
-
-                    <dt>
-                        Ngày cập nhật:
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.ModifiedDate)
+                        @Html.Raw(Convert.ToDateTime(Model.CreatedDate).ToString("dd/MM/yyyy")))
                     </dd>
 
                     <dt>
@@ -106,19 +98,20 @@
         </tr>
     </table>
     <br />
+    @*<button type="button" class="btn btn-primary" style="width:110px">
+        <a class="fa fa-save"></a> &nbsp;
+        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.IDDonHang })
+    </button>*@
+    <button type="button" class="btn btn-warning" style="width:110px">
+        <a class="fa fa-arrow-left"></a> &nbsp;
+        @Html.ActionLink("Trở về", "Index")
+    </button>
+    <br /><br />
+    <hr />
     <h4>
         <i class="fa fa-list-ol"></i>
         <b style="color:darkgreen">&nbsp;Chi tiết đơn hàng</b>
     </h4>
-    @*(#@Model.IDDonHang)*@
     @Html.Action("IndexChiTietDonHang", new { @id = Model.IDDonHang })
 </div>
 <br />
-@*<button type="button" class="btn btn-primary btn-admin">
-    <a class="fa fa-edit"></a> &nbsp;
-    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.IDDonHang })
-</button>*@
-<button type="button" class="btn btn-warning btn-admin">
-    <a class="fa fa-th-list"></a> &nbsp;
-    @Html.ActionLink("Danh sách", "Index")
-</button>

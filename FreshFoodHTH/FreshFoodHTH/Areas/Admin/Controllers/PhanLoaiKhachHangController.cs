@@ -43,11 +43,14 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string ten, string dieukien)
+        public ActionResult Create(string capdo, string ten, string sodonhangtoithieu, string tongtienhangtoithieu, string dieukien)
         {
             PhanLoaiKhachHang phanloaikhachhang = new PhanLoaiKhachHang();
             phanloaikhachhang.IDLoaiKhachHang = Guid.NewGuid();
+            phanloaikhachhang.CapDo = Convert.ToInt32(capdo);
             phanloaikhachhang.Ten = ten;
+            phanloaikhachhang.SoDonHangToiThieu = Convert.ToInt32(sodonhangtoithieu);
+            phanloaikhachhang.TongTienHangToiThieu = Convert.ToDecimal(tongtienhangtoithieu);
             phanloaikhachhang.DieuKien = dieukien;
             if (ModelState.IsValid)
             {
@@ -66,10 +69,13 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Guid id, string ten,string dieukien)
+        public ActionResult Edit(Guid id, string capdo, string ten, string sodonhangtoithieu, string tongtienhangtoithieu, string dieukien)
         {
             PhanLoaiKhachHang phanloaikhachhang = plkhDao.GetByID(id);
+            phanloaikhachhang.CapDo = Convert.ToInt32(capdo);
             phanloaikhachhang.Ten = ten;
+            phanloaikhachhang.SoDonHangToiThieu = Convert.ToInt32(sodonhangtoithieu);
+            phanloaikhachhang.TongTienHangToiThieu = Convert.ToDecimal(tongtienhangtoithieu);
             phanloaikhachhang.DieuKien = dieukien;
             if (ModelState.IsValid)
             {

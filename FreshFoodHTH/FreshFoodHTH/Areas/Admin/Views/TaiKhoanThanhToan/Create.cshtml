@@ -7,7 +7,7 @@
 
 @section header
 {
-    Tài khoản thanh toán - Thêm tài khoản thanh toán
+    Tài khoản thanh toán - Thêm mới
 }
 
 
@@ -19,53 +19,30 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <table style="width:100%">
-            <col style="width:25%">
-            <col style="width:25%">
-            <col style="width:25%">
-            <col style="width:25%">
-            <tr>
-                <td>
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <label for="exampleInputEmail1">Viết Tắt</label><br />
-                            <input type="text" class="form-control" name="viettat" placeholder="Nhập viết tắt ..." value=" @Html.DisplayFor(model => model.VietTat)" style="width:370px" required>
-                        </div>
-                    </div>
-                    <br />
-                </td>
-                <td colspan="2">
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <label for="exampleInputEmail1">Tên tài khoản</label>
-                            <input type="text" class="form-control" name="ten" placeholder="Nhập tên tài khoản..." value=" @Html.DisplayFor(model => model.Ten)" style="width:370px" required>
-                        </div>
-                    </div>
-                    <br />
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align:top">
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <label for="exampleInputFile">Logo</label>
-                            <input type="file" id="hinhanh" name="logo" required>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <label for="exampleInputEmail1">Loại tài khoản</label><br />
-                            <input type="text" class="form-control" name="loaitaikhoan" placeholder="Nhập đơn vị tính ..." value=" @Html.DisplayFor(model => model.LoaiTaiKhoan)" required>
-                        </div>
-                    </div>
-                    <br />
-                </td>
-
-            </tr>
-
-        </table>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="exampleInputEmail1">Viết tắt</label><br />
+                <input type="text" class="form-control" name="viettat" placeholder="Nhập tên tài khoản viết tắt ..." value=" @Html.DisplayFor(model => model.VietTat)" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="exampleInputEmail1">Tên đầy đủ</label>
+                <input type="text" class="form-control" name="ten" placeholder="Nhập tên tài khoản đầy đủ..." value=" @Html.DisplayFor(model => model.Ten)" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="exampleInputEmail1">Loại tài khoản</label><br />
+                <input type="text" class="form-control" name="loaitaikhoan" placeholder="Nhập loại tài khoản ..." value=" @Html.DisplayFor(model => model.LoaiTaiKhoan)" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="exampleInputFile">Logo</label>
+                <input type="file" id="hinhanh" name="logo" required>
+            </div>
+        </div>
 
         <br />
 

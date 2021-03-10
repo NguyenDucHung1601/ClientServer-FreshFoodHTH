@@ -1,10 +1,10 @@
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Linq;
+
 namespace FreshFoodHTH.Models.EF
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-
     public partial class FreshFoodDBContext : DbContext
     {
         public FreshFoodDBContext()
@@ -19,6 +19,7 @@ namespace FreshFoodHTH.Models.EF
         public virtual DbSet<HoaDonNhap> HoaDonNhaps { get; set; }
         public virtual DbSet<LoaiNguoiDung> LoaiNguoiDungs { get; set; }
         public virtual DbSet<MaGiamGia> MaGiamGias { get; set; }
+        public virtual DbSet<MaGiamGiaKhachHang> MaGiamGiaKhachHangs { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; }
         public virtual DbSet<NhaCungCapSanPham> NhaCungCapSanPhams { get; set; }
@@ -108,8 +109,17 @@ namespace FreshFoodHTH.Models.EF
                 .Property(e => e.TienGiam)
                 .HasPrecision(18, 0);
 
+            modelBuilder.Entity<MaGiamGia>()
+                .HasMany(e => e.MaGiamGiaKhachHangs)
+                .WithRequired(e => e.MaGiamGia)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<NguoiDung>()
                 .Property(e => e.DienThoai)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NguoiDung>()
+                .Property(e => e.Email)
                 .IsUnicode(false);
 
             modelBuilder.Entity<NguoiDung>()
@@ -137,14 +147,15 @@ namespace FreshFoodHTH.Models.EF
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NguoiDung>()
-                .HasMany(e => e.TKThanhToanNguoiDungs)
+                .HasMany(e => e.MaGiamGiaKhachHangs)
                 .WithRequired(e => e.NguoiDung)
+                .HasForeignKey(e => e.IDKhacHang)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NguoiDung>()
-                .HasMany(e => e.MaGiamGias)
-                .WithMany(e => e.NguoiDungs)
-                .Map(m => m.ToTable("MaGiamGiaKhachHang").MapLeftKey("IDKhachHang").MapRightKey("IDMaGiamGia"));
+                .HasMany(e => e.TKThanhToanNguoiDungs)
+                .WithRequired(e => e.NguoiDung)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NhaCungCap>()
                 .Property(e => e.DienThoai)

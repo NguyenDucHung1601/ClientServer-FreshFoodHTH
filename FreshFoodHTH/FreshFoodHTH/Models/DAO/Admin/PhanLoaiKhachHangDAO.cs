@@ -1,9 +1,9 @@
 ﻿using FreshFoodHTH.Models.EF;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using PagedList;
 
 namespace FreshFoodHTH.Models.DAO.Admin
 {
@@ -18,13 +18,14 @@ namespace FreshFoodHTH.Models.DAO.Admin
 
         public List<PhanLoaiKhachHang> ListPhanLoaiKhachHang()
         {
-            return db.PhanLoaiKhachHangs.ToList();
+            return db.PhanLoaiKhachHangs.OrderBy(x => x.CapDo).ToList();
         }
 
         public PhanLoaiKhachHang GetByID(Guid id)
         {
             return db.PhanLoaiKhachHangs.Find(id);
         }
+
         public void Add(PhanLoaiKhachHang obj)
         {
             db.PhanLoaiKhachHangs.Add(obj);
@@ -33,21 +34,25 @@ namespace FreshFoodHTH.Models.DAO.Admin
 
         public void Edit(PhanLoaiKhachHang obj)
         {
-            PhanLoaiKhachHang phanloaikhachhang = GetByID(obj.IDLoaiKhachHang);
-            if (phanloaikhachhang != null)
+            PhanLoaiKhachHang phanloaiKH = GetByID(obj.IDLoaiKhachHang);
+            if (phanloaiKH != null)
             {
-                phanloaikhachhang.Ten = obj.Ten;
-                phanloaikhachhang.DieuKien = obj.DieuKien;
+                phanloaiKH.CapDo = obj.CapDo;
+                phanloaiKH.Ten = obj.Ten;
+                phanloaiKH.SoDonHangToiThieu = obj.SoDonHangToiThieu;
+                phanloaiKH.TongTienHangToiThieu = obj.TongTienHangToiThieu;
+                phanloaiKH.DieuKien = obj.DieuKien;
+
                 db.SaveChanges();
             }
         }
 
         public int Delete(Guid id)
         {
-            PhanLoaiKhachHang phanloaikhachhang = db.PhanLoaiKhachHangs.Find(id);
-            if (phanloaikhachhang != null)
+            PhanLoaiKhachHang phanloaiKH = db.PhanLoaiKhachHangs.Find(id);
+            if (phanloaiKH != null)
             {
-                db.PhanLoaiKhachHangs.Remove(phanloaikhachhang);
+                db.PhanLoaiKhachHangs.Remove(phanloaiKH);
                 return db.SaveChanges();
             }
             else
@@ -58,9 +63,9 @@ namespace FreshFoodHTH.Models.DAO.Admin
         public IEnumerable<PhanLoaiKhachHang> ListSimple(string searching)
         {
             var list = db.Database.SqlQuery<PhanLoaiKhachHang>($"SELECT * FROM dbo.PhanLoaiKhachHang plkh " +
-                $"WHERE plkh.Ten LIKE N'%{searching}%' " +
-
-                $"ORDER BY plkh.Ten").ToList();
+                $"WHERE plkh.CapDo LIKE N'%{searching}%' " +
+                $"OR plkh.Ten LIKE N'%{searching}%' " +
+                $"ORDER BY plkh.CapDo").ToList();
 
             return list;
         }
@@ -68,8 +73,9 @@ namespace FreshFoodHTH.Models.DAO.Admin
         public IEnumerable<PhanLoaiKhachHang> ListSimpleSearch(int PageNum, int PageSize, string searching)
         {
             var list = db.Database.SqlQuery<PhanLoaiKhachHang>($"SELECT * FROM dbo.PhanLoaiKhachHang plkh " +
-               $"WHERE plkh.Ten LIKE N'%{searching}%' " +
-               $"ORDER BY plkh.Ten").ToPagedList<PhanLoaiKhachHang>(PageNum, PageSize);
+                $"WHERE plkh.CapDo LIKE N'%{searching}%' " +
+                $"OR plkh.Ten LIKE N'%{searching}%' " +
+                $"ORDER BY plkh.CapDo").ToPagedList<PhanLoaiKhachHang>(PageNum, PageSize);
 
             return list;
         }
