@@ -3,11 +3,10 @@
 <div class="row featured__filter">
     @foreach (var item in Model)
     {
-        string image = item.HinhAnh.ToString().Trim();
         var filterName = "c" + item.TheLoai.MaSo;
         <div class="col-lg-3 col-md-4 col-sm-6 mix @filterName">
             <div class="featured__item">
-                <div class="featured__item__pic set-bg" data-setbg="/Areas/Admin/Content/Photos/@image">
+                <div class="featured__item__pic set-bg" data-setbg="/Areas/Admin/Content/Photos/@item.HinhAnh">
                     <ul class="featured__item__pic__hover">
                         <li><a href="/ShopDetail/Index/@item.IDSanPham"><i class="fa fa-info"></i></a></li>
                         <li><a href="/ShopCart/AddItem?productId=@item.IDSanPham&quantity=1"><i class="fa fa-shopping-cart"></i></a></li>
