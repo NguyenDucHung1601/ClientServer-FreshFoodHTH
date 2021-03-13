@@ -1,0 +1,15 @@
+﻿@model IEnumerable<FreshFoodHTH.Models.EF.TheLoai>
+
+<div class="section-title">
+    <h2>Danh sách sản phẩm FreshFood HTH</h2>
+</div>
+<div class="featured__controls">
+    <ul>
+        <li class="active" data-filter="*">Tất cả</li>
+        @foreach (var item in Model)
+        {
+            var filerName = ".c" + item.MaSo;
+            <li data-filter="@filerName">@item.Ten</li>
+        }
+    </ul>
+</div>

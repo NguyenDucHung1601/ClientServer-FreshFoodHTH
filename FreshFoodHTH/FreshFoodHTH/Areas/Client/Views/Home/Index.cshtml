@@ -5,7 +5,7 @@
 }
 
 @section Title{
-    FreshFood | Trang chủ
+    FreshFoodHTH | Trang chủ
 }
 
 @section Styles
@@ -28,7 +28,6 @@
                 <table>
                     <a href="/Home/Index"><img src="~/Assets/Client/img/logo.png" alt=""></a>
                 </table>
-
             </div>
         </div>
         <div class="col-lg-6">
@@ -40,7 +39,16 @@
                 </ul>
             </nav>
         </div>
-        @Html.Action("HeaderCart", "ShopCart")
+        <div class="col-lg-3">
+            <div class="header__cart">
+                <ul>
+                    <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                </ul>
+                <div class="header__cart__price">item: <span>$150.00</span></div>
+            </div>
+        </div>
+        @*@Html.Action("HeaderCart", "ShopCart")*@
     </div>
     <div class="humberger__open">
         <i class="fa fa-bars"></i>
@@ -49,22 +57,10 @@
 
 @Html.Partial("_BeginContentLayoutHome")
 
-<div class="container">
+@Html.Partial("ProductSearchShow")
 
-    @Html.Partial("ProductSearchShow")
+@Html.Action("CategoryShowImage")
 
-</div>
-
-<!-- Categories Section Begin -->
-<section class="categories">
-    <div class="container">
-
-        @Html.Action("CategoryShowImage")
-
-    </div>
-</section>
-<!-- Categories Section End -->
-<!-- Featured Section Begin -->
 <section class="featured spad">
     <div class="container">
 
@@ -75,23 +71,6 @@
 
     </div>
 </section>
-<!-- Featured Section End -->
-<!-- Latest Product Section Begin -->
-<section class="latest-product spad">
-    <div class="container">
-        <div class="row">
-
-            @Html.Action("LatestProducts")
-
-            @Html.Action("TopRatedProducts")
-
-            @Html.Action("ReviewProducts")
-
-        </div>
-    </div>
-</section>
-<!-- Latest Product Section End -->
-
 
 @section Scripts
 {
@@ -104,4 +83,5 @@
     <script src="~/Assets/Client/js/owl.carousel.min.js"></script>
     <script src="~/Assets/Client/js/main.js"></script>
 }
+
 

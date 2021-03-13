@@ -1,24 +1,19 @@
-﻿<!-- Hero Section Begin -->
+﻿@{
+    FreshFoodHTH.Models.EF.FreshFoodDBContext db = new FreshFoodHTH.Models.EF.FreshFoodDBContext();
+    FreshFoodHTH.Models.EF.ThongTinLienHe info = db.ThongTinLienHes.SingleOrDefault();
+}
+<!-- Hero Section Begin -->
 <section class="hero">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-3" style="border: solid #80808036 1px; padding:0">
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span>Thể loại sản phẩm</span>
+                        <span style="font-size:16px">Danh mục sản phẩm</span>
                     </div>
-                    <ul>
+                    <ul style="border: solid white 1px">
                         @Html.Action("CategoryShow")
-                        <li style="color:white">none</li>
-                        <li style="color:white">none</li>
-                        <li style="color:white">none</li>
-                        <li style="color:white">none</li>
-                        <li style="color:white">none</li>
-                        <li style="color:white">none</li>
-                        <li style="color:white">none</li>
-                        <li style="color:white">none</li>
-                        <li style="color:white">none</li>
                     </ul>
                 </div>
             </div>
@@ -35,17 +30,16 @@
                             <i class="fa fa-phone"></i>
                         </div>
                         <div class="hero__search__phone__text">
-                            <h5>+84 65.888.888</h5>
+                            <b>@info.DienThoai1</b><br />
                             <span>Hỗ trợ 24/7</span>
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" style="background-image: url();" data-setbg="/Assets/Client/img/hero/banner.png">
-                    <div></div>
+                <div class="hero__item set-bg" data-setbg="/Assets/Client/img/banner.png">
                     <div class="hero__text">
-                        <img src="~/Assets/Client/img/big logo.png" alt="" width="170px" style="margin: auto;">
-                        <p style="text-align: center; margin-top: 10px; margin-bottom: -8px;">Giao hàng phục vụ tận nơi</p>
-                        <p style="text-align: center;">An toàn - Tiện lợi</p>
+                        <img src="~/Assets/Admin/Images/logofull.png" alt="" width="225" style="margin: auto;">
+                        <p style="text-align: center; font-family:Calibri; font-size:18px; color:green; font-weight:bold; margin-top: 10px; margin-bottom: -8px">Thực phẩm sạch 100% hữu cơ</p>
+                        <p style="text-align: center; font-family:Calibri; font-size:17px;">An toàn - Tiện lợi</p>
                         <a href="/Shop/Index" class="primary-btn" style="margin: auto;">Mua ngay</a>
                     </div>
                 </div>
