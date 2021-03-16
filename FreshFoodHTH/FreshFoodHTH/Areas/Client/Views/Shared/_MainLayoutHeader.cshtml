@@ -13,11 +13,19 @@
     <div class="humberger__menu__logo">
         <a href="/Home/Index"><img src="~/Assets/Client/img/language.png" alt="" height="14"></a>
     </div>
-    
+
     <div class="humberger__menu__widget">
         <div class="header__top__right__language">
-            <img src="~/Areas/Admin/Content/Photos/@Session["AVATAR_SESSION"]" class="user-image" alt="User Image" />
-            <span class="hidden-xs">@Session["USER_SESSION"]</span>
+            @if (Session["USER_SESSION"] == null)
+            {
+                <img src="~/Assets/Client/img/user.png" class="user-image" alt="User Image" />
+            }
+            else
+            {
+                <img src="~/Areas/Admin/Content/Photos/@Session["AVATAR_SESSION"]" class="user-image" alt="User Image" />
+            }
+            <img src="~/Assets/Client/img/logo.png" class="user-image" alt="User Image" />
+            <span class="hidden-xs">@Session["USERNAME_SESSION"]</span>
         </div>
         <div class="header__top__right__auth">
             <a href="#"><i class="fa fa-user"></i> Đăng nhập</a>
@@ -48,7 +56,7 @@
                     <div class="header__top__left">
                         <ul>
                             <li><i class="fa fa-envelope"></i> freshfoodhth@gmail.com</li>
-                            <li>Free ship cho đơn hàng từ 100.000 VNĐ</li>
+                            <li><i class="fa fa-ship"></i> Free ship cho đơn hàng từ 100.000 VNĐ</li>
                         </ul>
                     </div>
                 </div>
@@ -60,11 +68,18 @@
                             <a href="@info.LinkYoutube" target="_blank"><i class="fa fa-youtube"></i></a>
                         </div>
                         <div class="header__top__right__language">
-                            @*<img src="~/Areas/Admin/Content/Photos/@Session["AVATAR_SESSION"]" onerror="this.onerror=null; this.src='~/Areas/Admin/Content/Photos/default.png'" width="22" class="user-image" alt="" />
-                            <span class="hidden-xs" data-id="@Session["IDUSER_SESSION"]" id="txtCustomer">@Session["USER_SESSION"]</span>*@
+                            <img src="~/Areas/Admin/Content/Photos/@Session["AVATAR_SESSION"]" onerror="this.onerror=null" width="22" class="user-image" alt="" style="border: solid 1px #49505726"/>
+                            <span class="hidden-xs" data-id="@Session["IDUSER_SESSION"]" id="txtCustomer">@Session["NAME_SESSION"]</span>
                         </div>
                         <div class="header__top__right__auth">
-                            <a href="/CustomerLogin/Index"><i class="fa fa-user"></i> Đăng nhập</a>
+                            @if (Session["USER_SESSION"] == null)
+                            {
+                                <a href="/Client/Login/Index"><i class="fa fa-sign-in"></i> Đăng nhập</a>
+                            }
+                            else
+                            {
+                                <a href="/Client/Login/Logout"><i class="fa fa-sign-out"></i> Đăng xuất</a>
+                            }
                         </div>
                     </div>
                 </div>

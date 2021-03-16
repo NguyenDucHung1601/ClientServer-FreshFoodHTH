@@ -1,5 +1,4 @@
 ﻿using FreshFoodHTH.Models.EF;
-using FreshFoodHTH.Models.EFplus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +16,11 @@ namespace FreshFoodHTH.Areas.Client.Controllers
         {
             IEnumerable<SanPham> list;
             ViewBag.Searching = searching;
-            if (searching != null)
+            if (!string.IsNullOrEmpty(searching))
                 list = db.SanPhams.Where(x => x.Ten.Contains(searching) || x.TheLoai.Ten.Contains(searching)).ToList();
             else
                 list = db.SanPhams.ToList();
+            ViewBag.SearchList = list;
             return View(list);
         }
 

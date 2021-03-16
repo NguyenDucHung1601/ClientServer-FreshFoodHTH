@@ -618,3 +618,4 @@ C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServ
 C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.csproj.CopyComplete
 C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.dll
 C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.pdb
+C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.csprojAssemblyReference.cache

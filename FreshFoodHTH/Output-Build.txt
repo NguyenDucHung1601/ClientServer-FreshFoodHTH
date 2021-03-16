@@ -1,0 +1,4 @@
+﻿Build started...
+1>------ Build started: Project: FreshFoodHTH, Configuration: Debug Any CPU ------
+1>  FreshFoodHTH -> C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\bin\FreshFoodHTH.dll
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
