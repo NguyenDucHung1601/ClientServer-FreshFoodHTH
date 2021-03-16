@@ -10,6 +10,7 @@ namespace FreshFoodHTH.Common
     {
         public Guid IDNguoiDung { get; set; }
         public string Username { get; set; }
+        public string Avatar { get; set; }
         public string Ten { get; set; }
         public DateTime? NgayTao { get; set; }
     }

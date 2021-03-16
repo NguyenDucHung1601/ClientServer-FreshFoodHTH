@@ -160,7 +160,12 @@
     <Compile Include="Areas\Admin\Controllers\TKThanhToanNguoiDungController.cs" />
     <Compile Include="Areas\Admin\Controllers\TrangThaiController.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
+    <Compile Include="Areas\Client\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Client\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Client\Controllers\ContactController.cs" />
     <Compile Include="Areas\Client\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Client\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Client\Controllers\ProductDetailController.cs" />
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Global.asax.cs">
@@ -1052,8 +1057,10 @@
     <Content Include="Assets\Client\css\style.css" />
     <Content Include="Assets\Client\fonts\ElegantIcons.svg" />
     <Content Include="Assets\Client\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\Client\img\banner.png" />
     <Content Include="Assets\Client\img\banner\banner-1.jpg" />
     <Content Include="Assets\Client\img\banner\banner-2.jpg" />
+    <Content Include="Assets\Client\img\bgbody.png" />
     <Content Include="Assets\Client\img\blog\blog-1.jpg" />
     <Content Include="Assets\Client\img\blog\blog-2.jpg" />
     <Content Include="Assets\Client\img\blog\blog-3.jpg" />
@@ -1066,7 +1073,7 @@
     <Content Include="Assets\Client\img\blog\sidebar\sr-1.jpg" />
     <Content Include="Assets\Client\img\blog\sidebar\sr-2.jpg" />
     <Content Include="Assets\Client\img\blog\sidebar\sr-3.jpg" />
-    <Content Include="Assets\Client\img\breadcrumb.jpg" />
+    <Content Include="Assets\Client\img\breadcrumb.png" />
     <Content Include="Assets\Client\img\cart\cart-1.jpg" />
     <Content Include="Assets\Client\img\cart\cart-2.jpg" />
     <Content Include="Assets\Client\img\cart\cart-3.jpg" />
@@ -1118,6 +1125,7 @@
     <Content Include="Assets\Client\img\product\product-7.jpg" />
     <Content Include="Assets\Client\img\product\product-8.jpg" />
     <Content Include="Assets\Client\img\product\product-9.jpg" />
+    <Content Include="Assets\Client\img\user.png" />
     <Content Include="Assets\Client\js\bootstrap.min.js" />
     <Content Include="Assets\Client\js\jquery-3.3.1.min.js" />
     <Content Include="Assets\Client\js\jquery-ui.min.js" />
@@ -1363,6 +1371,21 @@
     <Content Include="Areas\Client\Views\Shared\_MainLayoutFooter.cshtml" />
     <Content Include="Areas\Client\Views\Shared\_MainLayoutHeader.cshtml" />
     <Content Include="Areas\Client\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Home\CategoryShow.cshtml" />
+    <Content Include="Areas\Client\Views\Home\CategoryShowImage.cshtml" />
+    <Content Include="Areas\Client\Views\Home\LatestProducts.cshtml" />
+    <Content Include="Areas\Client\Views\Home\ListCategoryShow.cshtml" />
+    <Content Include="Areas\Client\Views\Home\ProductFilterShow.cshtml" />
+    <Content Include="Areas\Client\Views\Home\ProductSearchShow.cshtml" />
+    <Content Include="Areas\Client\Views\Home\ReviewProducts.cshtml" />
+    <Content Include="Areas\Client\Views\Home\TopRatedProducts.cshtml" />
+    <Content Include="Areas\Client\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Client\Views\ProductDetail\Index.cshtml" />
+    <Content Include="Areas\Client\Views\ProductDetail\RelatedProduct.cshtml" />
+    <Content Include="Areas\Client\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Account\Edit.cshtml" />
+    <Content Include="Areas\Client\Views\Account\ChangePassword.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1389,6 +1412,7 @@
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Admin\Views\DonHang\" />
     <Folder Include="Areas\Client\Data\" />
+    <Folder Include="Areas\Client\Views\Base\" />
     <Folder Include="Models\DAO\Client\" />
   </ItemGroup>
   <ItemGroup>

@@ -78,7 +78,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
                     }
                     return View(userchange);
                 }
-                ViewBag.OldPassword = "Mật khẩu cũ không đúng";
+                ViewBag.OldPassword = "** Mật khẩu cũ không đúng";
                 return View(userchange);
             }
             else
