@@ -166,6 +166,7 @@
     <Compile Include="Areas\Client\Controllers\HomeController.cs" />
     <Compile Include="Areas\Client\Controllers\LoginController.cs" />
     <Compile Include="Areas\Client\Controllers\ProductDetailController.cs" />
+    <Compile Include="Areas\Client\Controllers\ShoppingCartController.cs" />
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Global.asax.cs">
@@ -1386,6 +1387,7 @@
     <Content Include="Areas\Client\Views\Account\Index.cshtml" />
     <Content Include="Areas\Client\Views\Account\Edit.cshtml" />
     <Content Include="Areas\Client\Views\Account\ChangePassword.cshtml" />
+    <Content Include="Areas\Client\Views\ShoppingCart\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
