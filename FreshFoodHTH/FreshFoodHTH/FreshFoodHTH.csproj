@@ -162,10 +162,13 @@
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Areas\Client\Controllers\AccountController.cs" />
     <Compile Include="Areas\Client\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Client\Controllers\CheckoutController.cs" />
     <Compile Include="Areas\Client\Controllers\ContactController.cs" />
     <Compile Include="Areas\Client\Controllers\HomeController.cs" />
     <Compile Include="Areas\Client\Controllers\LoginController.cs" />
     <Compile Include="Areas\Client\Controllers\ProductDetailController.cs" />
+    <Compile Include="Areas\Client\Controllers\ShopController.cs" />
+    <Compile Include="Areas\Client\Controllers\ShoppingCartController.cs" />
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Global.asax.cs">
@@ -216,9 +219,11 @@
     <Compile Include="Models\EF\PhanLoaiKhachHang.cs" />
     <Compile Include="Models\EF\PhuongThucThanhToan.cs" />
     <Compile Include="Models\EF\SanPham.cs" />
+    <Compile Include="Models\EF\SanPhamKhuyenMai.cs" />
     <Compile Include="Models\EF\TaiKhoanThanhToan.cs" />
     <Compile Include="Models\EF\TheLoai.cs" />
     <Compile Include="Models\EF\ThongTinLienHe.cs" />
+    <Compile Include="Models\EF\ThongTinNhanHang.cs" />
     <Compile Include="Models\EF\TKThanhToanNguoiDung.cs" />
     <Compile Include="Models\EF\TrangThai.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1386,6 +1391,9 @@
     <Content Include="Areas\Client\Views\Account\Index.cshtml" />
     <Content Include="Areas\Client\Views\Account\Edit.cshtml" />
     <Content Include="Areas\Client\Views\Account\ChangePassword.cshtml" />
+    <Content Include="Areas\Client\Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Shop\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Checkout\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

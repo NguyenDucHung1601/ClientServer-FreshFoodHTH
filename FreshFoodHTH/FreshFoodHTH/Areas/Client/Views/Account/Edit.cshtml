@@ -6,13 +6,12 @@
 }
 
 @section Title{
-    FreshFood HTH | Sửa hồ sơ cá nhân
+    FreshFood HTH | Sửa hồ sơ tài khoản
 }
 
-@section Styles{
+@section Styles
+{
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-    <!-- Css Styles -->
     <link rel="stylesheet" href="~/Assets/Client/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Client/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Client/css/elegant-icons.css" type="text/css">
@@ -22,8 +21,8 @@
     <link rel="stylesheet" href="~/Assets/Client/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Client/css/style.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Admin/otherAssets/style.css" type="text/css">
-
 }
+
 
 <div class="container">
     <div class="row">
@@ -48,7 +47,7 @@
             <div class="header__cart">
                 <ul>
                     <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                    <li><a href="/Client/ShoppingCart/Index/@Session["IDUSER_SESSION"]"><i class="fa fa-shopping-cart"></i> <span>3</span></a></li>
                 </ul>
                 <div class="header__cart__price">item: <span>$150.00</span></div>
             </div>
@@ -69,7 +68,7 @@
         <div class="row ">
             <div class="col-lg-12 text-center ">
                 <div class="breadcrumb__text ">
-                    <h2>Chỉnh sửa hồ sơ cá nhân</h2>
+                    <h2>Chỉnh sửa hồ sơ tài khoản</h2>
                 </div>
             </div>
         </div>
@@ -145,7 +144,7 @@
                                         </td>
                                         <td>
                                             <div class="col-md-10">
-                                                <button type="button" class="site-btn" style="text-align:left; width:145px"><i class="fa fa-reply"></i>&nbsp; @Html.ActionLink("Huỷ bỏ", "Index", "Account", new { id = Session["IDUSER_SESSION"]}, null)</button>
+                                                <button type="button" class="site-btn" style="text-align:left; width:145px"><i class="fa fa-reply"></i>&nbsp; @Html.ActionLink("Huỷ bỏ", "Index", "Account", new { id = Session["IDUSER_SESSION"] }, null)</button>
                                             </div>
                                         </td>
                                     </tr>

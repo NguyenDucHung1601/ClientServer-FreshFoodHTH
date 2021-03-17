@@ -6,18 +6,23 @@ namespace FreshFoodHTH.Models.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("MaGiamGiaKhachHang")]
-    public partial class MaGiamGiaKhachHang
+    [Table("ThongTinNhanHang")]
+    public partial class ThongTinNhanHang
     {
         [Key]
-        [Column(Order = 0)]
-        public Guid IDMaGiamGia { get; set; }
+        public Guid IDThongTinNhanHang { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        public Guid IDKhacHang { get; set; }
+        public Guid? IDNguoiDung { get; set; }
 
-        public bool? ConHanSuDung { get; set; }
+        [StringLength(200)]
+        public string TenNhanHang { get; set; }
+
+        [StringLength(12)]
+        public string SdtNhanHang { get; set; }
+
+        public string DiaChiNhanHang { get; set; }
+
+        public bool? MacDinh { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
@@ -28,8 +33,6 @@ namespace FreshFoodHTH.Models.EF
 
         [StringLength(200)]
         public string ModifiedBy { get; set; }
-
-        public virtual MaGiamGia MaGiamGia { get; set; }
 
         public virtual NguoiDung NguoiDung { get; set; }
     }

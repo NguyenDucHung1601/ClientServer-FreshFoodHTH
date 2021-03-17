@@ -4,13 +4,12 @@
 }
 
 @section Title{
-    FreshFood HTH | Chi tiết sản phẩm
+    FreshFood HTH | Mua hàng
 }
 
-@section Styles{
+@section Styles
+{
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-    <!-- Css Styles -->
     <link rel="stylesheet" href="~/Assets/Client/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Client/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Client/css/elegant-icons.css" type="text/css">
@@ -19,8 +18,9 @@
     <link rel="stylesheet" href="~/Assets/Client/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Client/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Client/css/style.css" type="text/css">
-
+    <link rel="stylesheet" href="~/Assets/Admin/otherAssets/style.css" type="text/css">
 }
+
 
 <div class="container">
     <div class="row">
@@ -37,6 +37,7 @@
                     <li><a href="/Client/Home/Index" style="font-size: 17px;">Trang chủ</a></li>
                     <li class="active"><a href="/Client/Shop/Index" style="font-size: 17px;">Mua hàng</a></li>
                     <li><a href="/Client/Contact/Index" style="font-size: 17px;">Liên hệ</a></li>
+                    <li><a href="/Client/Account/Index/@Session["IDUSER_SESSION"]" style="font-size: 17px;">Hồ sơ</a></li>
                 </ul>
             </nav>
         </div>
@@ -58,66 +59,20 @@
 
 @Html.Partial("_BeginContentLayoutOtherHome")
 
-
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg " data-setbg="/Assets/Client/img/breadcrumb.png">
     <div class="container ">
         <div class="row ">
             <div class="col-lg-12 text-center ">
                 <div class="breadcrumb__text ">
-                    <h2>Chi tiết sản phẩm</h2>
+                    <h2>Mua hàng</h2>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!-- Breadcrumb Section End -->
-<!-- Product Details Section Begin -->
-<section class="product-details spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="product__details__pic">
-                    <div class="product__details__pic__item">
-                        <img class="product__details__pic__item--large"
-                             src="~/Areas/Admin/Content/Photos/@Model.HinhAnh" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="product__details__text">
-                    <h3>@Model.Ten</h3>
-                    <div><i class="fa fa-check-circle" style="color:green"></i> Thể loại: <span style="color:green; font-weight:bold">@Model.TheLoai.Ten</span></div>
-                    <div><i class="fa fa-check-circle" style="color:green"></i> Số lượt xem: <span style="color:navy; font-weight:bold">@Model.SoLuotXem</span></div>
-                    <div><i class="fa fa-check-circle" style="color:green"></i> Số lượt mua: <span style="color:navy; font-weight:bold">@Model.SoLuotMua</span></div>
-                    @if (Model.GiaKhuyenMai < Model.GiaTien)
-                    {
-                        <div style="text-decoration:line-through; font-size:16px"> @Model.GiaKhuyenMai VNĐ</div>
-                    }
-                    <br />
-                    <div class="product__details__price">@Model.GiaTien VNĐ</div>
-                    <div><i class="fa fa-check-circle" style="color:green"></i> Đơn vị tính: <span style="color:navy; font-weight:bold">@Model.DonViTinh</span></div>
-                    <div><i class="fa fa-check-circle" style="color:green"></i> Số lượng hiện có: <span style="color:navy; font-weight:bold">@Model.SoLuong</span></div>
-                    <br />
-                    <div class="product__details__quantity">
-                        <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="primary-btn">Thêm vào giỏ</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
-                    <br /><br /><div><i class="fa fa-check-circle" style="color:green"></i> Thông tin sản phẩm:</div>
-                    <p style="text-align:justify">@Model.MoTa</p>
-                </div>
-            </div>
-            <hr />
-        </div>
-    </div>
-</section>
-<!-- Product Details Section End -->
-@Html.Action("RelatedProduct", new { @idtheloai = Model.TheLoai.IDTheLoai })
+
 
 
 @section Scripts{

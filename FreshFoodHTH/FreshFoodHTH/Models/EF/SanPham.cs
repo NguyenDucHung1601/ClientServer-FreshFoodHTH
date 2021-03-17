@@ -16,6 +16,7 @@ namespace FreshFoodHTH.Models.EF
             ChiTietGioHangs = new HashSet<ChiTietGioHang>();
             ChiTietHoaDonNhaps = new HashSet<ChiTietHoaDonNhap>();
             NhaCungCapSanPhams = new HashSet<NhaCungCapSanPham>();
+            SanPhamKhuyenMais = new HashSet<SanPhamKhuyenMai>();
         }
 
         [Key]
@@ -74,5 +75,8 @@ namespace FreshFoodHTH.Models.EF
         public virtual ICollection<NhaCungCapSanPham> NhaCungCapSanPhams { get; set; }
 
         public virtual TheLoai TheLoai { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SanPhamKhuyenMai> SanPhamKhuyenMais { get; set; }
     }
 }

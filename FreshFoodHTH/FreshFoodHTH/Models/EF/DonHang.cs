@@ -23,6 +23,14 @@ namespace FreshFoodHTH.Models.EF
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MaSo { get; set; }
 
+        [StringLength(200)]
+        public string TenNhanHang { get; set; }
+
+        [StringLength(12)]
+        public string SdtNhanHang { get; set; }
+
+        public string DiaChiNhanHang { get; set; }
+
         public string GhiChu { get; set; }
 
         public decimal? TienHang { get; set; }
