@@ -22,7 +22,9 @@
     <link rel="stylesheet" href="~/Assets/Client/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Client/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Client/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/Client/css/style.css" type="text/css">
 }
+
 
 <div class="container">
     <div class="row">
@@ -39,6 +41,7 @@
                     <li><a href="/Client/Home/Index" style="font-size: 17px;">Trang chủ</a></li>
                     <li><a href="/Client/Shop/Index" style="font-size: 17px;">Mua hàng</a></li>
                     <li class="active"><a href="/Client/Contact/Index" style="font-size: 17px;">Liên hệ</a></li>
+                    <li><a href="/Client/Account/Index/@Session["IDUSER_SESSION"]" style="font-size: 17px;">Hồ sơ</a></li>
                 </ul>
             </nav>
         </div>
@@ -46,7 +49,7 @@
             <div class="header__cart">
                 <ul>
                     <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                    <li><a href="/Client/ShoppingCart/Index/@Session["IDUSER_SESSION"]"><i class="fa fa-shopping-cart"></i> <span>3</span></a></li>
                 </ul>
                 <div class="header__cart__price">item: <span>$150.00</span></div>
             </div>

@@ -24,6 +24,16 @@ namespace FreshFoodHTH.Models.EF
         [Column(TypeName = "date")]
         public DateTime? NgayCapNhat { get; set; }
 
+        public DateTime? CreatedDate { get; set; }
+
+        [StringLength(200)]
+        public string CreatedBy { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+
+        [StringLength(200)]
+        public string ModifiedBy { get; set; }
+
         public virtual NhaCungCap NhaCungCap { get; set; }
 
         public virtual SanPham SanPham { get; set; }

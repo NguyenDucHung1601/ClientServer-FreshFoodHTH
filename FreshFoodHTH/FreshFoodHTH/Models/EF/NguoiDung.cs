@@ -16,6 +16,7 @@ namespace FreshFoodHTH.Models.EF
             DonHangs = new HashSet<DonHang>();
             MaGiamGiaKhachHangs = new HashSet<MaGiamGiaKhachHang>();
             TKThanhToanNguoiDungs = new HashSet<TKThanhToanNguoiDung>();
+            ThongTinNhanHangs = new HashSet<ThongTinNhanHang>();
         }
 
         [Key]
@@ -81,5 +82,8 @@ namespace FreshFoodHTH.Models.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TKThanhToanNguoiDung> TKThanhToanNguoiDungs { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThongTinNhanHang> ThongTinNhanHangs { get; set; }
     }
 }
