@@ -190,6 +190,8 @@
     <Compile Include="Models\DAO\Admin\SanPhamDAO.cs" />
     <Compile Include="Models\DAO\Admin\TaiKhoanThanhToanDAO.cs" />
     <Compile Include="Models\DAO\Admin\TheLoaiDAO.cs" />
+    <Compile Include="Models\DAO\Client\GioHangDAO.cs" />
+    <Compile Include="Models\DAO\Client\ThanhToanDAO.cs" />
     <Compile Include="Models\EFplus\flatChangePassword.cs" />
     <Compile Include="Models\EFplus\flatMaGiamGia.cs" />
     <Compile Include="Models\EFplus\flatNguoiDungMoi.cs" />
@@ -1423,7 +1425,6 @@
     <Folder Include="Areas\Admin\Views\DonHang\" />
     <Folder Include="Areas\Client\Data\" />
     <Folder Include="Areas\Client\Views\Base\" />
-    <Folder Include="Models\DAO\Client\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
