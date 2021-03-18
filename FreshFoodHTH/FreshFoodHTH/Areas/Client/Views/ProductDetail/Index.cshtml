@@ -40,16 +40,7 @@
                 </ul>
             </nav>
         </div>
-        <div class="col-lg-3">
-            <div class="header__cart">
-                <ul>
-                    <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                    <li><a href="/Client/ShoppingCart/Index/@Session["IDUSER_SESSION"]"><i class="fa fa-shopping-cart"></i> <span>3</span></a></li>
-                </ul>
-                <div class="header__cart__price">item: <span>$150.00</span></div>
-            </div>
-        </div>
-        @*@Html.Action("HeaderCart", "ShopCart")*@
+        @Html.Partial("_HeaderCart")
     </div>
     <div class="humberger__open">
         <i class="fa fa-bars"></i>
@@ -90,12 +81,8 @@
                     <div><i class="fa fa-check-circle" style="color:green"></i> Thể loại: <span style="color:green; font-weight:bold">@Model.TheLoai.Ten</span></div>
                     <div><i class="fa fa-check-circle" style="color:green"></i> Số lượt xem: <span style="color:navy; font-weight:bold">@Model.SoLuotXem</span></div>
                     <div><i class="fa fa-check-circle" style="color:green"></i> Số lượt mua: <span style="color:navy; font-weight:bold">@Model.SoLuotMua</span></div>
-                    @if (Model.GiaKhuyenMai < Model.GiaTien)
-                    {
-                        <div style="text-decoration:line-through; font-size:16px"> @Model.GiaKhuyenMai VNĐ</div>
-                    }
                     <br />
-                    <div class="product__details__price">@Model.GiaTien VNĐ</div>
+                    <div class="product__details__price">@String.Format("{0:n0}", Model.GiaKhuyenMai) VNĐ</div>
                     <div><i class="fa fa-check-circle" style="color:green"></i> Đơn vị tính: <span style="color:navy; font-weight:bold">@Model.DonViTinh</span></div>
                     <div><i class="fa fa-check-circle" style="color:green"></i> Số lượng hiện có: <span style="color:navy; font-weight:bold">@Model.SoLuong</span></div>
                     <br />

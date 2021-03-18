@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FreshFoodHTH.Common;
 
 namespace FreshFoodHTH.Areas.Client.Controllers
 {
@@ -29,6 +30,11 @@ namespace FreshFoodHTH.Areas.Client.Controllers
         public ActionResult UpdateCart()
         {
             return RedirectToAction("Index", "ShoppingCart", new { id = Session["IDUSER_SESSION"] });
+        }
+
+        public ActionResult HeaderCart()
+        {
+            return PartialView();
         }
     }
 }
