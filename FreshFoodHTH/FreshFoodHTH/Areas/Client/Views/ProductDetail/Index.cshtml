@@ -71,32 +71,38 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                             src="~/Areas/Admin/Content/Photos/@Model.HinhAnh" alt="">
+                             src="~/Areas/Admin/Content/Photos/@ViewBag.Product.HinhAnh" alt="">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__text">
-                    <h3>@Model.Ten</h3>
-                    <div><i class="fa fa-check-circle" style="color:green"></i> Thể loại: <span style="color:green; font-weight:bold">@Model.TheLoai.Ten</span></div>
-                    <div><i class="fa fa-check-circle" style="color:green"></i> Số lượt xem: <span style="color:navy; font-weight:bold">@Model.SoLuotXem</span></div>
-                    <div><i class="fa fa-check-circle" style="color:green"></i> Số lượt mua: <span style="color:navy; font-weight:bold">@Model.SoLuotMua</span></div>
+                    <h3>@ViewBag.Product.Ten</h3>
+                    <div><i class="fa fa-check-circle" style="color:green"></i> Thể loại: <span style="color:green; font-weight:bold">@ViewBag.Product.TheLoai.Ten</span></div>
+                    <div><i class="fa fa-check-circle" style="color:green"></i> Số lượt xem: <span style="color:navy; font-weight:bold">@ViewBag.Product.SoLuotXem</span></div>
+                    <div><i class="fa fa-check-circle" style="color:green"></i> Số lượt mua: <span style="color:navy; font-weight:bold">@ViewBag.Product.SoLuotMua</span></div>
                     <br />
-                    <div class="product__details__price">@String.Format("{0:n0}", Model.GiaKhuyenMai) VNĐ</div>
-                    <div><i class="fa fa-check-circle" style="color:green"></i> Đơn vị tính: <span style="color:navy; font-weight:bold">@Model.DonViTinh</span></div>
-                    <div><i class="fa fa-check-circle" style="color:green"></i> Số lượng hiện có: <span style="color:navy; font-weight:bold">@Model.SoLuong</span></div>
+                    <div class="product__details__price">@String.Format("{0:n0}", ViewBag.Product.GiaKhuyenMai) VNĐ</div>
+                    <div><i class="fa fa-check-circle" style="color:green"></i> Đơn vị tính: <span style="color:navy; font-weight:bold">@ViewBag.Product.DonViTinh</span></div>
+                    <div><i class="fa fa-check-circle" style="color:green"></i> Số lượng hiện có: <span style="color:navy; font-weight:bold">@ViewBag.Product.SoLuong</span></div>
                     <br />
-                    <div class="product__details__quantity">
-                        <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
+
+                    <form action="/Client/ShoppingCart/AddItem?productId=@Model.IDSanPham&quantity=@Model.SoLuong">
+                        <input type="text" name="productId" value="@Model.IDSanPham" style="visibility:hidden">
+                        <br />
+                        <div class="product__details__quantity">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" name="quantity" value="@Model.SoLuong">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <a href="#" class="primary-btn">Thêm vào giỏ</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <input type="submit" class="primary-btn" value="Thêm vào giỏ"/>
+                    </form>
+                    
+                    <a href="" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <br /><br /><div><i class="fa fa-check-circle" style="color:green"></i> Thông tin sản phẩm:</div>
-                    <p style="text-align:justify">@Model.MoTa</p>
+                    <p style="text-align:justify">@ViewBag.Product.MoTa</p>
                 </div>
             </div>
             <hr />
@@ -104,7 +110,7 @@
     </div>
 </section>
 <!-- Product Details Section End -->
-@Html.Action("RelatedProduct", new { @idtheloai = Model.TheLoai.IDTheLoai })
+@Html.Action("RelatedProduct", new { @idtheloai = ViewBag.Product.TheLoai.IDTheLoai })
 
 
 @section Scripts{

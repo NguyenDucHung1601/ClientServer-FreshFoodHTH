@@ -137,7 +137,14 @@
                     <h5>Tổng kết giỏ hàng</h5>
                     <ul>
                         <li>Số sản phẩm <span>@Model.Count()</span></li>
-                        <li>Tổng tiền hàng <span>@Model.First().NguoiDung.TongTienGioHang VNĐ</span></li>
+                        @if (Model.Count() > 0)
+                        {
+                            <li>Tổng tiền hàng <span>@Model.First().NguoiDung.TongTienGioHang VNĐ</span></li>
+                        }
+                        else
+                        {
+                            <li>Tổng tiền hàng <span>0 VNĐ</span></li>
+                        }
                     </ul>
                     <a href="/Client/Checkout/Index/@Session["IDUSER_SESSION"]" class="primary-btn">Tiến hành thanh toán</a>
                 </div>
