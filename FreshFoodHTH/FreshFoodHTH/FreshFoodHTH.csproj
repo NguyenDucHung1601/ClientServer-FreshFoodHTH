@@ -1394,6 +1394,8 @@
     <Content Include="Areas\Client\Views\ShoppingCart\Index.cshtml" />
     <Content Include="Areas\Client\Views\Shop\Index.cshtml" />
     <Content Include="Areas\Client\Views\Checkout\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Shared\_HeaderCart.cshtml" />
+    <Content Include="Areas\Client\Views\Home\IndexByCategory.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

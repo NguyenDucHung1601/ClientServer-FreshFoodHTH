@@ -52,9 +52,10 @@ namespace FreshFoodHTH.Areas.Client.Controllers
 
         public ActionResult Logout()
         {
-            Session["USER_SESSION"] = null;
-            Session["AVATAR_SESSION"] = null;
-            Session["NAME_SESSION"] = null;
+            Session.Clear();
+            //Session["USER_SESSION"] = null;
+            //Session["AVATAR_SESSION"] = null;
+            //Session["NAME_SESSION"] = null;
             return RedirectToAction("Index", "Home");
         }
     }
