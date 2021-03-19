@@ -14,6 +14,14 @@ namespace FreshFoodHTH.Models.DAO.Client
         {
             db = new FreshFoodDBContext();
         }
+        public ChiTietGioHang GetChiTietGioHangByID(Guid id)
+        {
+            return db.ChiTietGioHangs.Find(id);
+        }
+        public List<ChiTietGioHang> GetListChiTietGioHangByIDKhachHang(Guid id)
+        {
+            return db.ChiTietGioHangs.Where(x => x.IDKhachHang == id).ToList();
+        }
         public bool KTGIOHANG(ChiTietGioHang obj)
         {
             if (obj.SoLuong <= (db.SanPhams.Find(obj.IDSanPham)).SoLuong)
@@ -23,10 +31,23 @@ namespace FreshFoodHTH.Models.DAO.Client
         public void Add(ChiTietGioHang obj)
         {
             db.ChiTietGioHangs.Add(obj);
-            NguoiDung nguoidung = db.NguoiDungs.Where(x => x.IDNguoiDung == obj.IDKhachHang).SingleOrDefault();
+            NguoiDung nguoidung = db.NguoiDungs.Find(obj.IDKhachHang);
             nguoidung.TongTienGioHang += obj.ThanhTien;
             db.SaveChanges();
-
+        }
+        public void Edit(ChiTietGioHang obj)
+        {
+            ChiTietGioHang ctGioHang = GetChiTietGioHangByID(obj.IDChiTietGioHang);
+            if (ctGioHang != null)
+            {
+                NguoiDung nguoidung = db.NguoiDungs.Find(obj.IDKhachHang);
+                nguoidung.TongTienGioHang -= ctGioHang.ThanhTien;
+                ctGioHang.SoLuong = obj.SoLuong;
+                ctGioHang.ThanhTien = obj.ThanhTien;
+                nguoidung.TongTienGioHang += ctGioHang.ThanhTien;
+                ctGioHang.DuocChon = obj.DuocChon;
+                db.SaveChanges();
+            }
         }
         public bool CNGioHang(Guid id)
         {
@@ -37,7 +58,7 @@ namespace FreshFoodHTH.Models.DAO.Client
             {
                 if (!KTGIOHANG(item))
                     return false;
-                cartDetail = db.ChiTietGioHangs.Where(x => x.IDKhachHang==id && x.IDSanPham == item.IDSanPham).SingleOrDefault();
+                cartDetail = db.ChiTietGioHangs.Where(x => x.IDKhachHang == id && x.IDSanPham == item.IDSanPham).SingleOrDefault();
                 user.TongTienGioHang -= cartDetail.ThanhTien;
                 cartDetail.ThanhTien = item.ThanhTien;
                 user.TongTienGioHang += cartDetail.ThanhTien;
@@ -46,5 +67,5 @@ namespace FreshFoodHTH.Models.DAO.Client
             return true;
         }
     }
-    
+
 }
