@@ -6,6 +6,9 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Client/Views/Shared/_MainLayout.cshtml";
+
+    FreshFoodHTH.Models.EF.FreshFoodDBContext db = new FreshFoodHTH.Models.EF.FreshFoodDBContext();
+    List<FreshFoodHTH.Models.EF.TaiKhoanThanhToan> listTKTT = db.TaiKhoanThanhToans.ToList();
 }
 
 @section Title{
@@ -25,8 +28,7 @@
     <link rel="stylesheet" href="~/Assets/Client/css/style.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Admin/otherAssets/style.css" type="text/css">
     <style>
-        .nice-select
-        {
+        .nice-select {
             width: 360px;
             height: 40px;
         }
@@ -120,6 +122,25 @@
                                 @Html.DropDownList("IDPhuongThucThanhToan", (IEnumerable<SelectListItem>)ViewBag.PayWayList)
                                 <br />
                             </div>
+                            <br />
+                            <div class="col-md-12" style="width:360px">
+                                <br />
+                                <b>Chọn tài khoản thanh toán</b>
+                                <br />
+                            </div>
+                            @foreach (var item in listTKTT)
+                            {
+                                <div class="col-md-4" style="width:360px">
+                                    <img src="~/Areas/Admin/Content/Photos/@item.Logo" alt="" width="30" height="30"> <span>&nbsp;@item.VietTat</span><br />
+                                </div>
+                            }
+                            @*@foreach (var item in listTKTT)
+                                {
+                                    <img src="~/Areas/Admin/Content/Photos/@item.Logo" alt="" width="30" height="30"> <span>&nbsp;@item.VietTat</span><br />
+                                }*@
+                            @*<label for="exampleInputEmail1"><b>Phương thức thanh toán</b></label><br />*@
+                            @*@Html.DropDownList("IDPhuongThucThanhToan", (IEnumerable<SelectListItem>)ViewBag.PayWayList)*@
+                            <br />
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
@@ -133,10 +154,6 @@
                                 }
                             </ul>
 
-                            @*<div class="checkout__order__subtotal">Tiền hàng <span>@String.Format("{0:n0}", ViewBag.Bill.TienHang)</span></div>
-                                <div class="checkout__order__subtotal">Tiền ship <span>@String.Format("{0:n0}", ViewBag.Bill.TienShip)</span></div>
-                                <div class="checkout__order__subtotal">Tổng giảm <span>@String.Format("{0:n0}", ViewBag.Bill.TienGiam)</span></div>
-                                <div class="checkout__order__total">Tổng Tiền <span>@String.Format("{0:n0}", ViewBag.Bill.TongTien)</span></div>*@
                             <div style="border-bottom: 1px solid #e1e1e1"><br /></div>
                             <ul>
                                 <li style="color:black"><b>Tổng tiền hàng</b><span>@String.Format("{0:n0}", 1000000)</span></li>
