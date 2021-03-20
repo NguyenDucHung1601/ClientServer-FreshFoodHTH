@@ -16,7 +16,15 @@ namespace FreshFoodHTH.Areas.Client.Controllers
             SanPham sanpham = db.SanPhams.Find(id);
             sanpham.SoLuotXem = sanpham.SoLuotXem + 1;
             db.SaveChanges();
-            return View(sanpham);
+
+            ViewBag.Product = sanpham;
+
+            ChiTietGioHang obj = new ChiTietGioHang();
+            obj.IDChiTietGioHang = Guid.NewGuid();
+            obj.IDSanPham = id;
+            obj.SoLuong = 1;
+
+            return View(obj);
         }
 
         public ActionResult RelatedProduct(Guid idtheloai, string ten)

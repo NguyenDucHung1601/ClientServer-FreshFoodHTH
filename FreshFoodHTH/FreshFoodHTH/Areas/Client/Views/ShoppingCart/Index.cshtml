@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<FreshFoodHTH.Models.EF.ChiTietGioHang>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Client/Views/Shared/_MainLayout.cshtml";
@@ -46,16 +47,7 @@
                 </ul>
             </nav>
         </div>
-        <div class="col-lg-3">
-            <div class="header__cart">
-                <ul>
-                    <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                    <li><a href="/Client/ShoppingCart/Index/@Session["IDUSER_SESSION"]"><i class="fa fa-shopping-cart"></i> <span>3</span></a></li>
-                </ul>
-                <div class="header__cart__price">item: <span>$150.00</span></div>
-            </div>
-        </div>
-        @*@Html.Action("HeaderCart", "ShopCart")*@
+        @Html.Partial("_HeaderCart")
     </div>
     <div class="humberger__open">
         <i class="fa fa-bars"></i>
@@ -80,86 +72,91 @@
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="shoping__cart__table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th class="shoping__product">Sản phẩm</th>
-                                <th>Đơn giá</th>
-                                <th>Số lượng</th>
-                                <th>Thành tiền</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shoping__cart__table">
+                        <table>
+                            @Html.ValidationSummary(true)
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <input type="checkbox" name="duocchon" value="@item.DuocChon">
-                                    </td>
-                                    <td class="shoping__cart__item" style="padding-top:10px; padding-bottom:25px">
-                                        <img src="~/Areas/Admin/Content/Photos/@item.SanPham.HinhAnh" alt="" width="100" height="100">
-                                        <h5>@item.SanPham.Ten</h5>
-                                    </td>
-                                    <td class="shoping__cart__price" style="font-weight:normal">
-                                        @if (item.SanPham.GiaKhuyenMai < item.SanPham.GiaTien)
-                                        {
-                                            @String.Format("{0:n0}", item.SanPham.GiaKhuyenMai)
-                                        }
-                                        else
-                                        {
-                                            @String.Format("{0:n0}", item.SanPham.GiaTien)
-                                        }
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty" style="border-radius:10px; background-color:#ebebeb">
-                                                <input type="text" name="soluong" value="@item.SoLuong">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total" style="font-weight:normal">
-                                        @String.Format("{0:n0}", item.ThanhTien)
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        @Html.ActionLink("❌", "DeleteCartDetail", new { id = item.IDChiTietGioHang }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })
-                                    </td>
+                                    <th></th>
+                                    <th class="shoping__product">Sản phẩm</th>
+                                    <th>Đơn giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
+                                    <th></th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.HiddenFor(modelItem => item.IDChiTietGioHang)
+                                            @*<input type="checkbox" name="duocchon" value="@item.DuocChon">*@
+                                        </td>
+                                        <td class="shoping__cart__item" style="padding-top:10px; padding-bottom:25px">
+                                            <img src="~/Areas/Admin/Content/Photos/@item.SanPham.HinhAnh" alt="" width="100" height="100">
+                                            <h5>@item.SanPham.Ten</h5>
+                                        </td>
+                                        <td class="shoping__cart__price" style="font-weight:normal">
+                                            @if (item.SanPham.GiaKhuyenMai < item.SanPham.GiaTien)
+                                            {
+                                                @String.Format("{0:n0}", item.SanPham.GiaKhuyenMai)
+                                            }
+                                            else
+                                            {
+                                                @String.Format("{0:n0}", item.SanPham.GiaTien)
+                                            }
+                                        </td>
+                                        <td class="shoping__cart__quantity">
+                                            <div class="quantity">
+                                                <div class="pro-qty" style="border-radius:10px; background-color:#ebebeb">
+                                                    @*<input type="text" name="soluong" value="@item.SoLuong">*@
+                                                    @Html.EditorFor(modelItem => item.SoLuong)
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="shoping__cart__total" style="font-weight:normal">
+                                            @String.Format("{0:n0}", item.ThanhTien)
+                                        </td>
+                                        <td class="shoping__cart__item__close">
+                                            @Html.ActionLink("❌", "DeleteItem", new { id = item.IDChiTietGioHang }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <button type="button" class="site-btn" style="text-align:left; width:250px"><i class="fa fa-shopping-basket"></i> &nbsp; @Html.ActionLink("Tiếp tục mua hàng", "Index", "Home")</button>
+                    &nbsp;&nbsp;
+                    <input type="submit" class="site-btn" style="text-align:left; width:250px" value="Cập nhật giỏ hàng" />
+                </div>
+                <div class="col-lg-6">
+                    <div class="shoping__checkout" style="margin-top:0px">
+                        <h5>Tổng kết giỏ hàng</h5>
+                        <ul>
+                            <li>Số sản phẩm <span>@Model.Count()</span></li>
+                            @if (Model.Count() > 0)
+                            {
+                                <li>Tổng tiền hàng <span>@String.Format("{0:n0}", Model.First().NguoiDung.TongTienGioHang) VNĐ</span></li>
                             }
-                        </tbody>
-                    </table>
+                            else
+                            {
+                                <li>Tổng tiền hàng <span>0 VNĐ</span></li>
+                            }
+                        </ul>
+                        <a href="/Client/Checkout/Index/@Session["IDUSER_SESSION"]" class="primary-btn">Tiến hành thanh toán</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <button type="button" class="site-btn" style="text-align:left; width:250px"><i class="fa fa-shopping-basket"></i> &nbsp; @Html.ActionLink("Tiếp tục mua hàng", "Index", "Home")</button>
-                &nbsp;&nbsp;
-                <button type="button" class="site-btn" style="text-align:left; width:250px"><i class="fa fa-spinner"></i> &nbsp; @Html.ActionLink("Cập nhật giỏ hàng", "UpdateCart", "ShoppingCart")</button>
-            </div>
-            <div class="col-lg-6">
-                <div class="shoping__checkout" style="margin-top:0px">
-                    <h5>Tổng kết giỏ hàng</h5>
-                    <ul>
-                        <li>Số sản phẩm <span>@Model.Count()</span></li>
-                        @if (Model.Count() > 0)
-                        {
-                            <li>Tổng tiền hàng <span>@Model.First().NguoiDung.TongTienGioHang VNĐ</span></li>
-                        }
-                        else
-                        {
-                            <li>Tổng tiền hàng 0 VNĐ</li>
-
-                        }
-                    </ul>
-                    <a href="/Client/Checkout/Index/@Session["IDUSER_SESSION"]" class="primary-btn">Tiến hành thanh toán</a>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </section>
 <!-- Shoping Cart Section End -->

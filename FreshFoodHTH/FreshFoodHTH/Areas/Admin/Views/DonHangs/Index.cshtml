@@ -97,6 +97,7 @@
                     @Html.Raw(Convert.ToDateTime(item.CreatedDate).ToString("dd/MM/yyyy"))
                 </td>
                 <td>
+<<<<<<< HEAD
                     @if (item.TenTrangThai == "Chờ xác nhận")
                     {
                         <i class="fa fa-check-square-o"></i> @*&nbsp;*@
@@ -106,6 +107,14 @@
                     @Html.ActionLink("Xem", "Details", new { id = item.IDDonHang }) @*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*@
                     @*<i class="fa fa-trash"></i> &nbsp;
         @Html.ActionLink("Xóa", "Delete", new { id = item.IDDonHang }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })*@
+=======
+                    <i class="fa fa-info-circle"></i> &nbsp;
+                    @Html.ActionLink("Xem", "Details", new { id = item.IDDonHang }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@*|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*@
+                    @*<i class="fa fa-edit"></i> &nbsp;
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.IDDonHang }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-trash"></i> &nbsp;
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.IDDonHang }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })*@
+>>>>>>> b1288ddc8bf28212d2bde5f573a7981acb93c9bf
                 </td>
             </tr>
         }

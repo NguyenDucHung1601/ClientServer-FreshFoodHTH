@@ -13,6 +13,5 @@ namespace FreshFoodHTH.Areas.Client.Controllers
         {
             return View();
         }
-
     }
 }
