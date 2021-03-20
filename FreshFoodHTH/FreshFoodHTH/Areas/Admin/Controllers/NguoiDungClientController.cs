@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace FreshFoodHTH.Areas.Admin.Controllers
 {
-    public class NguoiDungClientController : Controller
+    public class NguoiDungClientController : BaseController
     {
         // GET: Admin/NguoiDungClient
         FreshFoodDBContext db = new FreshFoodDBContext();
@@ -39,80 +39,80 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             return View(nguoidung);
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public ActionResult Create(string username, string password, string ten, string dienthoai, string diachi, HttpPostedFileBase avatar)
-        {
-            NguoiDung nguoidung = new NguoiDung();
-            nguoidung.IDNguoiDung = Guid.NewGuid();
-            nguoidung.IsAdmin = true;
-            nguoidung.IDLoaiNguoiDung = db.LoaiNguoiDungs.Where(x => x.Ten.Equals("Admin")).Select(x => x.IDLoaiNguoiDung).ToList().ElementAt(0);
-            nguoidung.CreatedDate = DateTime.Now;
-            nguoidung.ModifiedDate = DateTime.Now;
-            nguoidung.Username = username;
-            nguoidung.Password = BCrypt.Net.BCrypt.HashPassword(password);
-            nguoidung.Ten = ten;
-            nguoidung.DienThoai = dienthoai;
-            nguoidung.DiaChi = diachi;
+        //[HttpPost]
+        //public ActionResult Create(string username, string password, string ten, string dienthoai, string diachi, HttpPostedFileBase avatar)
+        //{
+        //    NguoiDung nguoidung = new NguoiDung();
+        //    nguoidung.IDNguoiDung = Guid.NewGuid();
+        //    nguoidung.IsAdmin = true;
+        //    nguoidung.IDLoaiNguoiDung = db.LoaiNguoiDungs.Where(x => x.Ten.Equals("Admin")).Select(x => x.IDLoaiNguoiDung).ToList().ElementAt(0);
+        //    nguoidung.CreatedDate = DateTime.Now;
+        //    nguoidung.ModifiedDate = DateTime.Now;
+        //    nguoidung.Username = username;
+        //    nguoidung.Password = BCrypt.Net.BCrypt.HashPassword(password);
+        //    nguoidung.Ten = ten;
+        //    nguoidung.DienThoai = dienthoai;
+        //    nguoidung.DiaChi = diachi;
 
-            if (ModelState.IsValid)
-            {
-                if (avatar != null && avatar.ContentLength > 0)
-                {
-                    var path = Path.Combine(Server.MapPath("~/Areas/Admin/Content/Photos/"), System.IO.Path.GetFileName(avatar.FileName));
-                    avatar.SaveAs(path);
-                    nguoidung.Avatar = avatar.FileName;
-                }
-                ndDao.AddAdmin(nguoidung);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(nguoidung);
-            }
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (avatar != null && avatar.ContentLength > 0)
+        //        {
+        //            var path = Path.Combine(Server.MapPath("~/Areas/Admin/Content/Photos/"), System.IO.Path.GetFileName(avatar.FileName));
+        //            avatar.SaveAs(path);
+        //            nguoidung.Avatar = avatar.FileName;
+        //        }
+        //        ndDao.Add(nguoidung);
+        //        return RedirectToAction("Index");
+        //    }
+        //    else
+        //    {
+        //        return View(nguoidung);
+        //    }
+        //}
 
-        public ActionResult Edit(Guid id)
-        {
-            return View(ndDao.GetByID(id));
-        }
+        //public ActionResult Edit(Guid id)
+        //{
+        //    return View(ndDao.GetByID(id));
+        //}
 
-        [HttpPost]
-        public ActionResult Edit(Guid id, string username, string password, string ten, string dienthoai, string diachi, HttpPostedFileBase avatar)
-        {
-            NguoiDung nguoidung = ndDao.GetByID(id);
-            nguoidung.ModifiedDate = DateTime.Now;
-            nguoidung.Username = username;
-            nguoidung.Password = password;
-            nguoidung.Ten = ten;
-            nguoidung.DienThoai = dienthoai;
-            nguoidung.DiaChi = diachi;
+        //[HttpPost]
+        //public ActionResult Edit(Guid id, string username, string password, string ten, string dienthoai, string diachi, HttpPostedFileBase avatar)
+        //{
+        //    NguoiDung nguoidung = ndDao.GetByID(id);
+        //    nguoidung.ModifiedDate = DateTime.Now;
+        //    nguoidung.Username = username;
+        //    nguoidung.Password = password;
+        //    nguoidung.Ten = ten;
+        //    nguoidung.DienThoai = dienthoai;
+        //    nguoidung.DiaChi = diachi;
 
-            if (ModelState.IsValid)
-            {
-                if (avatar != null && avatar.ContentLength > 0)
-                {
-                    var path = Path.Combine(Server.MapPath("~/Areas/Admin/Content/Photos/"), System.IO.Path.GetFileName(avatar.FileName));
-                    avatar.SaveAs(path);
-                    nguoidung.Avatar = avatar.FileName;
-                }
-                ndDao.EditAdmin(nguoidung);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(nguoidung);
-            }
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (avatar != null && avatar.ContentLength > 0)
+        //        {
+        //            var path = Path.Combine(Server.MapPath("~/Areas/Admin/Content/Photos/"), System.IO.Path.GetFileName(avatar.FileName));
+        //            avatar.SaveAs(path);
+        //            nguoidung.Avatar = avatar.FileName;
+        //        }
+        //        ndDao.Edit(nguoidung);
+        //        return RedirectToAction("Index");
+        //    }
+        //    else
+        //    {
+        //        return View(nguoidung);
+        //    }
+        //}
 
-        public ActionResult Delete(Guid id)
-        {
-            ndDao.DeleteAdmin(id);
-            return RedirectToAction("Index");
-        }
+        //public ActionResult Delete(Guid id)
+        //{
+        //    ndDao.Delete(id);
+        //    return RedirectToAction("Index");
+        //}
     }
 }

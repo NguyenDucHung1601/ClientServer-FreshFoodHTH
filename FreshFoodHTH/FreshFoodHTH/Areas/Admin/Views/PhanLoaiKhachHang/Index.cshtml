@@ -24,7 +24,7 @@
 
 @section header
 {
-    Danh sách phân loại khách hàng
+    Danh sách Phân loại khách hàng
 }
 
 <table style="width:100%; margin-bottom:10px">
@@ -51,34 +51,34 @@
     <thead>
         <tr>
             <th>STT</th>
-            <th>Tên</th>
-            <th>Điều kiện</th>
+            <th>Cấp độ</th>
+            <th>Tên phân loại</th>
             <th>Chức năng</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.Raw(GetSTT())
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DieuKien)
-            </td>
-            <td>
-                <i class="fa fa-info-circle"></i> &nbsp;
-                @Html.ActionLink("Xem", "Details", new { id = item.IDLoaiKhachHang }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-edit"></i> &nbsp;
-                @Html.ActionLink("Sửa", "Edit", new { id = item.IDLoaiKhachHang }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-trash"></i> &nbsp;
-                @Html.ActionLink("Xóa", "Delete", new { id = item.IDLoaiKhachHang }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })
-            </td>
+            <tr>
+                <td>
+                    @Html.Raw(GetSTT())
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CapDo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    <i class="fa fa-info-circle"></i> &nbsp;
+                    @Html.ActionLink("Xem", "Details", new { id = item.IDLoaiKhachHang }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-edit"></i> &nbsp;
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDLoaiKhachHang }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-trash"></i> &nbsp;
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDLoaiKhachHang }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })
+                </td>
 
-        </tr>
+            </tr>
         }
     </tbody>
 </table>

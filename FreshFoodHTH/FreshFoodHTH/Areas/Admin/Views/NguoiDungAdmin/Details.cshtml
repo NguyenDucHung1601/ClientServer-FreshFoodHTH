@@ -43,6 +43,13 @@
                     @Html.DisplayFor(model => model.DienThoai)
                 </dd>
                 <dt>
+                    Email:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt>
                     Địa chỉ:
                 </dt>
 
@@ -66,12 +73,6 @@
             </dl>
         </td>
     </table>
-    <br />
-    <h4>
-        <i class="fa fa-list-ol"></i>
-        <b style="color:darkgreen">&nbsp;Chi tiết đơn hàng</b>
-    </h4>
-    @Html.Action("IndexChiTietGioHang", new { @id = Model.IDNguoiDung })
 </div>
 
 <br />
@@ -80,6 +81,13 @@
     <a class="fa fa-edit"></a> &nbsp;
     @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.IDNguoiDung })
 </button>
+@if (Model.Username.Equals(Session["USERNAME_SESSION"]))
+{
+    <button type="button" class="btn btn-success btn-admin">
+        <a class="fa fa-key"></a> &nbsp;
+        @Html.ActionLink("Đổi mật khẩu", "ChangePassword", new { id = Model.IDNguoiDung })
+    </button>
+}
 <button type="button" class="btn btn-warning btn-admin">
     <a class="fa fa-th-list"></a> &nbsp;
     @Html.ActionLink("Danh sách", "Index")

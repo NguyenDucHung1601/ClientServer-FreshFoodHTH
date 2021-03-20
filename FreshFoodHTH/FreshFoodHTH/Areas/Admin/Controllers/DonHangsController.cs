@@ -11,7 +11,7 @@ using FreshFoodHTH.Models.EF;
 
 namespace FreshFoodHTH.Areas.Admin.Controllers
 {
-    public class DonHangsController : Controller
+    public class DonHangsController : BaseController
     {
         private FreshFoodDBContext db = new FreshFoodDBContext();
         public DonHangDAO dhDao = new DonHangDAO();
@@ -77,7 +77,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
                 donHang.CreatedBy = (string)Session["USERNAME_SESSION"];
                 donHang.ModifiedDate = DateTime.Now;
                 donHang.ModifiedBy = (string)Session["USERNAME_SESSION"];
-                donHang.TongTien = donHang.TienHang + donHang.TienShip - donHang.TienGiam;
+                donHang.TongTien = 0;
                 db.DonHangs.Add(donHang);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -149,6 +149,19 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             ViewBag.IDDonHang = id;
 
             return PartialView(listChiTietDonHang);
+        }
+
+
+        public ActionResult Accept(Guid id)
+        {
+            var donHang = db.DonHangs.SingleOrDefault(x => x.IDDonHang == id);
+            donHang.IDTrangThai = new Guid("3240c2e6-fc6c-4feb-9313-382bd05cf522");
+            donHang.ModifiedDate = DateTime.Now;
+            donHang.ModifiedBy = (string)Session["USERNAME_SESSION"];
+            db.Entry(donHang).State = EntityState.Modified;
+            db.SaveChanges();
+            
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

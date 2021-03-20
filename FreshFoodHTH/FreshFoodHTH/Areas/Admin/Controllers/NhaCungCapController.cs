@@ -12,6 +12,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
     public class NhaCungCapController : BaseController
     {
         NhaCungCapDAO nccDao = new NhaCungCapDAO();
+        NhaCungCapSanPhamDAO nccspDao = new NhaCungCapSanPhamDAO();
         // GET: Admin/NhaCungCap
         public ActionResult Index(int? page, int? PageSize, string searching = "")
         {
@@ -50,6 +51,11 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             nhacungcap.DienThoai = dienthoai;
             nhacungcap.CreatedDate = DateTime.Now;
 
+            nhacungcap.CreatedDate = DateTime.Now;
+            nhacungcap.CreatedBy = (string)Session["USERNAME_SESSION"];
+            nhacungcap.ModifiedDate = DateTime.Now;
+            nhacungcap.ModifiedBy = (string)Session["USERNAME_SESSION"];
+
             if (ModelState.IsValid)
             {
                 if (hinhanh != null && hinhanh.ContentLength > 0)
@@ -79,6 +85,8 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             nhacungcap.DiaChi = diachi;
             nhacungcap.DienThoai = dienthoai;
 
+            nhacungcap.ModifiedDate = DateTime.Now;
+            nhacungcap.ModifiedBy = (string)Session["USERNAME_SESSION"];
 
             if (ModelState.IsValid)
             {
@@ -101,6 +109,18 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         {
             nccDao.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult IndexNhaCungCapSanPham(Guid id)
+        {
+            var listSanPhamCungCap = nccspDao.GetListSPCungUngByIDNhaCungCap(id);
+
+            if (listSanPhamCungCap == null)
+                return HttpNotFound();
+
+            ViewBag.IDNhaCungCap = id;
+
+            return PartialView(listSanPhamCungCap);
         }
     }
 }

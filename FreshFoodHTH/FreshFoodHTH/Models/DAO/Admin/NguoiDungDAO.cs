@@ -16,49 +16,31 @@ namespace FreshFoodHTH.Models.DAO.Admin
             db = new FreshFoodDBContext();
         }
 
-        // Login
-        public NguoiDung GetByID(Guid id)
-        {
-            return db.NguoiDungs.Find(id);
-        }
-
         public NguoiDung GetByUsername(string username)
         {
             return db.NguoiDungs.SingleOrDefault(x => x.Username == username);
         }
 
-        public List<NguoiDung> ListNguoiDung()
+        public NguoiDung GetByID(Guid id)
         {
-            return db.NguoiDungs.ToList();
-        }
-
-        public int Login(string username, string password)
-        {
-            var result = db.NguoiDungs.SingleOrDefault(x => x.Username == username);
-            if (result == null)
-            {
-                return 0;
-            }
-            else
-            {
-                if (BCrypt.Net.BCrypt.Verify(password, result.Password))
-                    return 1;
-                else
-                    return -1;
-            }
+            return db.NguoiDungs.Find(id);
         }
 
         public int LoginAdmin(string username, string password)
         {
-            var result = db.NguoiDungs.SingleOrDefault(x => x.Username == username);
-            if (result == null)
+            var user = db.NguoiDungs.SingleOrDefault(x => x.Username == username);
+            if (user == null || !user.IsAdmin)
             {
                 return 0;
             }
             else
             {
-                if (result.IsAdmin && BCrypt.Net.BCrypt.Verify(password, result.Password))
+                if (BCrypt.Net.BCrypt.Verify(password, user.Password))
+                {
+                    GetByUsername(username).LanHoatDongGanNhat = DateTime.Now;
+                    db.SaveChanges();
                     return 1;
+                }
                 else
                     return -1;
             }
@@ -66,112 +48,89 @@ namespace FreshFoodHTH.Models.DAO.Admin
 
         public int LoginClient(string username, string password)
         {
-            var result = db.NguoiDungs.SingleOrDefault(x => x.Username == username);
-            if (result == null)
+            var user = db.NguoiDungs.SingleOrDefault(x => x.Username == username);
+            if (user == null || user.IsAdmin)
             {
                 return 0;
             }
             else
             {
-                if (!result.IsAdmin && BCrypt.Net.BCrypt.Verify(password, result.Password))
+                if (BCrypt.Net.BCrypt.Verify(password, user.Password))
+                {
+                    GetByUsername(username).LanHoatDongGanNhat = DateTime.Now;
+                    db.SaveChanges();
                     return 1;
+                }
                 else
                     return -1;
             }
         }
 
-        // NguoiDungAdmin
-        public List<NguoiDung> ListNguoiDungAdmin()
+        public void ChangePassword(NguoiDung obj, string newpass)
+        {
+            NguoiDung nguoidung = GetByID(obj.IDNguoiDung);
+            if (nguoidung != null)
+            {
+                nguoidung.Password = BCrypt.Net.BCrypt.HashPassword(newpass);
+
+                db.SaveChanges();
+            }
+        }
+
+        public List<NguoiDung> ListAdmin()
         {
             return db.NguoiDungs.Where(x => x.IsAdmin == true).ToList();
         }
 
-        public void AddAdmin(NguoiDung obj)
-        {
-            db.NguoiDungs.Add(obj);
-            db.SaveChanges();
-        }
-
-        public void EditAdmin(NguoiDung obj)
-        {
-            NguoiDung nguoidung = GetByID(obj.IDNguoiDung);
-            if (nguoidung != null)
-            {
-                nguoidung.Ten = obj.Ten;
-                nguoidung.DienThoai = obj.DienThoai;
-                nguoidung.DiaChi = obj.DiaChi;
-                nguoidung.Username = obj.Username;
-                nguoidung.Password = obj.Password;
-                nguoidung.Avatar = obj.Avatar;
-                db.SaveChanges();
-            }
-        }
-
-        public int DeleteAdmin(Guid id)
-        {
-            NguoiDung nguoidung= db.NguoiDungs.Find(id);
-            if (nguoidung != null)
-            {
-                db.NguoiDungs.Remove(nguoidung);
-                return db.SaveChanges();
-            }
-            else
-                return -1;
-        }
-
-        public IEnumerable<NguoiDung> ListAdminSimple(string searching)
-        {
-            var list = db.Database.SqlQuery<NguoiDung>($"SELECT * FROM dbo.NguoiDung nd " +
-                $"WHERE nd.IsAdmin = 1 " +
-                $"AND (nd.Username LIKE '%{searching}%' " +
-                $"OR nd.Ten LIKE N'%{searching}%' " +
-                $"OR nd.DienThoai LIKE '%{searching}%' " +
-                $"OR nd.DiaChi LIKE N'%{searching}%')").ToList();
-
-            return list;
-        }
-
-        public IEnumerable<NguoiDung> ListAdminSimpleSearch(int PageNum, int PageSize, string searching)
-        {
-            var list = db.Database.SqlQuery<NguoiDung>($"SELECT * FROM dbo.NguoiDung nd " +
-               $"WHERE nd.IsAdmin = 1 " +
-               $"AND (nd.Username LIKE '%{searching}%' " +
-               $"OR nd.Ten LIKE N'%{searching}%' " +
-               $"OR nd.DienThoai LIKE '%{searching}%' " +
-               $"OR nd.DiaChi LIKE N'%{searching}%')").ToPagedList<NguoiDung>(PageNum, PageSize);
-
-            return list;
-        }
-
-
-        // NguoiDungClient
-        public List<NguoiDung> ListNguoiDungClient()
+        public List<NguoiDung> ListClient()
         {
             return db.NguoiDungs.Where(x => x.IsAdmin == false).ToList();
         }
 
-        public void AddClient(NguoiDung obj)
+        public List<NguoiDung> ListClientCapDoGreaterThan(int capdo)
+        {
+            return db.NguoiDungs.Where(x => x.IsAdmin == false).Where(x => x.PhanLoaiKhachHang.CapDo >= capdo).ToList();
+        }
+
+        public void UpdatePhanLoaiKhachHang(Guid id)
+        {
+            NguoiDung kh = GetByID(id);
+            var listPhanLoai = (new PhanLoaiKhachHangDAO()).ListPhanLoaiKhachHang();
+
+            if (kh != null)
+            {
+                foreach (PhanLoaiKhachHang pl in listPhanLoai)
+                {
+                    if (kh.SoDonHangDaMua >= pl.SoDonHangToiThieu && kh.TongTienHangDaMua >= pl.TongTienHangToiThieu)
+                    {
+                        kh.IDLoaiKhachHang = pl.IDLoaiKhachHang;
+                    }
+                }
+            }
+        }
+
+        public void Add(NguoiDung obj)
         {
             db.NguoiDungs.Add(obj);
             db.SaveChanges();
         }
 
-        public void EditClient(NguoiDung obj)
+        public void Edit(NguoiDung obj)
         {
             NguoiDung nguoidung = GetByID(obj.IDNguoiDung);
             if (nguoidung != null)
             {
                 nguoidung.Ten = obj.Ten;
                 nguoidung.DienThoai = obj.DienThoai;
+                nguoidung.Email = obj.Email;
                 nguoidung.DiaChi = obj.DiaChi;
-                nguoidung.Username = obj.Username;
-                nguoidung.Password = obj.Password;
                 nguoidung.Avatar = obj.Avatar;
+
                 db.SaveChanges();
             }
         }
 
-        public int DeleteClient(Guid id)
+        public int Delete(Guid id)
         {
             NguoiDung nguoidung = db.NguoiDungs.Find(id);
             if (nguoidung != null)
@@ -183,33 +142,103 @@ namespace FreshFoodHTH.Models.DAO.Admin
                 return -1;
         }
 
+        public IEnumerable<flatTaiKhoan> ListAccountSimple(string searching)
+        {
+            string query = $"SELECT nd.IDNguoiDung AS IDUser, nd.Username, lnd.Ten AS TenLoaiNguoiDung, nd.ModifiedDate " +
+                $"FROM dbo.NguoiDung nd LEFT JOIN dbo.LoaiNguoiDung lnd " +
+                $"ON lnd.IDLoaiNguoiDung = nd.IDLoaiNguoiDung " +
+                $"WHERE nd.Username LIKE '%{searching}%' " +
+                $"OR lnd.Ten LIKE N'%{searching}%' " +
+                $"OR nd.ModifiedDate LIKE N'%{searching}%' " +
+                $"ORDER BY nd.ModifiedDate DESC";
+            var list = db.Database.SqlQuery<flatTaiKhoan>(query).ToList();
+
+            return list;
+        }
+
+        public IEnumerable<flatTaiKhoan> ListAccountSimpleSearch(int PageNum, int PageSize, string searching)
+        {
+            string query = $"SELECT nd.IDNguoiDung AS IDUser, nd.Username, lnd.Ten AS TenLoaiNguoiDung, nd.ModifiedDate " +
+                $"FROM dbo.NguoiDung nd LEFT JOIN dbo.LoaiNguoiDung lnd " +
+                $"ON lnd.IDLoaiNguoiDung = nd.IDLoaiNguoiDung " +
+                $"WHERE nd.Username LIKE '%{searching}%' " +
+                $"OR lnd.Ten LIKE N'%{searching}%' " +
+                $"OR nd.ModifiedDate LIKE N'%{searching}%' " +
+                $"ORDER BY nd.ModifiedDate DESC";
+            var list = db.Database.SqlQuery<flatTaiKhoan>(query).ToPagedList<flatTaiKhoan>(PageNum, PageSize);
+
+            return list;
+        }
+
+        public IEnumerable<NguoiDung> ListAdminSimple(string searching)
+        {
+            string query = $"SELECT * FROM dbo.NguoiDung nd " +
+                $"WHERE nd.IsAdmin = 1 " +
+                $"AND (nd.Username LIKE '%{searching}%' " +
+                $"OR nd.Ten LIKE N'%{searching}%' " +
+                $"OR nd.ModifiedDate LIKE N'%{searching}%') " +
+                $"ORDER BY nd.ModifiedDate DESC";
+            var list = db.Database.SqlQuery<NguoiDung>(query).ToList();
+
+            return list;
+        }
+
+        public IEnumerable<NguoiDung> ListAdminSimpleSearch(int PageNum, int PageSize, string searching)
+        {
+            string query = $"SELECT * FROM dbo.NguoiDung nd " +
+               $"WHERE nd.IsAdmin = 1 " +
+               $"AND (nd.Username LIKE '%{searching}%' " +
+               $"OR nd.Ten LIKE N'%{searching}%' " +
+               $"OR nd.ModifiedDate LIKE N'%{searching}%') " +
+               $"ORDER BY nd.ModifiedDate DESC";
+            var list = db.Database.SqlQuery<NguoiDung>(query).ToPagedList<NguoiDung>(PageNum, PageSize);
+
+            return list;
+        }
+
+        public int TongSoThanhVien()
+        {
+            var countUser = db.Database.SqlQuery<NguoiDung>($"SELECT * FROM dbo.NguoiDung kh " +
+            $"WHERE kh.IsAdmin = 0").ToList().Count;
+            return countUser;
+        }
         public IEnumerable<flatKhachHang> ListClientSimple(string searching)
         {
-            //string querry = $"SELECT nd.IDNguoiDung, nd.IDLoaiNguoiDung, nd.IDLoaiKhachHang, pl.Ten AS TenLoaiKhachHang, nd.Ten, " +
-            //    $"nd.DienThoai, nd.DiaChi, nd.Username, nd.Avatar, nd.TongTienGioHang, nd.SoDonHangDaMua, nd.TongTienHangDaMua, nd.TrangThai, " +
-            //    $"nd.LanHoatDongGanNhat, nd.IsAdmin, nd.CreatedDate, nd.CreatedBy, nd.ModifiedDate, nd.ModifiedBy " +
-            //    $"FROM dbo.NguoiDung nd LEFT JOIN dbo.PhanLoaiKhachHang pl " +
-            //    $"ON pl.IDLoaiKhachHang = nd.IDLoaiKhachHang WHERE nd.IsAdmin = 0";
-            var list = db.Database.SqlQuery<flatKhachHang>($"SELECT * FROM dbo.NguoiDung nd " +
+            string query = $"SELECT nd.IDNguoiDung, nd.Username, nd.Ten, pl.Ten AS TenLoaiKhachHang, nd.Avatar, nd.SoDonHangDaMua, nd.TongTienHangDaMua, nd.LanHoatDongGanNhat, nd.ModifiedDate " +
+                $"FROM dbo.NguoiDung nd LEFT JOIN dbo.PhanLoaiKhachHang pl " +
+                $"ON pl.IDLoaiKhachHang = nd.IDLoaiKhachHang " +
                 $"WHERE nd.IsAdmin = 0 " +
                 $"AND (nd.Username LIKE '%{searching}%' " +
                 $"OR nd.Ten LIKE N'%{searching}%' " +
-                $"OR nd.DienThoai LIKE '%{searching}%' " +
-                $"OR nd.DiaChi LIKE N'%{searching}%')").ToList();
+                $"OR pl.Ten LIKE N'%{searching}%' " +
+                $"OR nd.SoDonHangDaMua LIKE N'%{searching}%' " +
+                $"OR nd.TongTienHangDaMua LIKE N'%{searching}%' " +
+                $"OR nd.LanHoatDongGanNhat LIKE N'%{searching}%' " +
+                $"OR nd.ModifiedDate LIKE N'%{searching}%') " +
+                $"ORDER BY nd.ModifiedDate DESC";
+            var list = db.Database.SqlQuery<flatKhachHang>(query).ToList();
 
             return list;
         }
 
-        public IEnumerable<NguoiDung> ListClientSimpleSearch(int PageNum, int PageSize, string searching)
+        public IEnumerable<flatKhachHang> ListClientSimpleSearch(int PageNum, int PageSize, string searching)
         {
-            var list = db.Database.SqlQuery<NguoiDung>($"SELECT * FROM dbo.NguoiDung nd " +
-               $"WHERE nd.IsAdmin = 0 " +
-               $"AND (nd.Username LIKE '%{searching}%' " +
-               $"OR nd.Ten LIKE N'%{searching}%' " +
-               $"OR nd.DienThoai LIKE '%{searching}%' " +
-               $"OR nd.DiaChi LIKE N'%{searching}%')").ToPagedList<NguoiDung>(PageNum, PageSize);
+            string query = $"SELECT nd.IDNguoiDung, nd.Username, nd.Ten, pl.Ten AS TenLoaiKhachHang, nd.Avatar, nd.SoDonHangDaMua, nd.TongTienHangDaMua, nd.LanHoatDongGanNhat, nd.ModifiedDate " +
+                $"FROM dbo.NguoiDung nd LEFT JOIN dbo.PhanLoaiKhachHang pl " +
+                $"ON pl.IDLoaiKhachHang = nd.IDLoaiKhachHang " +
+                $"WHERE nd.IsAdmin = 0 " +
+                $"AND (nd.Username LIKE '%{searching}%' " +
+                $"OR nd.Ten LIKE N'%{searching}%' " +
+                $"OR pl.Ten LIKE N'%{searching}%' " +
+                $"OR nd.SoDonHangDaMua LIKE N'%{searching}%' " +
+                $"OR nd.TongTienHangDaMua LIKE N'%{searching}%' " +
+                $"OR nd.LanHoatDongGanNhat LIKE N'%{searching}%' " +
+                $"OR nd.ModifiedDate LIKE N'%{searching}%') " +
+                $"ORDER BY nd.ModifiedDate DESC";
+            var list = db.Database.SqlQuery<flatKhachHang>(query).ToPagedList<flatKhachHang>(PageNum, PageSize);
 
             return list;
         }
+
     }
 }

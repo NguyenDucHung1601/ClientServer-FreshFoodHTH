@@ -47,12 +47,12 @@
         <tr>
             <th>STT</th>
             <th>Username</th>
-            <th>Tên</th>
-            <th>Avatar</th>
+            <th>Họ tên</th>
+            <th>HÌnh đại diện</th>
             <th>Phân loại khách hàng</th>
             <th>Số đơn hàng đã mua</th>
             <th>Tổng tiền hàng đã mua (VNĐ)</th>
-            <th>Ngày tạo</th>
+            <th>Lần hoạt động gần nhất</th>
             <th>Ngày cập nhật</th>
             <th>Chức năng</th>
         </tr>
@@ -83,18 +83,14 @@
                     @Html.DisplayFor(modelItem => item.TongTienHangDaMua)
                 </td>
                 <td>
-                    @Html.Raw(@Convert.ToDateTime(item.CreatedDate).ToString("dd/MM/yyyy"))
+                    @Html.Raw(@Convert.ToDateTime(item.LanHoatDongGanNhat).ToString("dd/MM/yyyy"))
                 </td>
                 <td>
                     @Html.Raw(@Convert.ToDateTime(item.ModifiedDate).ToString("dd/MM/yyyy"))
                 </td>
                 <td>
                     <i class="fa fa-info-circle"></i> &nbsp;
-                    @Html.ActionLink("Xem", "Details", new { id = item.IDNguoiDung }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-edit"></i> &nbsp;
-                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDNguoiDung }) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-trash"></i> &nbsp;
-                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDNguoiDung }, new { onclick = "return confirm('Chắc chắn muốn xoá?');" })
+                    @Html.ActionLink("Xem", "Details", new { id = item.IDNguoiDung })
                 </td>
             </tr>
         }
@@ -102,7 +98,7 @@
 </table>
 
 
-@using (Html.BeginForm("Index", "NguoiDungAdmin", FormMethod.Get, new { id = "form1" }))
+@using (Html.BeginForm("Index", "NguoiDungClient", FormMethod.Get, new { id = "form1" }))
 {
     <div class="pager">
         <table style="width:100%">

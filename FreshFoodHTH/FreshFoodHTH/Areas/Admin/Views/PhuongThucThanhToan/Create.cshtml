@@ -7,7 +7,7 @@
 
 @section header
 {
-    Phương thức thanh toán - Thêm phương thức thanh toán
+    Phương thức thanh toán - Thêm mới
 }
 
 @using (Html.BeginForm())
@@ -20,9 +20,11 @@
         <div class="form-group">
             <div class="col-md-10">
                 <label for="exampleInputEmail1">Phương thức thanh toán</label>
-                <input type="text" class="form-control" name="ten" placeholder="Nhập tên" value=" @Html.DisplayFor(model => model.TenPhuongThucThanhToan)">
+                <input type="text" class="form-control" name="ten" placeholder="Nhập tên" value=" @Html.DisplayFor(model => model.TenPhuongThucThanhToan)" required>
             </div>
         </div>
+        <br />
+
         <button type="submit" class="btn btn-primary" style="width:110px">
             <a class="fa fa-save"></a> &nbsp;Lưu lại
         </button>

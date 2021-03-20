@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Client/Views/Shared/_MainLayout.cshtml";
+}
+
+@section Title{
+    FreshFood HTH | Hồ sơ tài khoản
+}
+
+@section Styles
+{
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Assets/Client/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/Client/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/Client/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/Client/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/Client/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/Client/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/Client/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/Client/css/style.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/Admin/otherAssets/style.css" type="text/css">
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="header__logo">
+                <table>
+                    <a href="/Home/Index"><img src="~/Assets/Client/img/logo.png" alt=""></a>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <nav class="header__menu">
+                <ul>
+                    <li><a href="/Client/Home/Index" style="font-size: 17px;">Trang chủ</a></li>
+                    <li><a href="/Client/Shop/Index" style="font-size: 17px;">Mua hàng</a></li>
+                    <li><a href="/Client/Contact/Index" style="font-size: 17px;">Liên hệ</a></li>
+                    <li class="active"><a href="/Client/Account/Index/@Session["IDUSER_SESSION"]" style="font-size: 17px;">Hồ sơ</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-3">
+            <div class="header__cart">
+                <ul>
+                    <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                    <li><a href="/Client/ShoppingCart/Index/@Session["IDUSER_SESSION"]"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                </ul>
+                <div class="header__cart__price">item: <span>$150.00</span></div>
+            </div>
+        </div>
+        @*@Html.Action("HeaderCart", "ShopCart")*@
+    </div>
+    <div class="humberger__open">
+        <i class="fa fa-bars"></i>
+    </div>
+</div>
+
+@Html.Partial("_BeginContentLayoutOtherHome")
+
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg " data-setbg="/Assets/Client/img/breadcrumb.png">
+    <div class="container ">
+        <div class="row ">
+            <div class="col-lg-12 text-center ">
+                <div class="breadcrumb__text ">
+                    <h2>Hồ sơ tài khoản</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large"
+                             src="~/Areas/Admin/Content/Photos/@Session["AVATAR_SESSION"]" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+                    <h3>@Model.Ten</h3>
+                    <div><i class="fa fa-user" style="color:green"></i> <b>Tên đăng nhập:</b> <span style="color:green; font-weight:bold">@Model.Username</span></div>
+                    <div><i class="fa fa-phone" style="color:green"></i> <b>Số điện thoại:</b> <span>@Model.DienThoai</span></div>
+                    <div><i class="fa fa-envelope" style="color:green"></i> <b>Email:</b> <span>@Model.Email</span></div>
+                    <div><i class="fa fa-home" style="color:green"></i> <b>Địa chỉ:</b> <span>@Model.DiaChi</span></div>
+                    <br />
+                    @switch (Model.PhanLoaiKhachHang.CapDo)
+                    {
+                        case 0:
+                            <div><i class="fa fa-trophy" style="color:green"></i> <b>Xếp hạng:</b><span style="color:darkslategrey; font-weight:bold"> @Model.PhanLoaiKhachHang.Ten</span></div>
+                            break;
+                        case 1:
+                            <div><i class="fa fa-trophy" style="color:green"></i> <b>Xếp hạng:</b><span style="color:crimson; font-weight:bold"> @Model.PhanLoaiKhachHang.Ten</span></div>
+                            break;
+                        case 2:
+                            <div><i class="fa fa-trophy" style="color:green"></i> <b>Xếp hạng:</b><span style="color:silver; font-weight:bold"> @Model.PhanLoaiKhachHang.Ten</span></div>
+                            break;
+                        case 3:
+                            <div><i class="fa fa-trophy" style="color:green"></i> <b>Xếp hạng:</b><span style="color:goldenrod; font-weight:bold"> @Model.PhanLoaiKhachHang.Ten</span></div>
+                            break;
+                        case 4:
+                            <div><i class="fa fa-trophy" style="color:green"></i> <b>Xếp hạng:</b><span style="color:skyblue; font-weight:bold"> @Model.PhanLoaiKhachHang.Ten</span></div>
+                            break;
+                        case 5:
+                            <div><i class="fa fa-trophy" style="color:green"></i> <b>Xếp hạng:</b><span style="color:purple; font-weight:bold"> @Model.PhanLoaiKhachHang.Ten</span></div>
+                            break;
+                        default:
+                            <div><i class="fa fa-trophy" style="color:green"></i> <b>Xếp hạng:</b><span style="color:green; font-weight:bold"> @Model.PhanLoaiKhachHang.Ten</span></div>
+                            break;
+                    }
+
+                    <div><i class="fa fa-navicon" style="color:green"></i> <b>Số đơn hàng đã mua:</b> <span>@Model.SoDonHangDaMua</span></div>
+                    <div><i class="fa fa-money" style="color:green"></i> <b>Tổng tiền hàng đã mua:</b> <span>@String.Format("{0:n0}", Model.TongTienHangDaMua) VNĐ</span></div>
+                    <br /><br />
+                    <button type="button" class="site-btn" style="text-align:left; width:195px"><i class="fa fa-edit"></i> &nbsp; @Html.ActionLink("Chỉnh sửa", "Edit", "Account", new { id = Session["IDUSER_SESSION"] }, null)</button>
+                    <br /><br />
+                    <button type="button" class="site-btn" style="text-align:left; width:195px"><i class="fa fa-key"></i> &nbsp; @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Account", new { id = Session["IDUSER_SESSION"] }, null)</button>
+                </div>
+            </div>
+            <hr />
+        </div>
+    </div>
+</section>
+<!-- Product Details Section End -->
+@*@Html.Action("RelatedProduct", new { @idtheloai = Model.TheLoai.IDTheLoai })*@
+
+
+@section Scripts{
+    <script src="~/Assets/Client/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Assets/Client/js/bootstrap.min.js"></script>
+    <script src="~/Assets/Client/js/jquery.nice-select.min.js"></script>
+    <script src="~/Assets/Client/js/jquery-ui.min.js"></script>
+    <script src="~/Assets/Client/js/jquery.slicknav.js"></script>
+    <script src="~/Assets/Client/js/mixitup.min.js"></script>
+    <script src="~/Assets/Client/js/owl.carousel.min.js"></script>
+    <script src="~/Assets/Client/js/main.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".quantity input").change(function () {
+                var value = $(".quantity input").text;
+                var item = $(".quantity input").offsetParent().
+                    $("#form1").submit();
+            });
+        });
+    </script>
+    <script src="/Assets/Client/Controller/ShopDetailController.js"></script>
+
+}
+

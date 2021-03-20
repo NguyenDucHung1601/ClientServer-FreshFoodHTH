@@ -1,10 +1,10 @@
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Linq;
+
 namespace FreshFoodHTH.Models.EF
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-
     public partial class FreshFoodDBContext : DbContext
     {
         public FreshFoodDBContext()
@@ -19,15 +19,18 @@ namespace FreshFoodHTH.Models.EF
         public virtual DbSet<HoaDonNhap> HoaDonNhaps { get; set; }
         public virtual DbSet<LoaiNguoiDung> LoaiNguoiDungs { get; set; }
         public virtual DbSet<MaGiamGia> MaGiamGias { get; set; }
+        public virtual DbSet<MaGiamGiaKhachHang> MaGiamGiaKhachHangs { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
         public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; }
         public virtual DbSet<NhaCungCapSanPham> NhaCungCapSanPhams { get; set; }
         public virtual DbSet<PhanLoaiKhachHang> PhanLoaiKhachHangs { get; set; }
         public virtual DbSet<PhuongThucThanhToan> PhuongThucThanhToans { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
+        public virtual DbSet<SanPhamKhuyenMai> SanPhamKhuyenMais { get; set; }
         public virtual DbSet<TaiKhoanThanhToan> TaiKhoanThanhToans { get; set; }
         public virtual DbSet<TheLoai> TheLoais { get; set; }
         public virtual DbSet<ThongTinLienHe> ThongTinLienHes { get; set; }
+        public virtual DbSet<ThongTinNhanHang> ThongTinNhanHangs { get; set; }
         public virtual DbSet<TKThanhToanNguoiDung> TKThanhToanNguoiDungs { get; set; }
         public virtual DbSet<TrangThai> TrangThais { get; set; }
 
@@ -52,6 +55,10 @@ namespace FreshFoodHTH.Models.EF
             modelBuilder.Entity<ChiTietHoaDonNhap>()
                 .Property(e => e.ThanhTien)
                 .HasPrecision(18, 0);
+
+            modelBuilder.Entity<DonHang>()
+                .Property(e => e.SdtNhanHang)
+                .IsUnicode(false);
 
             modelBuilder.Entity<DonHang>()
                 .Property(e => e.TienHang)
@@ -108,8 +115,17 @@ namespace FreshFoodHTH.Models.EF
                 .Property(e => e.TienGiam)
                 .HasPrecision(18, 0);
 
+            modelBuilder.Entity<MaGiamGia>()
+                .HasMany(e => e.MaGiamGiaKhachHangs)
+                .WithRequired(e => e.MaGiamGia)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<NguoiDung>()
                 .Property(e => e.DienThoai)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NguoiDung>()
+                .Property(e => e.Email)
                 .IsUnicode(false);
 
             modelBuilder.Entity<NguoiDung>()
@@ -137,14 +153,15 @@ namespace FreshFoodHTH.Models.EF
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NguoiDung>()
-                .HasMany(e => e.TKThanhToanNguoiDungs)
+                .HasMany(e => e.MaGiamGiaKhachHangs)
                 .WithRequired(e => e.NguoiDung)
+                .HasForeignKey(e => e.IDKhacHang)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NguoiDung>()
-                .HasMany(e => e.MaGiamGias)
-                .WithMany(e => e.NguoiDungs)
-                .Map(m => m.ToTable("MaGiamGiaKhachHang").MapLeftKey("IDKhachHang").MapRightKey("IDMaGiamGia"));
+                .HasMany(e => e.TKThanhToanNguoiDungs)
+                .WithRequired(e => e.NguoiDung)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NhaCungCap>()
                 .Property(e => e.DienThoai)
@@ -157,6 +174,10 @@ namespace FreshFoodHTH.Models.EF
 
             modelBuilder.Entity<NhaCungCapSanPham>()
                 .Property(e => e.GiaCungUng)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<PhanLoaiKhachHang>()
+                .Property(e => e.TongTienHangToiThieu)
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<PhuongThucThanhToan>()
@@ -195,6 +216,10 @@ namespace FreshFoodHTH.Models.EF
                 .HasMany(e => e.NhaCungCapSanPhams)
                 .WithRequired(e => e.SanPham)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SanPhamKhuyenMai>()
+                .Property(e => e.GiaKhuyenMai)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<TaiKhoanThanhToan>()
                 .Property(e => e.VietTat)
@@ -236,6 +261,10 @@ namespace FreshFoodHTH.Models.EF
 
             modelBuilder.Entity<ThongTinLienHe>()
                 .Property(e => e.LinkInstagram)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ThongTinNhanHang>()
+                .Property(e => e.SdtNhanHang)
                 .IsUnicode(false);
 
             modelBuilder.Entity<TKThanhToanNguoiDung>()

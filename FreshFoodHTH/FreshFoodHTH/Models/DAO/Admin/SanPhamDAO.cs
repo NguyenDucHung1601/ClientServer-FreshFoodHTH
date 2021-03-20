@@ -74,7 +74,7 @@ namespace FreshFoodHTH.Models.DAO.Admin
 
         public IEnumerable<flatSanPham> ListSimple(string searching)
         {
-            var list = db.Database.SqlQuery<flatSanPham>($"SELECT sp.IDSanPham, sp.MaSo, sp.Ten AS TenSanPham, tl.Ten AS TenTheLoai, sp.DonViTinh, sp.GiaTien, sp.GiaKhuyenMai, sp.HinhAnh, sp.CoSan, sp.SoLuong, sp.CreatedDate " +
+            var list = db.Database.SqlQuery<flatSanPham>($"SELECT sp.IDSanPham, sp.MaSo, sp.Ten AS TenSanPham, tl.Ten AS TenTheLoai, sp.DonViTinh, sp.GiaTien, sp.GiaKhuyenMai, sp.HinhAnh, sp.CoSan, sp.SoLuong, sp.SoLuotXem, sp.SoLuotMua, sp.ModifiedDate " +
                $"FROM dbo.SanPham sp LEFT JOIN dbo.TheLoai tl ON tl.IDTheLoai = sp.IDTheLoai " +
                $"WHERE sp.MaSo LIKE N'%{searching}%' " +
                $"OR sp.Ten LIKE N'%{searching}%' " +
@@ -83,15 +83,17 @@ namespace FreshFoodHTH.Models.DAO.Admin
                $"OR sp.GiaTien LIKE N'%{searching}%' " +
                $"OR sp.GiaKhuyenMai LIKE N'%{searching}%' " +
                $"OR sp.SoLuong LIKE N'%{searching}%' " +
-               $"OR sp.CreatedDate LIKE N'%{searching}%' " +
-               $"ORDER BY sp.CreatedDate DESC").ToList();
+               $"OR sp.SoLuotXem LIKE N'%{searching}%' " +
+               $"OR sp.SoLuotMua LIKE N'%{searching}%' " +
+               $"OR sp.ModifiedDate LIKE N'%{searching}%' " +
+               $"ORDER BY sp.ModifiedDate DESC").ToList();
 
             return list;
         }
 
         public IEnumerable<flatSanPham> ListSimpleSearch(int PageNum, int PageSize, string searching)
         {
-            var list = db.Database.SqlQuery<flatSanPham>($"SELECT sp.IDSanPham, sp.MaSo, sp.Ten AS TenSanPham, tl.Ten AS TenTheLoai, sp.DonViTinh, sp.GiaTien, sp.GiaKhuyenMai, sp.HinhAnh, sp.CoSan, sp.SoLuong, sp.CreatedDate " +
+            var list = db.Database.SqlQuery<flatSanPham>($"SELECT sp.IDSanPham, sp.MaSo, sp.Ten AS TenSanPham, tl.Ten AS TenTheLoai, sp.DonViTinh, sp.GiaTien, sp.GiaKhuyenMai, sp.HinhAnh, sp.CoSan, sp.SoLuong, sp.SoLuotXem, sp.SoLuotMua, sp.ModifiedDate " +
                 $"FROM dbo.SanPham sp LEFT JOIN dbo.TheLoai tl ON tl.IDTheLoai = sp.IDTheLoai " +
                 $"WHERE sp.MaSo LIKE N'%{searching}%' " +
                 $"OR sp.Ten LIKE N'%{searching}%' " +
@@ -100,8 +102,10 @@ namespace FreshFoodHTH.Models.DAO.Admin
                 $"OR sp.GiaTien LIKE N'%{searching}%' " +
                 $"OR sp.GiaKhuyenMai LIKE N'%{searching}%' " +
                 $"OR sp.SoLuong LIKE N'%{searching}%' " +
-                $"OR sp.CreatedDate LIKE N'%{searching}%' " +
-                $"ORDER BY sp.CreatedDate DESC").ToPagedList<flatSanPham>(PageNum, PageSize);
+                $"OR sp.SoLuotXem LIKE N'%{searching}%' " +
+                $"OR sp.SoLuotMua LIKE N'%{searching}%' " +
+                $"OR sp.ModifiedDate LIKE N'%{searching}%' " +
+                $"ORDER BY sp.ModifiedDate DESC").ToPagedList<flatSanPham>(PageNum, PageSize);
 
             return list;
         }

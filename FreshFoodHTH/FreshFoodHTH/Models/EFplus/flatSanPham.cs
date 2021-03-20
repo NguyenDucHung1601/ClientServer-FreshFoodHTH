@@ -31,6 +31,12 @@ namespace FreshFoodHTH.Models.EFplus
 
         public long SoLuong { get; set; }
 
-        public DateTime NgayCapNhat { get; set; }
+        public int SoLuotXem { get; set; }
+
+        public int SoLuotMua { get; set; }
+
+        public DateTime ModifiedDate { get; set; }
+
+        
     }
 }

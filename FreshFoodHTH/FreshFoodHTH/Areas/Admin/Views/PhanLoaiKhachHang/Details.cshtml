@@ -7,19 +7,34 @@
 
 @section header
 {
-    Loại khách hàng - Thông tin thể loại (#@Model.Ten)
+    Phân loại khách hàng (@Model.Ten)
 }
 
 <div>
     <dl class="dl-horizontal">
         <dt>
-            Tên thể loại:
+            Cấp độ:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CapDo)
+        </dd>
+        <dt>
+            Tên phân loại:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Ten)
         </dd>
         <dt>
-            Điều kiện
+            Điều kiện:
+        </dt>
+        <dd>
+            - Số đơn hàng tối thiểu: @Html.DisplayFor(model => model.SoDonHangToiThieu)
+        </dd>
+        <dd>
+            - Tổng tiền hàng tối thiểu: @Html.DisplayFor(model => model.TongTienHangToiThieu) VNĐ
+        </dd>
+        <dt>
+            Mô tả:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.DieuKien)

@@ -1,5 +1,7 @@
-﻿using FreshFoodHTH.Models.DAO.Admin;
+﻿using FreshFoodHTH.Common;
+using FreshFoodHTH.Models.DAO.Admin;
 using FreshFoodHTH.Models.EF;
+using FreshFoodHTH.Models.EFplus;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,8 +16,6 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         // GET: Admin/NguoiDungAdmin
         FreshFoodDBContext db = new FreshFoodDBContext();
         NguoiDungDAO ndDao = new NguoiDungDAO();
-        ChiTietGioHangDAO ctghDao = new ChiTietGioHangDAO();
-
 
         public ActionResult Index(int? page, int? PageSize, string searching = "")
         {
@@ -41,40 +41,99 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             return View(nguoidung);
         }
 
+        public ActionResult ChangePassword(Guid id)
+        {
+            flatChangePassword obj = new flatChangePassword() { IDUser = id, Username = (ndDao.GetByID(id)).Username };
+            return View(obj);
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(Guid id, string oldpass, string newpass, string confirm)
+        {
+            NguoiDung nguoidung = ndDao.GetByID(id);
+            flatChangePassword userchange = new flatChangePassword() { IDUser = id, Username = (ndDao.GetByID(id)).Username, OldPass = oldpass, NewPass = newpass, Confirm = confirm };
+
+            nguoidung.ModifiedDate = DateTime.Now;
+            nguoidung.ModifiedBy = (string)Session["USERNAME_SESSION"];
+
+
+            if (ModelState.IsValid)
+            {
+                if (BCrypt.Net.BCrypt.Verify(oldpass, nguoidung.Password))
+                {
+                    ViewBag.OldPassword = string.Empty;
+                    if (BCrypt.Net.BCrypt.Verify(newpass, nguoidung.Password))
+                        ViewBag.NewPassword = "** Mật khẩu mới phải khác mật khẩu cũ";
+                    else
+                    {
+                        ViewBag.NewPassword = string.Empty;
+                        if (!newpass.Equals(confirm))
+                            ViewBag.ConfirmPassword = "** Mật khẩu mới và xác nhận mật khẩu không khớp";
+                        else
+                        {
+                            ViewBag.ConfirmPassword = string.Empty;
+                            ndDao.ChangePassword(nguoidung, newpass);
+                            return RedirectToAction("Details", new { id = nguoidung.IDNguoiDung });
+                        }
+                    }
+                    return View(userchange);
+                }
+                ViewBag.OldPassword = "** Mật khẩu cũ không đúng";
+                return View(userchange);
+            }
+            else
+            {
+                return View(userchange);
+            }
+        }
+
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(string username, string password, string ten, string dienthoai, string diachi, HttpPostedFileBase avatar)
+        public ActionResult Create(string username, string password, string confirm, string ten, string dienthoai, string email, string diachi, HttpPostedFileBase avatar)
         {
             NguoiDung nguoidung = new NguoiDung();
+            flatNguoiDungMoi newuser = new flatNguoiDungMoi() { Username = username, Ten = ten, DienThoai = dienthoai, DiaChi = diachi, Password = password, Confirm = confirm };
+
             nguoidung.IDNguoiDung = Guid.NewGuid();
             nguoidung.IsAdmin = true;
-            nguoidung.IDLoaiNguoiDung = db.LoaiNguoiDungs.Where(x => x.Ten.Equals("Admin")).Select(x => x.IDLoaiNguoiDung).ToList().ElementAt(0);
-            nguoidung.CreatedDate = DateTime.Now;
-            nguoidung.ModifiedDate = DateTime.Now;
+            nguoidung.IDLoaiNguoiDung = db.LoaiNguoiDungs.Where(x => x.Ten.Equals("Client")).Select(x => x.IDLoaiNguoiDung).ToList().ElementAt(0);
             nguoidung.Username = username;
-            nguoidung.Password = BCrypt.Net.BCrypt.HashPassword(password);
             nguoidung.Ten = ten;
             nguoidung.DienThoai = dienthoai;
+            nguoidung.Email = email;
             nguoidung.DiaChi = diachi;
+
+            nguoidung.CreatedDate = DateTime.Now;
+            nguoidung.CreatedBy = (string)Session["USERNAME_SESSION"];
+            nguoidung.ModifiedDate = DateTime.Now;
+            nguoidung.ModifiedBy = (string)Session["USERNAME_SESSION"];
 
             if (ModelState.IsValid)
             {
+                if (!password.Equals(confirm))
+                {
+                    ViewBag.ConfirmNewPassword = "** Mật khẩu và xác nhận mật khẩu không khớp";
+                    return View(newuser);
+                }
+
+                nguoidung.Password = BCrypt.Net.BCrypt.HashPassword(password);
+                
                 if (avatar != null && avatar.ContentLength > 0)
                 {
                     var path = Path.Combine(Server.MapPath("~/Areas/Admin/Content/Photos/"), System.IO.Path.GetFileName(avatar.FileName));
                     avatar.SaveAs(path);
                     nguoidung.Avatar = avatar.FileName;
                 }
-                ndDao.AddAdmin(nguoidung);
+                ndDao.Add(nguoidung);
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(nguoidung);
+                return View(newuser);
             }
         }
 
@@ -84,15 +143,16 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Guid id, string username, string password, string ten, string dienthoai, string diachi, HttpPostedFileBase avatar)
+        public ActionResult Edit(Guid id, string ten, string dienthoai, string email, string diachi, HttpPostedFileBase avatar)
         {
             NguoiDung nguoidung = ndDao.GetByID(id);
-            nguoidung.ModifiedDate = DateTime.Now;
-            nguoidung.Username = username;
-            nguoidung.Password = password;
             nguoidung.Ten = ten;
             nguoidung.DienThoai = dienthoai;
+            nguoidung.Email = email;
             nguoidung.DiaChi = diachi;
+
+            nguoidung.ModifiedDate = DateTime.Now;
+            nguoidung.ModifiedBy = (string)Session["USERNAME_SESSION"];
 
             if (ModelState.IsValid)
             {
@@ -102,7 +162,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
                     avatar.SaveAs(path);
                     nguoidung.Avatar = avatar.FileName;
                 }
-                ndDao.EditAdmin(nguoidung);
+                ndDao.Edit(nguoidung);
                 return RedirectToAction("Index");
             }
             else
@@ -113,20 +173,8 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
 
         public ActionResult Delete(Guid id)
         {
-            ndDao.DeleteAdmin(id);
+            ndDao.Delete(id);
             return RedirectToAction("Index");
-        }
-
-        public ActionResult IndexChiTietGioHang(Guid id)
-        {
-            var listChiTietDonHang = ctghDao.GetListChiTietGioHang(id);
-
-            if (listChiTietDonHang == null)
-                return HttpNotFound();
-
-            ViewBag.IDDonHang = id;
-
-            return PartialView(listChiTietDonHang);
         }
     }
 }

@@ -22,11 +22,18 @@
         <td>
             <dl class="dl-horizontal">
                 <dt>
-                    Ngày cập nhật:
+                    Ngày tạo:
                 </dt>
 
                 <dd>
                     @Html.Raw(Convert.ToDateTime(Model.CreatedDate).ToString("dd/MM/yyyy"))
+                </dd>
+                <dt>
+                    Ngày cập nhật:
+                </dt>
+
+                <dd>
+                    @Html.Raw(Convert.ToDateTime(Model.ModifiedDate).ToString("dd/MM/yyyy"))
                 </dd>
 
                 <dt>
@@ -67,6 +74,22 @@
 
                 <dd>
                     @Html.DisplayFor(model => model.SoLuong)
+                </dd>
+
+                <dt>
+                    Số lượt xem:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SoLuotXem)
+                </dd>
+
+                <dt>
+                    Số lượt mua:
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SoLuotMua)
                 </dd>
 
                 <dt>

@@ -21,7 +21,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var dao = new NguoiDungDAO();
-                var result = dao.Login(collection["inputUsername"].ToString(), collection["inputPassword"].ToString());
+                var result = dao.LoginAdmin(collection["inputUsername"].ToString(), collection["inputPassword"].ToString());
                 if (result == 1)
                 {
                     var user = dao.GetByUsername(collection["inputUsername"].ToString());
@@ -42,7 +42,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Đăng nhập không thành công");
+                    ModelState.AddModelError("", "Username hoặc password không đúng");
                 }
             }
             return RedirectToAction("Index");

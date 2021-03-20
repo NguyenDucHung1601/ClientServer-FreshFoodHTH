@@ -61,8 +61,14 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             sanpham.MoTa = mota;
             sanpham.SoLuong = Convert.ToInt64(soluong);
             sanpham.CoSan = sanpham.SoLuong > 0 ? true : false;
-            sanpham.CreatedDate = DateTime.Now;
             sanpham.IDTheLoai = idtheloai;
+            sanpham.SoLuotXem = 0;
+            sanpham.SoLuotMua = 0;
+
+            sanpham.CreatedDate = DateTime.Now;
+            sanpham.CreatedBy = (string)Session["USERNAME_SESSION"];
+            sanpham.ModifiedDate = DateTime.Now;
+            sanpham.ModifiedBy = (string)Session["USERNAME_SESSION"];
 
             if (ModelState.IsValid)
             {
@@ -102,8 +108,10 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             sanpham.MoTa = mota;
             sanpham.SoLuong = Convert.ToInt64(soluong);
             sanpham.CoSan = sanpham.SoLuong > 0 ? true : false;
-            sanpham.CreatedDate = DateTime.Now;
             sanpham.IDTheLoai = idtheloai;
+
+            sanpham.ModifiedDate = DateTime.Now;
+            sanpham.ModifiedBy = (string)Session["USERNAME_SESSION"];
 
             if (ModelState.IsValid)
             {

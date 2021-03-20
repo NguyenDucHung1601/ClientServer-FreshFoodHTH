@@ -49,7 +49,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             SelectList taikhoanthanhtoanList = new SelectList(taikhoanthanhtoan, "IDTaiKhoan", "Ten", "IDTaiKhoan");
             ViewBag.TaiKhoan = taikhoanthanhtoanList;
 
-            List<NguoiDung> nguoidung = ndDao.ListNguoiDung();
+            List<NguoiDung> nguoidung = ndDao.ListClient();
             SelectList nguoidungList = new SelectList(nguoidung, "IDNguoiDung", "Ten", "IDNguoiDung");
             ViewBag.NguoiDung = nguoidungList;
 

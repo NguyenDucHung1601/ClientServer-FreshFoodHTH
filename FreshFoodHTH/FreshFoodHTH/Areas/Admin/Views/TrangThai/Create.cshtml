@@ -7,7 +7,7 @@
 
 @section header
 {
-    Trạng thái - Thêm Trạng thái người dùng
+    Trạng thái đơn hàng - Thêm mới
 }
 
 @using (Html.BeginForm())
@@ -19,10 +19,12 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <label for="exampleInputEmail1">Ten</label>
-                <input type="text" class="form-control" name="ten" placeholder="Nhập tên" value=" @Html.DisplayFor(model => model.TenTrangThai)">
+                <label for="exampleInputEmail1">Tên trạng thái thanh toán</label>
+                <input type="text" class="form-control" name="ten" placeholder="Nhập tên trạng thái thanh toán ..." value=" @Html.DisplayFor(model => model.TenTrangThai)" required>
             </div>
         </div>
+        <br />
+
         <button type="submit" class="btn btn-primary" style="width:110px">
             <a class="fa fa-save"></a> &nbsp;Lưu lại
         </button>

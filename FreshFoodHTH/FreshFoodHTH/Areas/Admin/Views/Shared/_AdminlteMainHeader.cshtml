@@ -1,6 +1,6 @@
 ﻿<header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/Admin/Dashboard/Index" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>F</b>HTH</span>
         <!-- logo for regular state and mobile devices -->
@@ -225,7 +225,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="Admin/NguoiDung/Details/@Session["IDUSERSESSION"]" class="btn btn-default btn-flat">Hồ sơ</a>
+                                <a href="/Admin/NguoiDungAdmin/Details/@Session["IDUSER_SESSION"]" class="btn btn-default btn-flat">Hồ sơ</a>
                             </div>
                             <div class="pull-right">                                
                                 @Html.ActionLink("Đăng xuất", "Logout", "Login", null, htmlAttributes: new { @class = "btn btn-default btn-flat" }); 
