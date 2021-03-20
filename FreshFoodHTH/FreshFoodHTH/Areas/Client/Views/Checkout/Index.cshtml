@@ -8,7 +8,8 @@
     Layout = "~/Areas/Client/Views/Shared/_MainLayout.cshtml";
 
     FreshFoodHTH.Models.EF.FreshFoodDBContext db = new FreshFoodHTH.Models.EF.FreshFoodDBContext();
-    List<FreshFoodHTH.Models.EF.TaiKhoanThanhToan> listTKTT = db.TaiKhoanThanhToans.ToList();
+    Guid idnguoidung = (Guid)Session["IDUSER_SESSION"];
+    List<FreshFoodHTH.Models.EF.TKThanhToanNguoiDung> listTKTT = db.TKThanhToanNguoiDungs.Where(x => x.IDNguoiDung == idnguoidung).ToList();
 }
 
 @section Title{
@@ -106,6 +107,11 @@
                                 <input type="text" class="form-control" value=" @ViewBag.User.DiaChi" required>
                                 <br />
                             </div>
+                            <div class="col-md-12">
+                                <label for="exampleInputEmail1"><b>Ghi chú</b></label>
+                                <input type="text" class="form-control" value=" @ViewBag.User.DiaChi" required>
+                                <br />
+                            </div>
                             <div class="col-md-12"><br /></div>
                             <div class="col-md-6">
                                 <label for="exampleInputEmail1"><b>Mã giảm giá</b></label>
@@ -117,11 +123,11 @@
                                 <button class="success" style="background-color: #7fad39;border:none; height:37px; width: 120px"><i class="fa fa-arrow-circle-o-right"></i>&nbsp; Áp dụng</button>
                                 <br />
                             </div>
-                            <div class="col-md-6" style="width:360px">
-                                <label for="exampleInputEmail1"><b>Phương thức thanh toán</b></label><br />
-                                @Html.DropDownList("IDPhuongThucThanhToan", (IEnumerable<SelectListItem>)ViewBag.PayWayList)
-                                <br />
-                            </div>
+                            @*<div class="col-md-6" style="width:360px">
+                                    <label for="exampleInputEmail1"><b>Phương thức thanh toán</b></label><br />
+                                    @Html.DropDownList("IDPhuongThucThanhToan", (IEnumerable<SelectListItem>)ViewBag.PayWayList)
+                                    <br />
+                                </div>*@
                             <br />
                             <div class="col-md-12" style="width:360px">
                                 <br />
@@ -130,16 +136,10 @@
                             </div>
                             @foreach (var item in listTKTT)
                             {
-                                <div class="col-md-4" style="width:360px">
-                                    <img src="~/Areas/Admin/Content/Photos/@item.Logo" alt="" width="30" height="30"> <span>&nbsp;@item.VietTat</span><br />
+                                <div class="col-md-4" style="width:360px;margin:5px 0pX 5px 0px">
+                                    <img src="~/Areas/Admin/Content/Photos/@item.TaiKhoanThanhToan.Logo" alt="" width="30" height="30"> <span>&nbsp;@item.TaiKhoanThanhToan.VietTat</span><br />
                                 </div>
                             }
-                            @*@foreach (var item in listTKTT)
-                                {
-                                    <img src="~/Areas/Admin/Content/Photos/@item.Logo" alt="" width="30" height="30"> <span>&nbsp;@item.VietTat</span><br />
-                                }*@
-                            @*<label for="exampleInputEmail1"><b>Phương thức thanh toán</b></label><br />*@
-                            @*@Html.DropDownList("IDPhuongThucThanhToan", (IEnumerable<SelectListItem>)ViewBag.PayWayList)*@
                             <br />
                         </div>
                     </div>
