@@ -124,5 +124,13 @@ namespace FreshFoodHTH.Models.DAO.Admin
 
             return SumMoney;
         }
+
+        public void AdminXacNhanDonHang(DonHang dh)
+        {   // cập nhật trạng thái => đang giao hàng
+            var donHang = getByID(dh.IDDonHang);
+            donHang.IDTrangThai = new Guid("3240c2e6-fc6c-4feb-9313-382bd05cf522");
+            db.SaveChanges();
+        }
+
     }
 }

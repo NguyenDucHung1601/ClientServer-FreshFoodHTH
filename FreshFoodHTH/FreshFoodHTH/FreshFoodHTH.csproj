@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
       <HintPath>..\packages\BCrypt.Net.0.1.0\lib\net35\BCrypt.Net.dll</HintPath>
     </Reference>
@@ -212,6 +215,7 @@
     <Compile Include="Models\DAO\Admin\SanPhamDAO.cs" />
     <Compile Include="Models\DAO\Admin\TaiKhoanThanhToanDAO.cs" />
     <Compile Include="Models\DAO\Admin\TheLoaiDAO.cs" />
+    <Compile Include="Models\DAO\Client\ClientDonHangDAO.cs" />
     <Compile Include="Models\DAO\Client\GioHangDAO.cs" />
     <Compile Include="Models\DAO\Client\ThanhToanDAO.cs" />
     <Compile Include="Models\EFplus\flatChangePassword.cs" />

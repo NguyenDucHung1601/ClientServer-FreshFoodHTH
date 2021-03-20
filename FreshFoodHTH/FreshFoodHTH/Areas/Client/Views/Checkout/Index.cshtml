@@ -1,7 +1,4 @@
-﻿@*@model IEnumerable<FreshFoodHTH.Models.EF.ChiTietDonHang>*@
-@*waiting for ChiTietDonHang*@
-
-@model IEnumerable<FreshFoodHTH.Models.EF.ChiTietGioHang>
+﻿@model IEnumerable<FreshFoodHTH.Models.EF.ChiTietDonHang>
 
 @{
     ViewBag.Title = "Index";
@@ -115,7 +112,7 @@
                             <div class="col-md-12"><br /></div>
                             <div class="col-md-6">
                                 <label for="exampleInputEmail1"><b>Mã giảm giá</b></label>
-                                <input type="text" class="form-control" name="magiamgia" placeholder="Nhập mã giảm giá (nếu có) ..." value="">
+                                <input type="text" class="form-control" name="magiamgia" placeholder="Nhập mã giảm giá (nếu có) ..." value="@ViewBag.mgg">
                                 <br />
                             </div>
                             <div class="col-md-6">
@@ -156,13 +153,12 @@
 
                             <div style="border-bottom: 1px solid #e1e1e1"><br /></div>
                             <ul>
-                                <li style="color:black"><b>Tổng tiền hàng</b><span>@String.Format("{0:n0}", 1000000)</span></li>
-                                <li style="color:black"><b>Phí vận chuyển</b><span>@String.Format("{0:n0}", 20000)</span></li>
-                                <li style="color:black"><b>Tiền giảm</b><span>- @String.Format("{0:n0}", 20000)</span></li>
-                                <li style="color:black"><b>Tổng tiền đơn hàng</b><span style="color:crimson">@String.Format("{0:n0}", 1000000)</span></li>
+                                <li style="color:black"><b>Tổng tiền hàng</b><span>@String.Format("{0:n0}", ViewBag.donhang.TienHang)</span></li>
+                                <li style="color:black"><b>Phí vận chuyển</b><span>@String.Format("{0:n0}", ViewBag.donhang.TienShip)</span></li>
+                                <li style="color:black"><b>Tiền giảm</b><span>- @String.Format("{0:n0}", ViewBag.donhang.TienGiam)</span></li>
+                                <li style="color:black"><b>Tổng tiền đơn hàng</b><span style="color:crimson">@String.Format("{0:n0}", ViewBag.donhang.TongTien)</span></li>
                             </ul>
-
-                            <button type="submit" class="site-btn">Xác nhận</button>
+                            <button type="submit" class="site-btn">@Html.ActionLink("Xác nhận","XacNhanThanhToan", new { id = ViewBag.donhang.IDDonHang })</button>
                         </div>
                     </div>
                 </div>

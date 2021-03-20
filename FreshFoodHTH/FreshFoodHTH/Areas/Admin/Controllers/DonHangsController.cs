@@ -151,6 +151,19 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             return PartialView(listChiTietDonHang);
         }
 
+
+        public ActionResult Accept(Guid id)
+        {
+            var donHang = db.DonHangs.SingleOrDefault(x => x.IDDonHang == id);
+            donHang.IDTrangThai = new Guid("3240c2e6-fc6c-4feb-9313-382bd05cf522");
+            donHang.ModifiedDate = DateTime.Now;
+            donHang.ModifiedBy = (string)Session["USERNAME_SESSION"];
+            db.Entry(donHang).State = EntityState.Modified;
+            db.SaveChanges();
+            
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

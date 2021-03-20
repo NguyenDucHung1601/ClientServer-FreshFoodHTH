@@ -1,4 +1,5 @@
-﻿using FreshFoodHTH.Models.EF;
+﻿using FreshFoodHTH.Models.DAO.Client;
+using FreshFoodHTH.Models.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
