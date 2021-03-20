@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "DoanhThuSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>DoanhThuSanPham</h2>
+
+@Html.DevExpress().WebDocumentViewer(settings =>
+{
+    settings.Name = "WebDocumentViewer2";
+}).Bind(new DevExpress.XtraReports.Web.CachedReportSourceWeb(new XtraReport4())).GetHtml()
+
