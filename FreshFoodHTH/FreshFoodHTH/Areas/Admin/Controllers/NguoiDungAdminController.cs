@@ -100,7 +100,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
 
             nguoidung.IDNguoiDung = Guid.NewGuid();
             nguoidung.IsAdmin = true;
-            nguoidung.IDLoaiNguoiDung = db.LoaiNguoiDungs.Where(x => x.Ten.Equals("Client")).Select(x => x.IDLoaiNguoiDung).ToList().ElementAt(0);
+            nguoidung.IDLoaiNguoiDung = db.LoaiNguoiDungs.Where(x => x.Ten.Equals("Admin")).Select(x => x.IDLoaiNguoiDung).ToList().ElementAt(0);
             nguoidung.Username = username;
             nguoidung.Ten = ten;
             nguoidung.DienThoai = dienthoai;

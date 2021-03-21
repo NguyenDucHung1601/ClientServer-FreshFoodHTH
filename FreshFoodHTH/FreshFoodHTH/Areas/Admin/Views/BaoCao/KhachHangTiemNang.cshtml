@@ -1,10 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "KhachHangTiemNang";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Báo Cáo khách hàng mua nhiều theo giai đoạn</h2>
+@section header
+{
+    THỐNG KÊ KHÁCH HÀNG TIỀM NĂNG
+}
 
 
 @Html.DevExpress().WebDocumentViewer(settings =>

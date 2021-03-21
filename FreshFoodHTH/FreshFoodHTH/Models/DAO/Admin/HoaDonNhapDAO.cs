@@ -97,14 +97,9 @@ namespace FreshFoodHTH.Models.DAO.Admin
             return list;
         }
 
-        public int TongHoaDonNhap(DateTime startDate, DateTime endDate)
+        public int TongHoaDonNhap()
         {
-            var start = String.Format("{0:yyyy/MM/dd}", startDate);
-            var end = String.Format("{0:yyyy/MM/dd}", endDate);
-
-            var count = db.Database.SqlQuery<flatHoaDonNhap>($"SELECT * FROM dbo.HoaDonNhap hdn " +
-            $"WHERE hdn.CreatedDate BETWEEN '{start}' AND '{end}'").ToList().Count;
-
+            var count = db.Database.SqlQuery<flatHoaDonNhap>($"SELECT * FROM dbo.HoaDonNhap hdn").ToList().Count;
             return count;
         }
     }

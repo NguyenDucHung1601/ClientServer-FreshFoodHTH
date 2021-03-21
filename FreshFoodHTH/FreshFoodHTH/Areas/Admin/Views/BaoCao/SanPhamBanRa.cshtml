@@ -4,7 +4,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>SanPhamBanRa</h2>
+@section header
+{
+    THỐNG KÊ SẢN PHẨM BÁN RA
+}
 
 @Html.DevExpress().WebDocumentViewer(settings =>
 {

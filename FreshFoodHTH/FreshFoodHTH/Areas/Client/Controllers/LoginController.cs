@@ -1,7 +1,10 @@
 ﻿using FreshFoodHTH.Common;
 using FreshFoodHTH.Models.DAO.Admin;
+using FreshFoodHTH.Models.EF;
+using FreshFoodHTH.Models.EFplus;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +13,9 @@ namespace FreshFoodHTH.Areas.Client.Controllers
 {
     public class LoginController : Controller
     {
+        FreshFoodDBContext db = new FreshFoodDBContext();
+        NguoiDungDAO ndDao = new NguoiDungDAO();
+
         // GET: Client/Login
         public ActionResult Index()
         {
@@ -57,6 +63,61 @@ namespace FreshFoodHTH.Areas.Client.Controllers
             //Session["AVATAR_SESSION"] = null;
             //Session["NAME_SESSION"] = null;
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(string username, string password, string confirm, string ten, string dienthoai, string email, string diachi, HttpPostedFileBase avatar)
+        {
+            NguoiDung nguoidung = new NguoiDung();
+            flatNguoiDungMoi newuser = new flatNguoiDungMoi() { Username = username, Ten = ten, DienThoai = dienthoai, DiaChi = diachi, Password = password, Confirm = confirm };
+
+            nguoidung.IDNguoiDung = Guid.NewGuid();
+            nguoidung.IsAdmin = false;
+            nguoidung.IDLoaiNguoiDung = db.LoaiNguoiDungs.Where(x => x.Ten.Equals("Client")).Select(x => x.IDLoaiNguoiDung).ToList().ElementAt(0);
+            nguoidung.Username = username;
+            nguoidung.Ten = ten;
+            nguoidung.DienThoai = dienthoai;
+            nguoidung.Email = email;
+            nguoidung.DiaChi = diachi;
+
+            nguoidung.IDLoaiKhachHang = db.PhanLoaiKhachHangs.Where(x => x.CapDo == 0).Select(x=>x.IDLoaiKhachHang).ToList().ElementAt(0);
+            nguoidung.TongTienGioHang = 0;
+            nguoidung.SoDonHangDaMua = 0;
+            nguoidung.TongTienGioHang = 0;
+
+            nguoidung.CreatedDate = DateTime.Now;
+            nguoidung.CreatedBy = (string)Session["USERNAME_SESSION"];
+            nguoidung.ModifiedDate = DateTime.Now;
+            nguoidung.ModifiedBy = (string)Session["USERNAME_SESSION"];
+
+            if (ModelState.IsValid)
+            {
+                if (!password.Equals(confirm))
+                {
+                    ViewBag.ConfirmNewPassword = "** Mật khẩu và xác nhận không khớp";
+                    return View(newuser);
+                }
+
+                nguoidung.Password = BCrypt.Net.BCrypt.HashPassword(password);
+
+                if (avatar != null && avatar.ContentLength > 0)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Areas/Admin/Content/Photos/"), System.IO.Path.GetFileName(avatar.FileName));
+                    avatar.SaveAs(path);
+                    nguoidung.Avatar = avatar.FileName;
+                }
+                ndDao.Add(nguoidung);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(newuser);
+            }
         }
     }
 }

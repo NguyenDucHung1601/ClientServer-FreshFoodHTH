@@ -9,7 +9,7 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
     public class BaoCaoController : BaseController
     {
         // GET: Admin/BaoCao
-        public ActionResult Index()
+        public ActionResult KhachHangTiemNang()
         {
             return View();
         }
