@@ -18,7 +18,7 @@
         @if (user != null)
         {
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>0</span></a></li>
+                @*<li><a href="#"><i class="fa fa-heart"></i> <span>0</span></a></li>*@
                 <li><a href="/Client/ShoppingCart/Index/@Session["IDUSER_SESSION"]"><i class="fa fa-shopping-cart"></i> <span>@user.ChiTietGioHangs.Count()</span></a></li>
             </ul>
             <div class="header__cart__price">Tổng giá trị: <span>@String.Format("{0:n0}", user.TongTienGioHang) VNĐ</span></div>
@@ -26,7 +26,7 @@
         else
         {
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>0</span></a></li>
+                @*<li><a href="#"><i class="fa fa-heart"></i> <span>0</span></a></li>*@
                 <li><a href="/Client/ShoppingCart/Index/@Session["IDUSER_SESSION"]"><i class="fa fa-shopping-cart"></i> <span>0</span></a></li>
             </ul>
             <div class="header__cart__price">Tổng giá trị: <span>0 VNĐ</span></div>

@@ -51,6 +51,22 @@
 
 @Html.Action("CategoryShowImage")
 
+<section class="latest-product spad">
+    <div class="container">
+        <div class="row">
+
+            @Html.Action("ProductTopNew")
+
+            @Html.Action("ProductTopSale")
+
+            @Html.Action("ProductTopReview")
+
+        </div>
+    </div>
+</section>
+
+@Html.Action("SaleOff")
+
 @Html.Partial("ProductSearchShow")
 
 <section class="featured spad">
@@ -62,6 +78,7 @@
 
     </div>
 </section>
+
 
 @section Scripts
 {

@@ -19,23 +19,17 @@ namespace FreshFoodHTH.Areas.Client.Controllers
             IEnumerable<SanPham> list;
             ViewBag.Searching = searching;
             if (!string.IsNullOrEmpty(searching))
-                list = db.SanPhams.Where(x => x.Ten.Contains(searching) || x.TheLoai.Ten.Contains(searching)).ToList();
+                list = db.SanPhams.Where(x => x.Ten.Contains(searching)).ToList();
             else
                 list = db.SanPhams.ToList();
             ViewBag.SearchList = list;
             return View(list);
         }
 
-        public ActionResult IndexByCategory(string searching, Guid idcategory)
+        public ActionResult IndexByCategory(Guid idcategory)
         {
-            IEnumerable <SanPham> list;
-            ViewBag.Searching = searching;
-            if (!string.IsNullOrEmpty(searching))
-                list = db.SanPhams.Where(x => x.IDTheLoai == idcategory && x.Ten.Contains(searching)).ToList();
-            else
-                list = db.SanPhams.Where(x => x.IDTheLoai == idcategory).ToList();
-            ViewBag.SearchList = list;
-            ViewBag.IDCategory = idcategory;
+            IEnumerable<SanPham> list;
+            list = db.SanPhams.Where(x => x.IDTheLoai == idcategory).ToList();
             ViewBag.CategoryName = (tlDao.GetByID(idcategory)).Ten;
             return View(list);
         }
@@ -58,6 +52,26 @@ namespace FreshFoodHTH.Areas.Client.Controllers
         public ActionResult HeaderCart()
         {
             return PartialView();
+        }
+
+        public ActionResult ProductTopNew()
+        {
+            return PartialView(db.SanPhams.OrderByDescending(p => p.ModifiedDate).Take(9));
+        }
+
+        public ActionResult ProductTopSale()
+        {
+            return PartialView(db.SanPhams.OrderByDescending(p => p.SoLuotMua).Take(9));
+        }
+
+        public ActionResult ProductTopReview()
+        {
+            return PartialView(db.SanPhams.OrderByDescending(p => p.SoLuotXem).Take(9));
+        }
+
+        public ActionResult SaleOff()
+        {
+            return PartialView(db.SanPhamKhuyenMais.Where(x => x.ThoiGianKetThuc < DateTime.Now).ToList());
         }
     }
 }

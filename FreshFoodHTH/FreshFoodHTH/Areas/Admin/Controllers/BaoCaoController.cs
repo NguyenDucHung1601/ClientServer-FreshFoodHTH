@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace FreshFoodHTH.Areas.Admin.Controllers
 {
-    public class BaoCaoController : Controller
+    public class BaoCaoController : BaseController
     {
         // GET: Admin/BaoCao
         public ActionResult Index()
