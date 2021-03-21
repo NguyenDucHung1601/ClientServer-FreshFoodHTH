@@ -1444,7 +1444,7 @@
     <Content Include="Areas\Client\Views\Checkout\Index.cshtml" />
     <Content Include="Areas\Client\Views\Shared\_HeaderCart.cshtml" />
     <Content Include="Areas\Client\Views\Home\IndexByCategory.cshtml" />
-    <Content Include="Areas\Admin\Views\BaoCao\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BaoCao\KhachHangTiemNang.cshtml" />
     <Content Include="Areas\Admin\Views\BaoCao\SanPhamBanChay.cshtml" />
     <Content Include="Areas\Admin\Views\BaoCao\SanPhamBanRa.cshtml" />
     <Content Include="Areas\Admin\Views\BaoCao\DoanhThuSanPham.cshtml" />
@@ -1460,6 +1460,7 @@
     <Content Include="Areas\Client\Views\Shop\ProductFilterShow.cshtml" />
     <Content Include="Areas\Client\Views\Shop\ProductSearchShow.cshtml" />
     <Content Include="Areas\Client\Views\Home\SaleOff.cshtml" />
+    <Content Include="Areas\Client\Views\Login\Register.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

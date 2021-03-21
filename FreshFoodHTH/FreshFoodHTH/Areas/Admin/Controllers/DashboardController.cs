@@ -18,9 +18,9 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
         public ActionResult Index()
         {
             //Tính theo khoảng thời gian từ đầu tháng -> hiện tại
-            ViewBag.TongHoaDonNhap = hdnDao.TongHoaDonNhap(DateTime.Today.AddDays((-DateTime.Today.Day + 1)), DateTime.Today.AddDays(1));
-            ViewBag.TongDonHang = dhDao.TongDonHang(DateTime.Today.AddDays((-DateTime.Today.Day + 1)), DateTime.Today.AddDays(1));
-            ViewBag.DoanhThu = dhDao.DoanhThu(DateTime.Today.AddDays((-DateTime.Today.Day + 1)), DateTime.Today.AddDays(1));
+            ViewBag.TongHoaDonNhap = hdnDao.TongHoaDonNhap();
+            ViewBag.TongDonHang = dhDao.TongDonHang();
+            ViewBag.DoanhThu = dhDao.DoanhThu();
             ViewBag.TongSoThanhVien = ndDao.TongSoThanhVien();
             return View();
         }
