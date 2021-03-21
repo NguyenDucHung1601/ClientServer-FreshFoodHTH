@@ -1450,6 +1450,16 @@
     <Content Include="Areas\Admin\Views\BaoCao\DoanhThuSanPham.cshtml" />
     <Content Include="Areas\Admin\Views\BaoCao\SanPhamNhapVao.cshtml" />
     <Content Include="Areas\Client\Views\Checkout\LoginTaiKhoanThanhToan.cshtml" />
+    <Content Include="Areas\Client\Views\Home\ProductTopNew.cshtml" />
+    <Content Include="Areas\Client\Views\Home\ProductTopSale.cshtml" />
+    <Content Include="Areas\Client\Views\Home\ProductTopReview.cshtml" />
+    <Content Include="Areas\Client\Views\Shop\ListCategoryShow.cshtml" />
+    <Content Include="Areas\Client\Views\Shop\ProductTopNew.cshtml" />
+    <Content Include="Areas\Client\Views\Shop\ProductTopSale.cshtml" />
+    <Content Include="Areas\Client\Views\Shop\SaleOff.cshtml" />
+    <Content Include="Areas\Client\Views\Shop\ProductFilterShow.cshtml" />
+    <Content Include="Areas\Client\Views\Shop\ProductSearchShow.cshtml" />
+    <Content Include="Areas\Client\Views\Home\SaleOff.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
