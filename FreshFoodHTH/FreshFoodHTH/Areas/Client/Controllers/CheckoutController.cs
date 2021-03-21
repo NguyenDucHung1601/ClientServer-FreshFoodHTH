@@ -92,5 +92,17 @@ namespace FreshFoodHTH.Areas.Client.Controllers
             return RedirectToAction("Index", "Home");
             //return RedirectToAction("Details", "HoaDonNhap", new { id = IDcurHoaDonNhap });
         }
+
+        public ActionResult LoginTaiKhoanThanhToan(Guid idtk, Guid idnd)
+        {
+            TKThanhToanNguoiDung tkthanhtoan = db.TKThanhToanNguoiDungs.Where(x => x.IDTaiKhoan == idtk && x.IDNguoiDung == idnd).SingleOrDefault();
+            return View(tkthanhtoan);
+        }
+
+        public ActionResult CheckLoginTaiKhoanThanhToan(Guid idnd) {
+            // check password
+            // ktra số dư
+            return RedirectToAction("Index", "Checkout", new { id = idnd});
+        }
     }
 }

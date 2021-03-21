@@ -1141,3 +1141,5 @@ C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServ
 C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\XtraReport5.resources
 C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.csproj.GenerateResource.cache
 C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\obj\Debug\FreshFoodHTH.dll.licenses
+C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\bin\AutoMapper.dll
+C:\Users\ADMIN\OneDrive\Máy tính\BTLCS FreshFood HTH\Project\GitHub\ClientServer-FreshFoodHTH\FreshFoodHTH\FreshFoodHTH\bin\AutoMapper.xml
