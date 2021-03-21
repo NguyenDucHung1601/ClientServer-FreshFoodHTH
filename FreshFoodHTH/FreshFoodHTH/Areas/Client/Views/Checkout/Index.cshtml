@@ -141,7 +141,7 @@
                                 <li style="color:black"><b>Tiền giảm</b><span>- @String.Format("{0:n0}", ViewBag.donhang.TienGiam)</span></li>
                                 <li style="color:black"><b>Tổng tiền đơn hàng</b><span style="color:crimson">@String.Format("{0:n0}", ViewBag.donhang.TongTien)</span></li>
                             </ul>
-                            <button type="submit" class="site-btn">@Html.ActionLink("Xác nhận","XacNhanThanhToan", new { id = ViewBag.donhang.IDDonHang })</button>
+                            <button type="submit" class="site-btn">@Html.ActionLink("Xác nhận","XacNhanThanhToan", new { id = ViewBag.donhang.IDDonHang } , new { onclick = "return alert('Đặt hàng thành công');" })</button>
                         </div>
                     </div>
                 </div>

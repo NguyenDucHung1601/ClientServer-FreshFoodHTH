@@ -46,6 +46,9 @@ namespace FreshFoodHTH.Areas.Client.Controllers
             var lstctgh = db.ChiTietGioHangs.Where(x => x.IDKhachHang == id).ToList();
 
             var donHang = new DonHang();
+            donHang.TenNhanHang = nguoidung.Ten;
+            donHang.DiaChiNhanHang = nguoidung.DiaChi;
+            donHang.SdtNhanHang = nguoidung.DienThoai;
             donHang.IDDonHang = Guid.NewGuid();
             donHang.CreatedDate = DateTime.Now;
             donHang.CreatedBy = (string)Session["USERNAME_SESSION"];

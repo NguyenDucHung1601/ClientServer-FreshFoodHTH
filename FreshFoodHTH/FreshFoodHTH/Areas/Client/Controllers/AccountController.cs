@@ -1,4 +1,5 @@
 ﻿using FreshFoodHTH.Models.DAO.Admin;
+using FreshFoodHTH.Models.DAO.Client;
 using FreshFoodHTH.Models.EF;
 using FreshFoodHTH.Models.EFplus;
 using System;
@@ -14,11 +15,25 @@ namespace FreshFoodHTH.Areas.Client.Controllers
     {
         FreshFoodDBContext db = new FreshFoodDBContext();
         NguoiDungDAO ndDao = new NguoiDungDAO();
+        DonHangDAO dhDao = new DonHangDAO();
+        ClientDonHangDAO cdhDao = new ClientDonHangDAO();
         // GET: Client/Account
-        public ActionResult Index(Guid id)
+        public ActionResult Index(Guid? id, int? page, int? PageSize, string searching = "")
         {
-            NguoiDung nguoidung = db.NguoiDungs.Find(id);
-            return View(nguoidung);
+            ViewBag.SearchString = searching;
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Value="10", Text= "10" },
+                new SelectListItem() { Value="15", Text= "15" },
+                new SelectListItem() { Value="20", Text= "20" },
+                new SelectListItem() { Value="25", Text= "25" },
+                new SelectListItem() { Value="50", Text= "50" }
+            };
+            int pageNumber = (page ?? 1);
+            int pagesize = (PageSize ?? 10);
+            ViewBag.psize = pagesize;
+            ViewBag.Count = dhDao.ListSimple(searching).Count();
+            return View(dhDao.ListSimpleSearch(pageNumber, pagesize, searching));
         }
 
         public ActionResult Edit(Guid id)
@@ -106,6 +121,13 @@ namespace FreshFoodHTH.Areas.Client.Controllers
             {
                 return View(userchange);
             }
+        }
+
+        public ActionResult Accept(Guid id)
+        {
+            var donHang = db.DonHangs.Find(id);
+            cdhDao.XacNhanDaNhanHang(donHang);
+            return RedirectToAction("Index");
         }
     }
 }
