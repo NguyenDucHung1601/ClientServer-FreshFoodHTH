@@ -1,11 +1,13 @@
-﻿@*@model IEnumerable<FreshFoodHTH.Models.EF.ChiTietDonHang>*@
-@*waiting for ChiTietDonHang*@
-
-@model IEnumerable<FreshFoodHTH.Models.EF.ChiTietGioHang>
+﻿@model IEnumerable<FreshFoodHTH.Models.EF.ChiTietDonHang>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Client/Views/Shared/_MainLayout.cshtml";
+
+    FreshFoodHTH.Models.EF.FreshFoodDBContext db = new FreshFoodHTH.Models.EF.FreshFoodDBContext();
+    Guid idnguoidung = (Guid)Session["IDUSER_SESSION"];
+    List<FreshFoodHTH.Models.EF.TKThanhToanNguoiDung> listTKTT = db.TKThanhToanNguoiDungs.Where(x => x.IDNguoiDung == idnguoidung).ToList();
+    //List<FreshFoodHTH.Models.EF.TaiKhoanThanhToan> listTKTT = db.TaiKhoanThanhToans.ToList();
 }
 
 @section Title{
@@ -25,8 +27,7 @@
     <link rel="stylesheet" href="~/Assets/Client/css/style.css" type="text/css">
     <link rel="stylesheet" href="~/Assets/Admin/otherAssets/style.css" type="text/css">
     <style>
-        .nice-select
-        {
+        .nice-select {
             width: 360px;
             height: 40px;
         }
@@ -104,10 +105,15 @@
                                 <input type="text" class="form-control" value=" @ViewBag.User.DiaChi" required>
                                 <br />
                             </div>
+                            <div class="col-md-12">
+                                <label for="exampleInputEmail1"><b>Ghi chú</b></label>
+                                <input type="text" class="form-control" value=" @ViewBag.User.DiaChi" required>
+                                <br />
+                            </div>
                             <div class="col-md-12"><br /></div>
                             <div class="col-md-6">
                                 <label for="exampleInputEmail1"><b>Mã giảm giá</b></label>
-                                <input type="text" class="form-control" name="magiamgia" placeholder="Nhập mã giảm giá (nếu có) ..." value="">
+                                <input type="text" class="form-control" name="magiamgia" placeholder="Nhập mã giảm giá (nếu có) ..." value="@ViewBag.mgg">
                                 <br />
                             </div>
                             <div class="col-md-6">
@@ -115,10 +121,50 @@
                                 <button class="success" style="background-color: #7fad39;border:none; height:37px; width: 120px"><i class="fa fa-arrow-circle-o-right"></i>&nbsp; Áp dụng</button>
                                 <br />
                             </div>
-                            <div class="col-md-6" style="width:360px">
-                                <label for="exampleInputEmail1"><b>Phương thức thanh toán</b></label><br />
-                                @Html.DropDownList("IDPhuongThucThanhToan", (IEnumerable<SelectListItem>)ViewBag.PayWayList)
+                            <div class="col-md-12" style="width:360px">
                                 <br />
+                                <b>Phương thức thanh toán</b>
+                                <br />
+                            </div>
+                            <div class="col-md-12">
+                                <div>
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                               aria-selected="true">Thanh toán tiền mặt</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                               aria-selected="false">Thanh toán online</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                            <div class="product__details__tab__desc">
+                                                <br />
+                                                <p>
+                                                    Thanh toán bằng tiền mặt khi nhận hàng
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                            <div class="product__details__tab__desc">
+                                                <div class="col-md-9" style="width:360px">
+                                                    <br />
+                                                    <p>
+                                                        Chọn tài khoản thanh toán
+                                                    </p>
+                                                </div>
+                                                @foreach (var item in listTKTT)
+                                                {
+                                                    <div class="col-md-4" style="width:360px;margin:5px 0pX 5px 0px">
+                                                        <a href="/Client/Checkout/LoginTaiKhoanThanhToan?idtk=@item.IDTaiKhoan&idnd=@item.IDNguoiDung"><img src="~/Areas/Admin/Content/Photos/@item.TaiKhoanThanhToan.Logo" alt="" width="30" height="30"></a><span>&nbsp;@item.TaiKhoanThanhToan.VietTat</span><br />
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -133,19 +179,14 @@
                                 }
                             </ul>
 
-                            @*<div class="checkout__order__subtotal">Tiền hàng <span>@String.Format("{0:n0}", ViewBag.Bill.TienHang)</span></div>
-                                <div class="checkout__order__subtotal">Tiền ship <span>@String.Format("{0:n0}", ViewBag.Bill.TienShip)</span></div>
-                                <div class="checkout__order__subtotal">Tổng giảm <span>@String.Format("{0:n0}", ViewBag.Bill.TienGiam)</span></div>
-                                <div class="checkout__order__total">Tổng Tiền <span>@String.Format("{0:n0}", ViewBag.Bill.TongTien)</span></div>*@
                             <div style="border-bottom: 1px solid #e1e1e1"><br /></div>
                             <ul>
-                                <li style="color:black"><b>Tổng tiền hàng</b><span>@String.Format("{0:n0}", 1000000)</span></li>
-                                <li style="color:black"><b>Phí vận chuyển</b><span>@String.Format("{0:n0}", 20000)</span></li>
-                                <li style="color:black"><b>Tiền giảm</b><span>- @String.Format("{0:n0}", 20000)</span></li>
-                                <li style="color:black"><b>Tổng tiền đơn hàng</b><span style="color:crimson">@String.Format("{0:n0}", 1000000)</span></li>
+                                <li style="color:black"><b>Tổng tiền hàng</b><span>@String.Format("{0:n0}", ViewBag.donhang.TienHang)</span></li>
+                                <li style="color:black"><b>Phí vận chuyển</b><span>@String.Format("{0:n0}", ViewBag.donhang.TienShip)</span></li>
+                                <li style="color:black"><b>Tiền giảm</b><span>- @String.Format("{0:n0}", ViewBag.donhang.TienGiam)</span></li>
+                                <li style="color:black"><b>Tổng tiền đơn hàng</b><span style="color:crimson">@String.Format("{0:n0}", ViewBag.donhang.TongTien)</span></li>
                             </ul>
-
-                            <button type="submit" class="site-btn">Xác nhận</button>
+                            <button type="submit" class="site-btn">@Html.ActionLink("Xác nhận", "XacNhanThanhToan", new { id = ViewBag.donhang.IDDonHang })</button>
                         </div>
                     </div>
                 </div>
