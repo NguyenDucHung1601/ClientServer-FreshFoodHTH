@@ -1,0 +1,51 @@
+QUY TRÌNH MUA HÀNG - THANH TOÁN:
+
+HUY ==================================================================================================
+I. clientGioHangDAO
+1. Thêm sản phẩm vào giỏ hàng:
+   - Kiểm tra: SoLuong(ChiTietGioHang) >= SoLuong(SanPham) mới được thêm
+   - Thêm 1 bản ghi vào bảng ChiTietGioHang:
+	+ Cập nhật TongTienGioHang(NguoiDung)
+
+2. Chỉnh sửa thông tin giỏ hàng
+   - Điều chỉnh SoLuong(ChiTietGioHang):
+	+ Cập nhật ThanhTien(ChiTietGioHang)
+	+ Cập nhật TongTienGioHang(NguoiDung)
+	+ Khi SoLuong = 0 thì xoá sản phẩm khỏi giỏ hàng
+   - Cập nhật giỏ hàng:
+	+ Bấm nút cập nhật giỏ hàng thì các thông tin trên được cập nhật
+	+ Kiểm tra: SoLuong(ChiTietGioHang) >= SoLuong(SanPham), nếu < thì báo lỗi
+III. clientTKThanhToanDAO
+   - Thanh toán Online:
+	+ GetTaiKhoanThanhToan (id nguoidung, idtkthanhtoan)
+	+ Kiểm tra mật khẩu (* Area/Controller/Admin/Login)
+	+ Kiểm tra TongTien(TKThanhToanNguoiDung) >= TongTien(DonHang) mới thanh toán được
+	+ Thanh toán thành công --> Cập nhật TongTien(TKThanhToanNguoiDung)
+
+
+TRƯỜNG ==============================================================================================
+II. clientDonHangDAO
+1. Tính tổng tiền đơn hàng sơ bộ:
+	+ Sau khi cập nhật GioHang --> Tính tổng tiền sơ bộ
+	+ Chuyển các sản phẩm trong giỏ hàng vào đơn hàng
+	+ Tính tổng tiền đơn hàng sơ bộ
+2. Áp dụng mã giảm giá:
+	+ Kiểm tra đối tượng áp dụng (kh vàng, bạc, đồng, ....)
+	+ Kiểm tra hạn sử dụng
+	+ Trừ tiền giảm giá vào TongTien(DonHang)
+3. Xác nhận thanh toán đơn hàng:
+	+ Cập nhật TrangThai(DonHang) = Chờ xác nhận
+	+ Khi đơn hàng được xác nhận --> Cập nhật TrangThai(DonHang) = Đang giao hàng
+	+ Cập nhật SoLuong(SanPham)
+	+ Cập nhật SoLuotMua(SanPham)
+	+ Cập nhật SoDonHangDaMua(NguoiDung)
+	+ Cập nhật TongTienHangDaMua(NguoiDung)
+	+ Xoá các sản phẩm đã mua trong GioHang
+	+ Cập nhật TongTienGioHang(NguoiDung)
+4. Xác nhận đã nhận hàng
+	+ Chuyển TrangThai(DonHang) = Đã nhận hàng
+
+
+
+
+
