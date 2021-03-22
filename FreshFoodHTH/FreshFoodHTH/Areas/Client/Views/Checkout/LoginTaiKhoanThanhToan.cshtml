@@ -2,6 +2,8 @@
 
 @{
     Layout = null;
+
+    var idnd = (Guid)Session["IDUSER_SESSION"];
 }
 
 <!DOCTYPE html>
@@ -33,23 +35,28 @@
         <div class="login-box-body">
             <img src="~/Areas/Admin/Content/Photos/@Model.TaiKhoanThanhToan.Logo" style="margin-left:auto; margin-right:auto; display:block; width:100px; height:100px" />
             <br />
-            <p class="login-box-msg" style="font-size:15px; color:navy"><b>Đăng nhập tài khoản của bạn</b></p>
-            @using (Html.BeginForm("CheckLoginTaiKhoanThanhToan", "Checkout", new { idnd = Model.IDNguoiDung }))
+            <p class="login-box-msg" style="font-size:15px; color:navy"><b>Nhập mật khẩu để thanh toán!</b></p>
+            @using (Html.BeginForm("CheckLoginTaiKhoanThanhToan", "Checkout", new { idtktt = Model.IDTaiKhoan }))
             {
-                <div><b>Số dư tài khoản:</b><span>@String.Format("{0:n0}", Model.TongTien) VNĐ</span></div><br />
-                <div class="form-group has-feedback">
-                    <input name="inputUsername" type="text" class="form-control" placeholder="Username" />
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                    <input name="inputPassword" type="password" class="form-control" placeholder="Password" />
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <button type="submit" class="btn btn-success btn-block btn-flat" style="border-radius:3px; color:white">Xác nhận thanh toán</button>
-                    </div><!-- /.col -->
-                </div>
+                <div style="justify-content: center; display: flex;">Số dư tài khoản: <b><span>@String.Format("{0:n0}", Model.TongTien) VNĐ</span></b></div><br />
+                if (Model.TongTien >= (decimal)ViewBag.TongTienDonHang)
+                {
+                    <div class="form-group has-feedback">
+                        <input name="inputPassword" type="password" class="form-control" placeholder="Mật khẩu..." />
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn btn-success btn-block btn-flat" style="border-radius:3px; color:white">Xác nhận thanh toán</button>
+                        </div><!-- /.col -->
+                    </div>
+                }
+                else
+                {
+                    <label>Số dư tài khoản không đủ để thực hiện giao dịch!</label>
+                    <button class="btn-info">@Html.ActionLink("Trở lại", "Index", new { id = idnd })</button>
+                }
+
             }
 
         </div><!-- /.login-box-body -->
