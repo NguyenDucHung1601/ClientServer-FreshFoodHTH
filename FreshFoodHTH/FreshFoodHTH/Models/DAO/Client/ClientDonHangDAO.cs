@@ -38,7 +38,7 @@ namespace FreshFoodHTH.Models.DAO.Client
         }
 
 
-        public List<ChiTietDonHang> CapNhatTongTienDonHangSoBo(DonHang dh, List<ChiTietGioHang> lstctgh)
+        public List<ChiTietDonHang> CapNhatTongTienDonHangSoBo(List<ChiTietGioHang> lstctgh)
         {
             // Chuyển các sản phẩm trong giỏ hàng => đơn hàng
             //Initialize the mapper
@@ -53,16 +53,6 @@ namespace FreshFoodHTH.Models.DAO.Client
                           (
                             item => mapper.Map<ChiTietGioHang, ChiTietDonHang>(item)
                           ).ToList();
-            //foreach (ChiTietDonHang item in lstctdh)
-            //{
-            //    var res = db.SanPhams.SingleOrDefault(x => x.IDSanPham == item.IDSanPham).GiaKhuyenMai;
-            //    item.IDChiTietDonHang = Guid.NewGuid();
-            //    item.IDDonHang = dh.IDDonHang;
-            //    item.DonGiaBan = res;
-            //    item.SanPham = new SanPham();
-            //}
-
-
             return lstctdh;
         }
        
@@ -128,7 +118,6 @@ namespace FreshFoodHTH.Models.DAO.Client
 
         public void XacNhanDonHang(Guid id)
         {   
-            // cập nhật trạng thái => đang giao hàng
             var donHang = db.DonHangs.Find(id);
 
             // cập nhật số lượng & số lượt mua

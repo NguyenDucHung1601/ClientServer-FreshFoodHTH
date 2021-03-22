@@ -103,6 +103,25 @@ namespace FreshFoodHTH.Models.DAO.Admin
             return list;
         }
 
+        public IEnumerable<flatDonHang> ListSimpleSearchClient(int PageNum, int PageSize, string searching)
+        {
+            var list = db.Database.SqlQuery<flatDonHang>($"SELECT b.IDDonHang,b.MaSo, c.Ten AS TenKhachHang, bpttt.TenPhuongThucThanhToan AS TenPhuongThucThanhToan , b.TienHang, b.TienShip, b.TienGiam, b.TongTien, b.CreatedDate, b.ModifiedDate ,b.GhiChu ,bs.TenTrangThai AS TenTrangThai " +
+                 $"FROM dbo.DonHang b INNER JOIN dbo.NguoiDung c ON b.IDKhachHang = c.IDNguoiDung INNER JOIN dbo.TrangThai bs ON " +
+                 $"b.IDTrangThai = bs.IDTrangThai INNER JOIN dbo.PhuongThucThanhToan bpttt ON b.IDPhuongThucThanhToan = bpttt.IDPhuongThucThanhToan " +
+                 $"WHERE b.IDDonHang LIKE N'%{searching}%' " +
+                 $"OR c.Ten LIKE N'%{searching}%' " +
+                 $"OR b.TienGiam LIKE N'%{searching}%' " +
+                 $"OR b.TienShip LIKE N'%{searching}%' " +
+                 $"OR b.TienHang LIKE N'%{searching}%' " +
+                 $"OR b.TongTien LIKE N'%{searching}%' " +
+                 $"OR b.CreatedDate LIKE N'%{searching}%' " +
+                 $"OR bpttt.TenPhuongThucThanhToan LIKE N'%{searching}%' " +
+                 $"OR bs.TenTrangThai LIKE N'%{searching}%' " +
+                 $"OR c.IDNguoiDung LIKE N'%{searching}%' " +
+                 $"ORDER BY b.CreatedDate DESC").ToPagedList<flatDonHang>(PageNum, PageSize);
+            return list;
+        }
+
         public int TongDonHang(DateTime startDate, DateTime endDate)
         {
             var start = String.Format("{0:yyyy/MM/dd}", startDate);

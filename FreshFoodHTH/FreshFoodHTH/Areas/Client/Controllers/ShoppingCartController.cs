@@ -5,11 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using FreshFoodHTH.Common;
-using FreshFoodHTH.Models.DAO.Client;
 using FreshFoodHTH.Models.DAO.Admin;
 using System.Data.Entity;
-
 namespace FreshFoodHTH.Areas.Client.Controllers
 {
     public class ShoppingCartController : BaseController

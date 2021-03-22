@@ -190,9 +190,6 @@
                         Ngày đặt hàng:
                     </th>
                     <th>
-                        Ghi chú:
-                    </th>
-                    <th>
                         Xác nhận:
                     </th>
                 </tr>
@@ -224,9 +221,6 @@
                         </td>
                         <td>
                             @Html.Raw(Convert.ToDateTime(item.CreatedDate).ToString("dd/MM/yyyy"))
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.GhiChu)
                         </td>
                         <td>
                             @if (item.TenTrangThai == "Đang giao hàng")
