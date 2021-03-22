@@ -79,7 +79,6 @@ namespace FreshFoodHTH.Areas.Client.Controllers
             {
                 ViewBag.DaThanhToan = donHang.TongTien;
                 TienTTOL = (decimal)donHang.TongTien;
-                donHang.TongTien = 0;
             }
             else
             {

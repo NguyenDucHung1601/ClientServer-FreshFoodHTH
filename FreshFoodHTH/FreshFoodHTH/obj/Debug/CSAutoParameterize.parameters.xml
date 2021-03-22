@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="FreshFoodDBContext-Web.config Connection String" description="FreshFoodDBContext Connection String used in web.config by the application to access the database." defaultValue="data source=.\;initial catalog=FreshFoodHTH;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\ADMIN\\OneDrive\\Máy\ tính\\BTLCS\ FreshFood\ HTH\\Project\\GitHub\\ClientServer-FreshFoodHTH\\FreshFoodHTH\\FreshFoodHTH\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='FreshFoodDBContext']/@connectionString" />
+  </parameter>
+</parameters>
