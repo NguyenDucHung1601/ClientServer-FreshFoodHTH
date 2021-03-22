@@ -1,6 +1,9 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Client/Views/Shared/_MainLayout.cshtml";
+
+    FreshFoodHTH.Models.EF.FreshFoodDBContext db = new FreshFoodHTH.Models.EF.FreshFoodDBContext();
+    List<FreshFoodHTH.Models.EF.TheLoai> listTheLoai = db.TheLoais.ToList();
 }
 
 @section Title{
@@ -63,7 +66,78 @@
     </div>
 </section>
 <!-- Breadcrumb Section End -->
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5">
+                <div class="sidebar">
+                    @*@Html.Action("ListCategoryShow")*@
 
+                    <div class="sidebar__item">
+                        <form action="/Client/Shop/Index">
+                            <h4>Bộ lọc tìm kiếm</h4>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"><b>Tên sản phẩm</b></label>
+                                <input type="text" class="form-control" name="name" placeholder="Nhập tên ..." value="@ViewBag.ProductName">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"><b>Thể loại</b></label><br />
+                                <select name="idcategory" id="@ViewBag.IdCategory">
+                                    <option value="" style="font-size:16px">-- Mọi thể loại --</option>
+                                    @foreach (var item in listTheLoai)
+                                    {
+                                        <option value="@item.IDTheLoai" style="font-size:16px">@item.Ten</option>
+                                    }
+                                </select>
+                            </div>
+                            <br /><br />
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"><b>Khoảng giá ( VNĐ - VNĐ )</b></label>
+                                <table>
+                                    <tr>
+                                        <td><input type="number" min="0" step="1000" class="form-control" name="priceFrom" placeholder="Từ ..." , value="@ViewBag.PriceFrom"></td>
+                                        <td><input type="number" min="0" step="1000" class="form-control" name="priceTo" placeholder="đến ..." , value="@ViewBag.PriceTo"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="form-group">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="submit" class="primary-btn" value="Áp dụng" style="width:130px"/>
+                                        </td>
+                                        <td>
+                                            <a href="/Client/Shop/Index?name=&idcategory=&priceFrom=?priceTo="><input type="button" class="primary-btn" value="Đặt lại" style="width:130px" /></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="sidebar__item">
+                        @Html.Action("ProductTopNew")
+                    </div>
+
+                    <div class="sidebar__item">
+                        @Html.Action("ProductTopSale")
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-7">
+                @Html.Action("SaleOff")
+
+                @Html.Partial("ProductSearchShow")
+
+                @Html.Action("ListCategoryShow")
+
+                @Html.Partial("ProductFilterShow")
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->
 
 
 @section Scripts{

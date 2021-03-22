@@ -132,7 +132,7 @@ namespace FreshFoodHTH.Models.DAO.Client
             // cật nhật số đơn hàng và tổng tiền hàng đã mua
             var khachHang = db.NguoiDungs.SingleOrDefault(x => x.IDNguoiDung == donHang.IDKhachHang);
             khachHang.SoDonHangDaMua = khachHang.SoDonHangDaMua + 1;
-            khachHang.TongTienHangDaMua = khachHang.TongTienHangDaMua + donHang.TongTien;
+            khachHang.TongTienHangDaMua = khachHang.TongTienHangDaMua + donHang.TienHang - donHang.TienGiam + donHang.TienShip;
 
             CapNhatTongTienGioHang(khachHang);
 

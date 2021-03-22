@@ -122,24 +122,17 @@ namespace FreshFoodHTH.Models.DAO.Admin
             return list;
         }
 
-        public int TongDonHang(DateTime startDate, DateTime endDate)
+        // public int TongDonHang(DateTime startDate, DateTime endDate)
+        public int TongDonHang()
         {
-            var start = String.Format("{0:yyyy/MM/dd}", startDate);
-            var end = String.Format("{0:yyyy/MM/dd}", endDate);
-
-            var count = db.Database.SqlQuery<flatDonHang>($"SELECT * FROM dbo.DonHang dh " +
-            $"WHERE dh.CreatedDate BETWEEN '{start}' AND '{end}'").ToList().Count;
+            var count = db.Database.SqlQuery<flatDonHang>($"SELECT * FROM dbo.DonHang dh").ToList().Count;
 
             return count;
         }
 
-        public decimal DoanhThu(DateTime startDate, DateTime endDate)
+        public decimal DoanhThu()
         {
-            var start = String.Format("{0:yyyy/MM/dd}", startDate);
-            var end = String.Format("{0:yyyy/MM/dd}", endDate);
-
-            var SumMoney = db.Database.SqlQuery<flatDonHang>($"SELECT * FROM dbo.DonHang dh " +
-            $"WHERE dh.CreatedDate BETWEEN '{start}' AND '{end}'").ToList().Sum(x => x.TongTien);
+            var SumMoney = db.Database.SqlQuery<flatDonHang>($"SELECT * FROM dbo.DonHang dh").ToList().Sum(x => x.TongTien);
 
             return SumMoney;
         }
