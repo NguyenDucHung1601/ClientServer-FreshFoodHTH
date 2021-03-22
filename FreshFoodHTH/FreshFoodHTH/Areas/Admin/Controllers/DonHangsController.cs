@@ -34,7 +34,6 @@ namespace FreshFoodHTH.Areas.Admin.Controllers
             int pagesize = (PageSize ?? 10);
             ViewBag.psize = pagesize;
             ViewBag.Count = dhDao.ListSimple(searching).Count();
-            //var donHangs = db.DonHangs.Include(d => d.NguoiDung).Include(d => d.PhuongThucThanhToan).Include(d => d.TrangThai);
             return View(dhDao.ListSimpleSearch(pageNumber, pagesize, searching));
         }
 
